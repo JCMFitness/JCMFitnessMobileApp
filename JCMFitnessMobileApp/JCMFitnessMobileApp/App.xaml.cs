@@ -1,4 +1,5 @@
-﻿using System;
+﻿using JCMFitnessMobileApp.Views;
+using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -9,8 +10,8 @@ namespace JCMFitnessMobileApp
         public App()
         {
             InitializeComponent();
-
-            MainPage = new MainPage();
+            Bootstrapper.Initialize();
+            MainPage = new WorkoutDisplayView();
         }
 
         protected override void OnStart()
