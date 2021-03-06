@@ -19,7 +19,7 @@ namespace JCMFitnessMobileApp.ViewModels
         {
             this.fitnessService = newsService;
         }
-        public async Task Initialize()
+        public async Task Init()
         {
             CurrentUsers = await fitnessService.GetUsers();
             admin = CurrentUsers.First();

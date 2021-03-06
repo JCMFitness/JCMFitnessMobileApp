@@ -48,10 +48,10 @@ namespace JCMFitnessMobileApp.Services
 
     public interface IFitApi
     {
-        [Get("api/users?code={azureCode}")]
+        [Get("/api/users?code={azureCode}")]
         public Task<List<User>> GetUsersAsync(string azureCode);
 
-        [Get("api/users/id={userid}?code={azureCode}")]
+        [Get("/api/users/{userid}?code={azureCode}")]
         public Task<User> GetUserByIdAsync(string userid,string azureCode);
     }
 }
