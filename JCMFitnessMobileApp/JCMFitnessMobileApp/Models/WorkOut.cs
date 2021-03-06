@@ -1,12 +1,14 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace JCMFitnessMobileApp.Models
 {
-    public class WorkOut
+    public class Workout
     {
-        public int Id { get; set; }
+        public long Id { get; set; }
+        public DateTime CreatedDate { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
-        public List<Exercise> ExercisesInWorkOut { get; set; }
+        public List<Exercise> Exercises { get; set; }
     }
 }

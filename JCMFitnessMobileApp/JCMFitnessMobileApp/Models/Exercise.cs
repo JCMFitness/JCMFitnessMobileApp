@@ -2,9 +2,10 @@
 {
     public class Exercise
     {
-        public int Id { get; set; }
-        public int Name { get; set; }
+        public long Id { get; set; }
+        public string Name { get; set; }
+        public string Description { get; set; }
         public string Category { get; set; }
-        public int AllotedTime { get; set; }
+        public string AllottedTime { get; set; }
     }
 }

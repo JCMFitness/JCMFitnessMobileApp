@@ -4,15 +4,18 @@ using System.Text;
 
 namespace JCMFitnessMobileApp.Models
 {
-    class User
-    { 
-        
-            private int Id { get; }
-            private string FirstName { get; set; }
-            private string LastName { get; set; }
-            private string Password { get; set; }
-            public List<WorkOut> WorkOutList { get; set; }
-            public List<Exercise> UserExercises { get; set; }
-        
+    public class User
+    {
+
+        public string Id { get; set; } 
+        public DateTime JoinedDate { get; set; } 
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string UserName { get; set; }
+        public string Email { get; set; }
+        public string Password { get; set; }
+        public string WorkoutList { get; set; }
+        public List<Workout> Workouts { get; set; }
+
     }
 }

@@ -21,13 +21,37 @@ namespace JCMFitnessMobileApp.Services
 
         public async Task<List<User>> GetUsers()
         {
-            
+            try
+            {
+                return await _fitApi.GetUsersAsync(azureCode);
+            }
+            catch(Exception ex)
+            {
+                throw;
+
+            }
         }
+        public async Task<User> GetUserById(string id)
+        {
+            try
+            {
+                return await _fitApi.GetUserByIdAsync(id, azureCode);
+            }
+            catch (Exception ex)
+            {
+                throw;
+
+            }
+        }
+
     }
 
     public interface IFitApi
     {
-        [Get("/users?code={azureCode}")]
+        [Get("api/users?code={azureCode}")]
         public Task<List<User>> GetUsersAsync(string azureCode);
+
+        [Get("api/users/id={userid}?code={azureCode}")]
+        public Task<User> GetUserByIdAsync(string userid,string azureCode);
     }
 }

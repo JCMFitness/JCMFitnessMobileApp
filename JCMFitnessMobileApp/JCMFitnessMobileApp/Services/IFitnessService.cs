@@ -10,5 +10,6 @@ namespace JCMFitnessMobileApp.Services
     {
 
        Task<List<User>> GetUsers();
+        Task<User> GetUserById(string id);
     }
 }
