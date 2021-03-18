@@ -13,7 +13,7 @@ namespace JCMFitnessMobileApp
 
             public static void Initialize()
             {
-                var baseUrl = "https://jcmfitnessapi.azurewebsites.net";
+                var baseUrl = "https://jcmfitnessapi.herokuapp.com";
                 var containerBuilder = new ContainerBuilder();
                 containerBuilder.RegisterAssemblyTypes(typeof(App).Assembly)
                     .Where(x => x.IsSubclassOf(typeof(ViewModel)));
