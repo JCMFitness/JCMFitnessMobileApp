@@ -8,7 +8,6 @@ namespace JCMFitnessMobileApp.Services
 {
     public interface IFitnessService
     {
-
        Task<List<User>> GetUsers();
         Task<User> GetUserById(string id);
     }

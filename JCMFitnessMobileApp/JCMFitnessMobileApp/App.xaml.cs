@@ -11,7 +11,7 @@ namespace JCMFitnessMobileApp
         {
             InitializeComponent();
             Bootstrapper.Initialize();
-            MainPage = new WorkoutDisplayView();
+            MainPage = new MainPage();
         }
 
         protected override void OnStart()

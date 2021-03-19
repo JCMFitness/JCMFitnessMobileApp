@@ -13,6 +13,13 @@ namespace JCMFitnessMobileApp
         public MainPage()
         {
             InitializeComponent();
+
+            var image = new Image { Source = "waterfront.jpg" };
+            image.Source = Device.RuntimePlatform == Device.Android
+                ? ImageSource.FromFile("Logo.png")
+                : ImageSource.FromFile("Assets/logo.jpg");
         }
+
+        
     }
 }

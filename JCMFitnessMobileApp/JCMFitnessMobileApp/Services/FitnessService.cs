@@ -44,6 +44,8 @@ namespace JCMFitnessMobileApp.Services
             }
         }
 
+
+
     }
 
     public interface IFitApi
@@ -53,5 +55,6 @@ namespace JCMFitnessMobileApp.Services
 
         [Get("/api/users/{userid}?code={azureCode}")]
         public Task<User> GetUserByIdAsync(string userid,string azureCode);
+
     }
 }
