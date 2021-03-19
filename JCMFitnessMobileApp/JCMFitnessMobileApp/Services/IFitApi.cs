@@ -10,21 +10,23 @@ namespace JCMFitnessMobileApp.Services
     public interface IFitApi
     {
         //Login
-        [Post("/api/user/loginuser?username={username}&password={password}")]
-
-        public Task<User> UserLoginAsync(string username, string password);
+        [Get("/api/user/login?username=max&password=123")]
+        public Task<User> UserLoginAsync(string userid, string pass);
 
         //User endpoints
-        [Get("/api/user/{id}")]
+        [Get("/api/user?userid={id}")]
         public Task<User> GetUserByIdAsync(string id);
+
         [Post("/api/user")]
         public Task<User> AddNewUserAsync();
+
         [Put("/api/user?id={userid}")]
         public Task<User> EditUserByIdAsync(string userid);
+
         [Delete("/api/user/{id}")]
         public Task<User> DeleteUserByIdAsync(string id);
 
-        //Workout endpoints
+      /*  //Workout endpoints
         [Get("/api/workout")]
         [Get("/api/workout/{id}")]
         [Post("/api/workout")]
@@ -35,7 +37,7 @@ namespace JCMFitnessMobileApp.Services
         [Get("/api/userworkout/{id}")]
         [Post("/api/userworkout")]
         [Put("/api/userworkout")]
-        [Delete("/api/userworkout/{id}")]
+        [Delete("/api/userworkout/{id}")]*/
     }
 }
 //-----------------------User------------------ -

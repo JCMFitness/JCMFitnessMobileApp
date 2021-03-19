@@ -17,7 +17,7 @@ namespace JCMFitnessMobileApp
                 var containerBuilder = new ContainerBuilder();
                 containerBuilder.RegisterAssemblyTypes(typeof(App).Assembly)
                     .Where(x => x.IsSubclassOf(typeof(ViewModel)));
-                
+
                 containerBuilder.RegisterType<FitnessService>().As<IFitnessService>();
                 IFitApi refitInstance = RestService.For<IFitApi>(baseUrl);
                 containerBuilder.RegisterInstance(refitInstance)
