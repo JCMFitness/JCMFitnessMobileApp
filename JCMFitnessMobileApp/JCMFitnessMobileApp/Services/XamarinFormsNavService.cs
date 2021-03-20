@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
+using JCMFitnessMobileApp.ViewModel;
 using Xamarin.Forms;
 
 

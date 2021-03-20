@@ -1,9 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:controls="clr-namespace:TripLog.Controls;assembly=TripLog"
-    xmlns:converters="clr-namespace:TripLog.Converters;assembly=TripLog"
-    x:Class="TripLog.Views.NewEntryPage"
+    xmlns:converters="clr-namespace:JCMFitnessMobileApp.Converters;assembly=JCMFitnessMobileApp"
+    x:Class="JCMFitnessMobileApp.Views.NewWorkoutPage"
     Title="New Entry">
 
     <ContentPage.Resources>
@@ -26,8 +25,6 @@
                             Keyboard="Numeric" Text="{Binding Latitude}" />
                         <EntryCell Label="Longitude"
                             Keyboard="Numeric" Text="{Binding Longitude}" />
-                        <controls:DatePickerEntryCell Label="Date" 
-                            Date="{Binding Date, StringFormat='{0:d}'}" />
                         <EntryCell x:Name="rating" Label="Rating" Keyboard="Numeric"
                             Text="{Binding Rating}" />
                         <EntryCell Label="Notes" Text="{Binding Notes}" />

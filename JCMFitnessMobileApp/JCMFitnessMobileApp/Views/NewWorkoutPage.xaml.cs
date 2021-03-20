@@ -3,21 +3,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TripLog.ViewModel;
+using JCMFitnessMobileApp.ViewModel;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-using System;
-using System.Collections.Generic;
+
 using System.ComponentModel;
 
-namespace TripLog.Views
+namespace JCMFitnessMobileApp.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class NewEntryPage : ContentPage
+    public partial class NewWorkoutPage : ContentPage
     {
         NewWorkoutViewModel ViewModel =>
         BindingContext as NewWorkoutViewModel;
-        public NewEntryPage()
+        public NewWorkoutPage()
         {
             InitializeComponent();
             BindingContextChanged += Page_BindingContextChanged;

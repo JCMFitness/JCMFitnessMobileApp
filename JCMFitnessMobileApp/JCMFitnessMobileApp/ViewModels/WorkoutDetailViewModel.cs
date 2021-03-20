@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
-using TripLog.Models;
-using TripLog.Services;
+using JCMFitnessMobileApp.Models;
+using JCMFitnessMobileApp.Services;
 using Xamarin.Forms;
 
-namespace TripLog.ViewModel
+namespace JCMFitnessMobileApp.ViewModel
 {
     public class WorkoutDetailViewModel : BaseViewModel<TripLogEntry>
     {

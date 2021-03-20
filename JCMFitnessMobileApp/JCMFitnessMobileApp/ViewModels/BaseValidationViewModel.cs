@@ -6,8 +6,9 @@ using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
+using JCMFitnessMobileApp.ViewModel;
 
-namespace TripLog.ViewModel
+namespace JCMFitnessMobileApp.ViewModel
 {
     public class BaseValidationViewModel : BaseViewModel,
     INotifyDataErrorInfo

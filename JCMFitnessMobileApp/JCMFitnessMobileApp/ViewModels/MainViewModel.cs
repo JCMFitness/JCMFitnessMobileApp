@@ -2,19 +2,21 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Collections.ObjectModel;
-using TripLog.Models;
+using JCMFitnessMobileApp.Models;
 using Xamarin.Forms;
 using System.Threading.Tasks;
-using TripLog.Services;
+using JCMFitnessMobileApp.Services;
 using Akavache;
 using JCMFitnessMobileApp.Services;
 
-namespace TripLog.ViewModel
+namespace JCMFitnessMobileApp.ViewModel
 {
     public class MainViewModel : BaseViewModel
     {
         ObservableCollection<TripLogEntry> _logEntries;
+
         readonly ITripLogDataService _tripLogService;
+
         readonly IBlobCache _cache;
 
         public ObservableCollection<TripLogEntry> LogEntries

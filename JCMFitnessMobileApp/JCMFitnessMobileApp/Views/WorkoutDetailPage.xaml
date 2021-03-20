@@ -1,15 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:maps="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps"
-    xmlns:converters="clr-namespace:TripLog.Converters;assembly=TripLog"
-    x:Class="TripLog.Views.DetailPage">
+    
+    x:Class="JCMFitnessMobileApp.Views.WorkoutDetailPage">
 
-    <ContentPage.Resources>
-        <ResourceDictionary>
-            <converters:RatingToStarImageNameConverter x:Key="RatingToStartImageNameConverter" />
-        </ResourceDictionary>
-    </ContentPage.Resources>
 
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Delete" Command="{Binding DeleteCommand}" />
@@ -24,7 +18,7 @@
                 <RowDefinition Height="1*" />
             </Grid.RowDefinitions>
 
-            <maps:Map MapType="Satellite" x:Name="map" Grid.RowSpan="3" />
+           
 
             <BoxView Grid.Row="1" BackgroundColor="White"
                 Opacity=".8" />

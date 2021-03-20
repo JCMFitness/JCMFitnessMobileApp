@@ -11,7 +11,7 @@ namespace JCMFitnessMobileApp.Services
     public class FitnessService : IFitnessService
     {
         private readonly IFitApi fitApi;
-
+        readonly Uri _baseUri;
 
         public FitnessService(IFitApi newsApi)
         {

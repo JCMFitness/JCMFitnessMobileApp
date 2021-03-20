@@ -5,7 +5,7 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using JCMFitnessMobileApp.Services;
 
-namespace TripLog.ViewModel
+namespace JCMFitnessMobileApp.ViewModel
 {
     public class BaseViewModel : INotifyPropertyChanged
     {

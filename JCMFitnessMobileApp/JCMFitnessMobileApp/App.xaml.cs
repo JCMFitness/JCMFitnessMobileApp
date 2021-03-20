@@ -1,18 +1,74 @@
-﻿using JCMFitnessMobileApp.Views;
-using System;
+﻿using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using TripLog.Views;
+using TripLog.ViewModel;
+using JCMFitnessMobileApp.Services;
+using Ninject.Modules;
+using Ninject;
+using JCMFitnessMobileApp.Modules;
+using Xamarin.Essentials;
 
 namespace JCMFitnessMobileApp
 {
     public partial class App : Application
     {
-        public App()
+        //bool IsSignedIn => !string.IsNullOrWhiteSpace(Preferences.Get("apitoken", ""));
+
+        public IKernel Kernel { get; set; }
+        public App(params INinjectModule[] platformModules)
         {
             InitializeComponent();
-            Bootstrapper.Initialize();
-            MainPage = new WorkoutDisplayView();
+
+            /* var mainPage = new NavigationPage(new MainPage());
+             var navService = DependencyService.Get<INavService>() as XamarinFormsNavService;
+             navService.XamarinFormsNav = mainPage.Navigation;
+             MainPage = mainPage;*/
+
+
+            // Register core services 
+            Kernel = new StandardKernel(
+                new CoreModule(),
+                new TripLogNavModule());
+            // Register platform specific services 
+            Kernel.Load(platformModules);
+
+            // Setup data service authentication delegates
+            var dataService = Kernel.Get<IFitnessService>();
+            //dataService.AuthorizedDelegate = OnSignIn;
+            SetMainPage();
         }
+
+
+        void SetMainPage()
+        {
+            /*var mainPage = IsSignedIn
+             ? new NavigationPage(new MainPage())
+             {
+                 BindingContext = Kernel.Get<MainViewModel>()
+             }
+             : new NavigationPage(new SignInPage())
+             {
+                 BindingContext = Kernel.Get<SignInViewModel>()
+             };*/
+
+
+            var mainPage = new NavigationPage(new MainPage())
+            {
+                BindingContext = Kernel.Get<MainViewModel>()
+            };
+
+            var navService = Kernel.Get<INavService>() as XamarinFormsNavService;
+            navService.XamarinFormsNav = mainPage.Navigation;
+            MainPage = mainPage;
+        }
+
+
+       /* void OnSignIn(string accessToken)
+        {
+            Preferences.Set("apitoken", accessToken);
+            SetMainPage();
+        }*/
 
         protected override void OnStart()
         {
