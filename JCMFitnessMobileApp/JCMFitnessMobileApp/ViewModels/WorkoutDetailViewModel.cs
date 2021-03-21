@@ -8,30 +8,30 @@ using Xamarin.Forms;
 
 namespace JCMFitnessMobileApp.ViewModel
 {
-    public class WorkoutDetailViewModel : BaseViewModel<TripLogEntry>
+    public class WorkoutDetailViewModel : BaseViewModel<Workout>
     {
-        TripLogEntry _entry;
-        readonly ITripLogDataService _tripLogService;
+        Workout _workout;
+        readonly IFitnessService _fitnessService;
 
-        public TripLogEntry Entry
+        public Workout Workout
         {
-            get => _entry;
+            get => _workout;
             set
             {
-                _entry = value;
+                _workout = value;
                 OnPropertyChanged();
             }
         }
 
-        public WorkoutDetailViewModel(INavService navService, ITripLogDataService tripLogService)
+        public WorkoutDetailViewModel(INavService navService, IFitnessService fitnessService)
             : base(navService)
         {
-            _tripLogService = tripLogService;
+            _fitnessService = fitnessService;
         }
 
-        public override void Init(TripLogEntry parameter)
+        public override void Init(Workout workout)
         {
-            Entry = parameter;
+            Workout = workout;
         }
 
         Command _deleteCommand;
@@ -43,7 +43,7 @@ namespace JCMFitnessMobileApp.ViewModel
 
             try
             {
-                await _tripLogService.DeleteEntryAsync(Entry);
+                //await _fitnessService.DeleteEntryAsync(Entry);
                 await NavService.GoBack();
             }
             finally

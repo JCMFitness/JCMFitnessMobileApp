@@ -10,30 +10,18 @@ namespace JCMFitnessMobileApp.ViewModel
 {
     public class NewWorkoutViewModel : BaseValidationViewModel
     {
-        readonly ILocationService _locService;
-        readonly ITripLogDataService _tripLogService;
+       
+        readonly IFitnessService _fitnessService;
 
-        public NewWorkoutViewModel(INavService navService, ILocationService locService, ITripLogDataService tripLogService)
+        public NewWorkoutViewModel(INavService navService, IFitnessService fitness)
             : base(navService)
         {
-            _locService = locService;
-            _tripLogService = tripLogService;
-            Date = DateTime.Today;
-            Rating = 1;
+            _fitnessService = fitness;
         }
 
         public override async void Init()
         {
-            try
-            {
-                var coords = await _locService.GetGeoCoordinatesAsync();
-                Latitude = coords.Latitude;
-                Longitude = coords.Longitude;
-            }
-            catch (Exception)
-            {
-                // TODO: handle exceptions from location service
-            }
+           
         }
 
         string _title;
@@ -48,49 +36,10 @@ namespace JCMFitnessMobileApp.ViewModel
                 SaveCommand.ChangeCanExecute();
             }
         }
-        double _latitude;
-        public double Latitude
-        {
-            get => _latitude;
-            set
-            {
-                _latitude = value;
-                OnPropertyChanged();
-            }
-        }
-        double _longitude;
-        public double Longitude
-        {
-            get => _longitude;
-            set
-            {
-                _longitude = value;
-                OnPropertyChanged();
-            }
-        }
-        DateTime _date;
-        public DateTime Date
-        {
-            get => _date;
-            set
-            {
-                _date = value;
-                OnPropertyChanged();
-            }
-        }
-        int _rating;
-        public int Rating
-        {
-            get => _rating;
-            set
-            {
-                _rating = value;
-                Validate(() => _rating >= 1 && _rating <= 5, "Rating must be between 1 and 5.");
-                OnPropertyChanged();
-            }
-        }
+       
+        
         string _notes;
-        public string Notes
+        public string Description
         {
             get => _notes;
             set
@@ -111,7 +60,7 @@ namespace JCMFitnessMobileApp.ViewModel
             IsBusy = true;
             try
             {
-                var newItem = new TripLogEntry
+                /*var newItem = new TripLogEntry
                 {
                     Title = Title,
                     Latitude = Latitude,
@@ -120,7 +69,7 @@ namespace JCMFitnessMobileApp.ViewModel
                     Rating = Rating,
                     Notes = Notes
                 };
-                await _tripLogService.AddEntryAsync(newItem);
+                await _tripLogService.AddEntryAsync(newItem);*/
                 await NavService.GoBack();
             }
             finally

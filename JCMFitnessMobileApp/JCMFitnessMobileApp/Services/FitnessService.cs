@@ -11,7 +11,7 @@ namespace JCMFitnessMobileApp.Services
     public class FitnessService : IFitnessService
     {
         private readonly IFitApi fitApi;
-        readonly Uri _baseUri;
+        
 
         public FitnessService(IFitApi newsApi)
         {
@@ -35,6 +35,18 @@ namespace JCMFitnessMobileApp.Services
             try
             {
                 return await fitApi.UserLoginAsync(id, password);
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
+        public async Task<List<Workout>> GetUserWorkouts(string id)
+        {
+            try
+            {
+                return await fitApi.GetUserWorkoutsAsync(id);
             }
             catch (Exception ex)
             {

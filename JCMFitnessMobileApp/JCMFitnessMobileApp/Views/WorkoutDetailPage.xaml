@@ -23,19 +23,12 @@
             <BoxView Grid.Row="1" BackgroundColor="White"
                 Opacity=".8" />
             <StackLayout Padding="10" Grid.Row="1">
-                <Label x:Name="title" Text="{Binding Entry.Title}"
+                <Label x:Name="title" Text="{Binding Workout.Title}"
                     HorizontalOptions="Center" AutomationProperties.IsInAccessibleTree="true"
                        AutomationProperties.HelpText="Title of trip" />
-                
-                <Label x:Name="date" Text="{Binding Entry.Date, StringFormat='{0:M}'}"
-                    HorizontalOptions="Center"  AutomationProperties.IsInAccessibleTree="true"
-                       AutomationProperties.HelpText="Date of trip" />
+            
 
-                <Image HorizontalOptions="Center" Source="{Binding Entry.Rating, Converter={StaticResource RatingToStartImageNameConverter}}"
-                       AutomationProperties.IsInAccessibleTree="true"
-                       AutomationProperties.HelpText="{Binding Entry.Rating, StringFormat='{0} star rating'}"/>
-
-                <Label x:Name="notes" Text="{Binding Entry.Notes}" HorizontalOptions="Center"
+                <Label x:Name="notes" Text="{Binding Workout.Description}" HorizontalOptions="Center"
                        AutomationProperties.IsInAccessibleTree="true"
                        AutomationProperties.HelpText="Notes from trip" />
                 

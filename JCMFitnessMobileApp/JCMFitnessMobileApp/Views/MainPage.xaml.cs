@@ -15,7 +15,7 @@ namespace JCMFitnessMobileApp.Views
     {
 
         MainViewModel ViewModel => BindingContext as MainViewModel;
-        // ...
+
         protected override void OnAppearing()
         {
             base.OnAppearing();
@@ -31,15 +31,15 @@ namespace JCMFitnessMobileApp.Views
 
         void New_Clicked(object sender, EventArgs e)
         {
-            Navigation.PushAsync(new NewEntryPage());
+            Navigation.PushAsync(new NewWorkoutPage());
         }
 
         async void Trips_SelectionChanged(object s, SelectionChangedEventArgs e)
         {
-            var trip = (TripLogEntry)e.CurrentSelection.FirstOrDefault();
+            var trip = (Workout)e.CurrentSelection.FirstOrDefault();
             if (trip != null)
             {
-                await Navigation.PushAsync(new DetailPage());
+                await Navigation.PushAsync(new WorkoutDetailPage());
             }
             // Clear selection 
             trips.SelectedItem = null;

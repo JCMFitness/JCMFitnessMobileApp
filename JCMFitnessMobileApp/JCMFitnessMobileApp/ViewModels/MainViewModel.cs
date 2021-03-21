@@ -7,32 +7,31 @@ using Xamarin.Forms;
 using System.Threading.Tasks;
 using JCMFitnessMobileApp.Services;
 using Akavache;
-using JCMFitnessMobileApp.Services;
 
 namespace JCMFitnessMobileApp.ViewModel
 {
     public class MainViewModel : BaseViewModel
     {
-        ObservableCollection<TripLogEntry> _logEntries;
+        ObservableCollection<Workout> _userWorkouts;
 
-        readonly ITripLogDataService _tripLogService;
+        readonly IFitnessService _fitnessService;
 
         readonly IBlobCache _cache;
 
-        public ObservableCollection<TripLogEntry> LogEntries
+        public ObservableCollection<Workout> UserWorkouts
         {
-            get => _logEntries;
+            get => _userWorkouts;
             set
             {
-                _logEntries = value;
+                _userWorkouts = value;
                 OnPropertyChanged();
             }
         }
 
 
-        public Command<TripLogEntry> ViewCommand =>
-            new Command<TripLogEntry>(async entry =>
-                await NavService.NavigateTo<WorkoutDetailViewModel, TripLogEntry>(entry));
+        public Command<Workout> ViewCommand =>
+            new Command<Workout>(async entry =>
+                await NavService.NavigateTo<WorkoutDetailViewModel, Workout>(entry));
 
         public Command NewCommand =>
             new Command(async () =>
@@ -44,19 +43,19 @@ namespace JCMFitnessMobileApp.ViewModel
             _refreshCommand ?? (_refreshCommand = new Command(LoadEntries));
 
        
-        public MainViewModel(INavService navService, ITripLogDataService tripLogService, IBlobCache cache)
+        public MainViewModel(INavService navService, IFitnessService tripLogService, IBlobCache cache)
             : base(navService)
         {
-            _tripLogService = tripLogService;
+            _fitnessService = tripLogService;
             _cache = cache;
-            LogEntries = new ObservableCollection<TripLogEntry>();
+            UserWorkouts = new ObservableCollection<Workout>();
         }
         public override void Init()
         {
             LoadEntries();
         }
 
-
+ 
 
         async void LoadEntries()
         {
@@ -66,12 +65,17 @@ namespace JCMFitnessMobileApp.ViewModel
             try
             {
                 // Load from local cache and then immediately load from API
-                _cache.GetAndFetchLatest("entries", async () => await _tripLogService.GetEntriesAsync())
-                    .Subscribe(entries =>
+                _cache.GetAndFetchLatest("entries", async () => await _fitnessService.GetUserWorkouts("2"))
+                    .Subscribe(workouts =>
                     {
-                        LogEntries = new ObservableCollection<TripLogEntry>(entries);
+                        ObservableCollection<Workout> newWorkouts = new ObservableCollection<Workout>(workouts);
+                        UserWorkouts = new ObservableCollection<Workout>(newWorkouts);
                         IsBusy = false;
                     });
+            }
+            catch
+            {
+                throw;
             }
             finally
             {

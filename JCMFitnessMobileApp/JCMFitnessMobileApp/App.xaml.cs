@@ -1,13 +1,13 @@
 ﻿using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-using TripLog.Views;
-using TripLog.ViewModel;
 using JCMFitnessMobileApp.Services;
 using Ninject.Modules;
 using Ninject;
 using JCMFitnessMobileApp.Modules;
 using Xamarin.Essentials;
+using JCMFitnessMobileApp.Views;
+using JCMFitnessMobileApp.ViewModel;
 
 namespace JCMFitnessMobileApp
 {
