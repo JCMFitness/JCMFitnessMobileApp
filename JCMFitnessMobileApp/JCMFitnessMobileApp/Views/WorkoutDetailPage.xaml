@@ -11,28 +11,21 @@
 
 
     <ContentPage.Content>
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="0*" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="4*" />
-            </Grid.RowDefinitions>
+        <StackLayout Spacing="20" Padding="15">
+            <Label Text="Name:"  FontSize="Small" TextColor="Black" />
+            <Label Text="{Binding Workout.Name}" FontSize="Medium" TextColor="Red" />
 
-           
+            <Label Text="Description:" FontSize="Small" TextColor="Black"  />
+            <Label Text="{Binding Workout.Description}" FontSize="Medium" TextColor="Red" />
 
-            <BoxView Grid.Row="1" BackgroundColor="White"
-                Opacity=".8" />
-            <StackLayout Padding="20" Grid.Row="1">
-                <Label x:Name="title" Text="{Binding Workout.Name }" FontAttributes="Bold" 
-                    HorizontalOptions="Center" AutomationProperties.IsInAccessibleTree="true"
-                       AutomationProperties.HelpText="Title of trip" />
-            
+            <Label Text="Category:" FontSize="Small" TextColor="Black"  />
+            <Label Text="{Binding Workout.Category}" FontSize="Medium" TextColor="Red" />
 
-                <Label x:Name="notes" Text="{Binding Workout.Description}" HorizontalOptions="Center"
-                       AutomationProperties.IsInAccessibleTree="true"
-                       AutomationProperties.HelpText="Notes from trip" />
-                
+            <StackLayout Orientation="Horizontal">
+                <Button Text="Delete" Command="{Binding DeleteCommand}" HorizontalOptions="FillAndExpand"></Button>
+                <Button Text="Edit" Command="{Binding EditCommand}" HorizontalOptions="FillAndExpand"></Button>
             </StackLayout>
-        </Grid>
+        </StackLayout>
+
     </ContentPage.Content>
 </ContentPage>
