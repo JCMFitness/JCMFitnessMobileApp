@@ -4,7 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     x:Class="JCMFitnessMobileApp.Views.MainPage"
     xmlns:vm="clr-namespace:JCMFitnessMobileApp.ViewModel"
-    Title="UserWorkouts">
+    Title="Workouts">
 
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="New" Command="{Binding NewCommand}" />
@@ -32,18 +32,20 @@
                              CommandParameter="{Binding}" />
                         </Grid.GestureRecognizers>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="1*" />
-                            <ColumnDefinition Width="3*" />
+                            <ColumnDefinition Width="6*" />
+                            <ColumnDefinition Width="6*" />
                         </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                        </Grid.RowDefinitions>
                         
-                        <Label Grid.RowSpan="2"
-                               Text="{Binding Title}" />
-                      
-                    </Grid>
+                        
+                            <Label Grid.Column="0"
+                               Text="{Binding Name}"
+                               FontAttributes="Bold" />
+
+                            <Label Grid.Column="0"
+                               Grid.Row="1"
+                               Text="{Binding Description}" />
+
+                        </Grid>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
