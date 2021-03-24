@@ -26,20 +26,37 @@ namespace JCMFitnessMobileApp.Services
         [Delete("/api/user/{id}")]
         public Task<User> DeleteUserByIdAsync(string id);
 
-       //Workout endpoints
+
+
+
+        //Workout endpoints
+        [Get("/api/workouts/getall")]
+        public Task<User> GetAllWorkoutsAsync();
+
+        [Get("/api/workouts?workoutid={id}")]
+        public Task<User> GetWorkoutsByIdAsync(string id);
+
+        [Post("/api/workouts")]
+        public Task<User> AddNewWorkoutAsync([Body] Workout workout);
+
+        [Put("/api/workouts")]
+        public Task<User> EditWorkoutsByIdAsync(string id);
+
+        [Delete("/api/workouts?workouts={id}")]
+        public Task<User> DeleteWorkoutsByIdAsync(string id);
+
+
+        //UserWorkout
         [Get("/api/userworkouts?userid={userid}")]
         public Task<List<Workout>> GetUserWorkoutsAsync(string userid);
 
-        /*   [Get("/api/workout/{id}")]
-          [Post("/api/workout")]
-          [Put("/api/workout")]
-          [Delete("/api/workout/{id}")]
 
-          //UserWorkout
-          [Get("/api/userworkout/{id}")]
-          [Post("/api/userworkout")]
-          [Put("/api/userworkout")]
-          [Delete("/api/userworkout/{id}")]*/
+        [Post("/api/userworkouts?userid={id}")]
+        public Task<User> AddNewUserWorkoutAsync(string id);
+        [Put("/api/userworkouts")]
+        public Task<User> EditUserWorkoutsByIdAsync(string id);
+        [Delete("/api/userworkouts?userid={userid}&workoutid={workoutid}")]
+        public Task<User> DeleteUserWorkoutsByIdAsync(string userid, string workoutid);
     }
 }
 
