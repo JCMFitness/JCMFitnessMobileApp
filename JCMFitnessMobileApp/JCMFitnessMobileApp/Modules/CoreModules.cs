@@ -3,10 +3,13 @@ using Ninject.Modules;
 using System;
 using System.Collections.Generic;
 using System.Text;
-using JCMFitnessMobileApp.ViewModel;
 using Xamarin.Essentials;
 using JCMFitnessMobileApp.Services;
 using Refit;
+using System.Text.Json;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
+using Newtonsoft.Json.Converters;
 
 namespace JCMFitnessMobileApp.Modules
 {
@@ -14,7 +17,7 @@ namespace JCMFitnessMobileApp.Modules
     {
         public override void Load()
         {
-            // ViewModels 
+            // ViewModels
             //Bind<SignInViewModel>().ToSelf();
             Bind<MainViewModel>().ToSelf();
             Bind<WorkoutDetailViewModel>().ToSelf();
@@ -24,12 +27,21 @@ namespace JCMFitnessMobileApp.Modules
 
             //var apiAuthToken = Preferences.Get("apitoken", "");
 
+            var settings = new RefitSettings(new NewtonsoftJsonContentSerializer());
+
+            JsonConvert.DefaultSettings =
+                () => new JsonSerializerSettings()
+                {
+                    ContractResolver = new CamelCasePropertyNamesContractResolver(),
+                    Converters = { new StringEnumConverter() }
+                };
+
             IFitApi refitInstance = RestService.For<IFitApi>(baseUrl);
 
-          
+
             var tripLogService = new FitnessService(refitInstance);
 
-            
+
 
             /*var fitApiService = new IFitApi();
 

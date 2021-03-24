@@ -26,11 +26,11 @@ namespace JCMFitnessMobileApp
              MainPage = mainPage;*/
 
 
-            // Register core services 
+            // Register core services
             Kernel = new StandardKernel(
                 new CoreModule(),
                 new TripLogNavModule());
-            // Register platform specific services 
+            // Register platform specific services
             Kernel.Load(platformModules);
 
             // Setup data service authentication delegates

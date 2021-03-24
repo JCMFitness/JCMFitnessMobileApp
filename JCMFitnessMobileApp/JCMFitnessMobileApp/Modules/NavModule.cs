@@ -4,7 +4,7 @@ using JCMFitnessMobileApp.Views;
 using Ninject.Modules;
 using System;
 using System.Collections.Generic;
-using System.Text;
+
 
 namespace JCMFitnessMobileApp.Modules
 {

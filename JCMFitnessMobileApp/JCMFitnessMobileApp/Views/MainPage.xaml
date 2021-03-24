@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage 
+<ContentPage
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     x:Class="JCMFitnessMobileApp.Views.MainPage"
@@ -9,13 +9,13 @@
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="New" Command="{Binding NewCommand}" />
     </ContentPage.ToolbarItems>
-    
+
     <ContentPage.Content>
 
-        <RefreshView 
-            IsRefreshing="{Binding IsBusy, Mode=OneWay}" 
+        <RefreshView
+            IsRefreshing="{Binding IsBusy, Mode=OneWay}"
             Command="{Binding RefreshCommand}">
-            
+
             <CollectionView x:Name="trips"
             SelectionMode="Single"
             ItemsSource="{Binding UserWorkouts}"
@@ -23,21 +23,21 @@
             <CollectionView.ItemTemplate>
                 <DataTemplate>
                         <StackLayout Padding="10">
-                            
-                            <Label Text="{Binding Name}" 
-                            LineBreakMode="NoWrap" 
-                            Style="{DynamicResource ListItemTextStyle}" 
-                            FontSize="20" 
+
+                            <Label Text="{Binding Name}"
+                            LineBreakMode="NoWrap"
+                            Style="{DynamicResource ListItemTextStyle}"
+                            FontSize="20"
                             TextColor="Blue"
                             FontAttributes="Bold, Italic"/>
-                            
-                            <Label Text="{Binding Description}" 
+
+                            <Label Text="{Binding Description}"
                             LineBreakMode="NoWrap"
                             Style="{DynamicResource ListItemDetailTextStyle}"
                             FontSize="13"
                                TextColor="Black" />
 
-                            <Label Text="{Binding Category}" 
+                            <Label Text="{Binding Category}"
                             LineBreakMode="NoWrap"
                             Style="{DynamicResource ListItemDetailTextStyle}"
                             FontSize="10"
@@ -46,9 +46,9 @@
 
                             <StackLayout.GestureRecognizers>
                                 <TapGestureRecognizer
-                                    Command="{Binding 
-                                        Source={RelativeSource 
-                                            AncestorType={x:Type vm:MainViewModel}}, 
+                                    Command="{Binding
+                                        Source={RelativeSource
+                                            AncestorType={x:Type vm:MainViewModel}},
                                     Path=ViewCommand}"
                                  CommandParameter="{Binding}" />
                             </StackLayout.GestureRecognizers>
@@ -59,6 +59,6 @@
         </CollectionView>
         </RefreshView>
 
-        
+
     </ContentPage.Content>
 </ContentPage>

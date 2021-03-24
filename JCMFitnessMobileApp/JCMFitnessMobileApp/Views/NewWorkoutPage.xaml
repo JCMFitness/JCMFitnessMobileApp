@@ -20,11 +20,13 @@
             <TableView Intent="Form" IsVisible="{Binding IsBusy, Converter={StaticResource ReverseBooleanConverter}}">
                 <TableView.Root>
                     <TableSection>
-                        <EntryCell x:Name="title" Label="Title" Text="{Binding Title}" />
+                        <EntryCell x:Name="id" Label="ID" Text="{Binding Id}" />
+                        <EntryCell x:Name="title" Label="Name" Text="{Binding Title}" />
 
-                        <EntryCell Label="Notes" Text="{Binding Description}" />
 
-                        <EntryCell Label="Notes" Text="{Binding Category}" />
+                        <EntryCell Label="Description" Text="{Binding Description}" />
+
+                        <EntryCell Label="Category" Text="{Binding Category}" />
                     </TableSection>
                 </TableView.Root>
             </TableView>

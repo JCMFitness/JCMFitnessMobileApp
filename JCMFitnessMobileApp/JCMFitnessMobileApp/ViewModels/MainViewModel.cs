@@ -42,7 +42,7 @@ namespace JCMFitnessMobileApp.ViewModel
         public Command RefreshCommand =>
             _refreshCommand ?? (_refreshCommand = new Command(LoadEntries));
 
-       
+
         public MainViewModel(INavService navService, IFitnessService tripLogService, IBlobCache cache)
             : base(navService)
         {
@@ -55,13 +55,14 @@ namespace JCMFitnessMobileApp.ViewModel
             LoadEntries();
         }
 
- 
 
-        async void LoadEntries()
+
+        public async void LoadEntries()
         {
             if (IsBusy)
                 return;
             IsBusy = true;
+
             try
             {
                 // Load from local cache and then immediately load from API

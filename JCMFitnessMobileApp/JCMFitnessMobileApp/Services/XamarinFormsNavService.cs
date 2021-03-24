@@ -5,6 +5,7 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using JCMFitnessMobileApp.ViewModel;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 
@@ -80,7 +81,7 @@ namespace JCMFitnessMobileApp.Services
             {
                 throw new ArgumentException("Invalid URI");
             }
-            Device.OpenUri(uri);
+            Launcher.OpenAsync(uri);
         }
         async Task NavigateToView(Type viewModelType)
         {

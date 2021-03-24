@@ -19,10 +19,7 @@ namespace JCMFitnessMobileApp.ViewModel
             _fitnessService = fitness;
         }
 
-        public override async void Init()
-        {
 
-        }
 
         string _title;
         public string Title
@@ -45,6 +42,18 @@ namespace JCMFitnessMobileApp.ViewModel
             set
             {
                 _description = value;
+                OnPropertyChanged();
+            }
+        }
+
+
+        string _id;
+        public string Id
+        {
+            get => _id;
+            set
+            {
+                _id = value;
                 OnPropertyChanged();
             }
         }
@@ -74,7 +83,7 @@ namespace JCMFitnessMobileApp.ViewModel
             {
                 var newWorkout = new Workout
                 {
-                    WorkoutID = "7",
+                    WorkoutID = Id,
                     Name = Title,
                     Description = Description,
                     Category = Category
