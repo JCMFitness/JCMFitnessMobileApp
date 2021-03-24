@@ -14,15 +14,17 @@
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Save" Command="{Binding SaveCommand}" />
     </ContentPage.ToolbarItems>
-    
+
     <ContentPage.Content>
         <Grid>
             <TableView Intent="Form" IsVisible="{Binding IsBusy, Converter={StaticResource ReverseBooleanConverter}}">
                 <TableView.Root>
                     <TableSection>
                         <EntryCell x:Name="title" Label="Title" Text="{Binding Title}" />
-             
+
                         <EntryCell Label="Notes" Text="{Binding Description}" />
+
+                        <EntryCell Label="Notes" Text="{Binding Category}" />
                     </TableSection>
                 </TableView.Root>
             </TableView>

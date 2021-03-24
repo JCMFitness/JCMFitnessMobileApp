@@ -52,11 +52,13 @@ namespace JCMFitnessMobileApp.Services
 
 
         [Post("/api/userworkouts?userid={id}")]
-        public Task<User> AddNewUserWorkoutAsync(string id);
+        public Task<User> AddNewUserWorkoutAsync(string id, [Body] Workout workout);
+
         [Put("/api/userworkouts")]
-        public Task<User> EditUserWorkoutsByIdAsync(string id);
+        public Task<User> EditUserWorkoutByIdAsync(string id);
+
         [Delete("/api/userworkouts?userid={userid}&workoutid={workoutid}")]
-        public Task<User> DeleteUserWorkoutsByIdAsync(string userid, string workoutid);
+        public Task<User> DeleteUserWorkoutByIdAsync(string userid, string workoutid);
     }
 }
 

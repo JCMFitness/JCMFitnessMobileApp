@@ -11,7 +11,7 @@ namespace JCMFitnessMobileApp.Services
     public class FitnessService : IFitnessService
     {
         private readonly IFitApi fitApi;
-        
+
 
         public FitnessService(IFitApi newsApi)
         {
@@ -53,6 +53,32 @@ namespace JCMFitnessMobileApp.Services
                 throw;
             }
         }
+
+        public async Task AddNewUserWorkout(string id, Workout workout)
+        {
+            try
+            {
+                 await fitApi.AddNewUserWorkoutAsync(id, workout);
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
+        public async Task DeleteUserWorkoutById(string userID, string workoutID)
+        {
+            try
+            {
+                await fitApi.DeleteUserWorkoutByIdAsync(userID, workoutID);
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
+
 
     }
 

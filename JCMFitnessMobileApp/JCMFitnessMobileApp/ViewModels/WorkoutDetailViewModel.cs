@@ -43,7 +43,7 @@ namespace JCMFitnessMobileApp.ViewModel
 
             try
             {
-                //await _fitnessService.DeleteEntryAsync(Entry);
+                await _fitnessService.DeleteUserWorkoutById("2", Workout.WorkoutID);
                 await NavService.GoBack();
             }
             finally
@@ -53,6 +53,5 @@ namespace JCMFitnessMobileApp.ViewModel
 
         }
 
-        // ...
     }
 }

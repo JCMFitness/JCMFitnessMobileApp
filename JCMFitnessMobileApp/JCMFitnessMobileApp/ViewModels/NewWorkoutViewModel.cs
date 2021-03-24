@@ -10,7 +10,7 @@ namespace JCMFitnessMobileApp.ViewModel
 {
     public class NewWorkoutViewModel : BaseValidationViewModel
     {
-       
+
         readonly IFitnessService _fitnessService;
 
         public NewWorkoutViewModel(INavService navService, IFitnessService fitness)
@@ -21,7 +21,7 @@ namespace JCMFitnessMobileApp.ViewModel
 
         public override async void Init()
         {
-           
+
         }
 
         string _title;
@@ -36,15 +36,27 @@ namespace JCMFitnessMobileApp.ViewModel
                 SaveCommand.ChangeCanExecute();
             }
         }
-       
-        
-        string _notes;
+
+
+        string _description;
         public string Description
         {
-            get => _notes;
+            get => _description;
             set
             {
-                _notes = value;
+                _description = value;
+                OnPropertyChanged();
+            }
+        }
+
+
+        string _category;
+        public string Category
+        {
+            get => _category;
+            set
+            {
+                _category = value;
                 OnPropertyChanged();
             }
         }
@@ -60,16 +72,15 @@ namespace JCMFitnessMobileApp.ViewModel
             IsBusy = true;
             try
             {
-                /*var newItem = new TripLogEntry
+                var newWorkout = new Workout
                 {
-                    Title = Title,
-                    Latitude = Latitude,
-                    Longitude = Longitude,
-                    Date = Date,
-                    Rating = Rating,
-                    Notes = Notes
+                    WorkoutID = "7",
+                    Name = Title,
+                    Description = Description,
+                    Category = Category
+
                 };
-                await _tripLogService.AddEntryAsync(newItem);*/
+                await _fitnessService.AddNewUserWorkout("2", newWorkout);
                 await NavService.GoBack();
             }
             finally
