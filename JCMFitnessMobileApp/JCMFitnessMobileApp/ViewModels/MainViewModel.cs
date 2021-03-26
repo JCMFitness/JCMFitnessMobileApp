@@ -13,11 +13,24 @@ namespace JCMFitnessMobileApp.ViewModel
     public class MainViewModel : BaseViewModel
     {
         ObservableCollection<Workout> _userWorkouts;
+        User _user;
 
         readonly IFitnessService _fitnessService;
 
         readonly IBlobCache _cache;
 
+
+        public User User
+        {
+            get => _user;
+            set
+            {
+                _user = value;
+                OnPropertyChanged();
+            }
+
+
+        }
         public ObservableCollection<Workout> UserWorkouts
         {
             get => _userWorkouts;
@@ -50,12 +63,36 @@ namespace JCMFitnessMobileApp.ViewModel
             _cache = cache;
             UserWorkouts = new ObservableCollection<Workout>();
         }
-        public override void Init()
+        public async override void Init()
         {
+            await LoginUser();
             LoadEntries();
         }
 
+        public async Task LoginUser()
+        {
+            if (IsBusy)
+                return;
+            IsBusy = true;
 
+            try
+            {
+
+
+                // Username and password needs to be entered by the user here
+
+                User = await _fitnessService.LoginUser("chancey", "1234");
+                IsBusy = false;
+            }
+            catch
+            {
+                throw;
+            }
+            finally
+            {
+                IsBusy = false;
+            }
+        }
 
         public async void LoadEntries()
         {
@@ -66,7 +103,7 @@ namespace JCMFitnessMobileApp.ViewModel
             try
             {
                 // Load from local cache and then immediately load from API
-                _cache.GetAndFetchLatest("entries", async () => await _fitnessService.GetUserWorkouts("2"))
+                _cache.GetAndFetchLatest("entries", async () => await _fitnessService.GetUserWorkouts(User.UserID))
                     .Subscribe(workouts =>
                     {
                         ObservableCollection<Workout> newWorkouts = new ObservableCollection<Workout>(workouts);
