@@ -9,10 +9,6 @@ namespace JCMFitnessMobileApp.Services
     public interface IFitnessService
     {
 
-        //Task<List<User>> GetUsers();
-
-
-        Task<User> GetUserById(string id);
 
         Task<User> LoginUser(string userId, string password);
 

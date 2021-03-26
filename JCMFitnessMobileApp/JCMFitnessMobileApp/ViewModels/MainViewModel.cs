@@ -103,7 +103,7 @@ namespace JCMFitnessMobileApp.ViewModel
             try
             {
                 // Load from local cache and then immediately load from API
-                _cache.GetAndFetchLatest("entries", async () => await _fitnessService.GetUserWorkouts(User.UserID))
+                _cache.GetAndFetchLatest("userworkouts", async () => await _fitnessService.GetUserWorkouts(User.UserID))
                     .Subscribe(workouts =>
                     {
                         ObservableCollection<Workout> newWorkouts = new ObservableCollection<Workout>(workouts);

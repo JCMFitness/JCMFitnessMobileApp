@@ -13,18 +13,14 @@ namespace JCMFitnessMobileApp.Services
         [Get("/api/user/login?username={userid}&password={password}")]
         public Task<User> UserLoginAsync(string userid, string password);
 
-        //User endpoints
-        [Get("/api/user?userid={id}")]
-        public Task<User> GetUserByIdAsync(string id);
 
-        [Post("/api/user")]
-        public Task AddNewUserAsync();
+        //User endpoints
 
         [Put("/api/user?id={userid}")]
-        public Task EditUserByIdAsync(string userid);
+        public Task EditUserAsync(string userid);
 
         [Delete("/api/user/{id}")]
-        public Task DeleteUserByIdAsync(string id);
+        public Task DeleteUserAsync(string id);
 
 
 
@@ -34,31 +30,30 @@ namespace JCMFitnessMobileApp.Services
         public Task<List<Workout>> GetWorkoutAsync();
 
         [Get("/api/workouts?workoutid={id}")]
-        public Task<Workout> GetWorkoutsByIdAsync(string id);
+        public Task<Workout> GetWorkoutsAsync(string id);
 
         [Post("/api/workouts")]
         public Task AddNewWorkoutAsync([Body] Workout workout);
 
         [Put("/api/workouts")]
-        public Task EditWorkoutsByIdAsync(string id);
+        public Task EditWorkoutdAsync(string id);
 
         [Delete("/api/workouts?workouts={id}")]
-        public Task DeleteWorkoutsByIdAsync(string id);
+        public Task DeleteWorkoutAsync(string id);
 
 
         //UserWorkout
         [Get("/api/userworkouts?userid={userid}")]
         public Task<List<Workout>> GetUserWorkoutsAsync(string userid);
 
-
         [Post("/api/userworkouts?userid={id}")]
         public Task AddNewUserWorkoutAsync(string id, [Body] Workout workout);
 
         [Put("/api/userworkouts")]
-        public Task EditUserWorkoutByIdAsync(string id);
+        public Task EditUserWorkoutAsync(string id);
 
         [Delete("/api/userworkouts?userid={userid}&workoutid={workoutid}")]
-        public Task DeleteUserWorkoutByIdAsync(string userid, string workoutid);
+        public Task DeleteUserWorkoutAsync(string userid, string workoutid);
 
 
 

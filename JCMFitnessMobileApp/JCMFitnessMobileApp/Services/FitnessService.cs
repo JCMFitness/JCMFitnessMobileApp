@@ -18,17 +18,6 @@ namespace JCMFitnessMobileApp.Services
             this.fitApi = newsApi;
         }
 
-        public async Task<User> GetUserById(string id)
-        {
-            try
-            {
-                return await fitApi.GetUserByIdAsync(id);
-            }
-            catch
-            {
-                throw;
-            }
-        }
 
         public async Task<User> LoginUser(string id, string password)
         {
@@ -71,7 +60,7 @@ namespace JCMFitnessMobileApp.Services
         {
             try
             {
-                await fitApi.DeleteUserWorkoutByIdAsync(userID, workoutID);
+                await fitApi.DeleteUserWorkoutAsync(userID, workoutID);
             }
             catch (Exception ex)
             {
