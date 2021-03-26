@@ -38,7 +38,7 @@ namespace JCMFitnessMobileApp.Modules
                     Converters = { new StringEnumConverter() }
                 };
 
-            IFitApi refitInstance = RestService.For<IFitApi>(baseUrl);
+            IFitApi refitInstance = RestService.For<IFitApi>(baseUrl, settings);
 
 
             var tripLogService = new FitnessService(refitInstance);

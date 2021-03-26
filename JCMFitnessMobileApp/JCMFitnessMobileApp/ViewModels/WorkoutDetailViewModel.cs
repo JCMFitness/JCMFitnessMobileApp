@@ -54,6 +54,10 @@ namespace JCMFitnessMobileApp.ViewModel
         public Command DeleteCommand =>
             _deleteCommand ?? (_deleteCommand = new Command(async () => await Delete()));
 
+        Command _editCommand;
+        public Command EditCommand =>
+            _editCommand ?? (_editCommand = new Command(async () => await Edit()));
+
         async Task<ObservableCollection<Exercise>> LoadExercises(string workoutid)
         {
 
@@ -80,6 +84,24 @@ namespace JCMFitnessMobileApp.ViewModel
             try
             {
                 await _fitnessService.DeleteUserWorkoutById("2", Workout.WorkoutID);
+                await NavService.GoBack();
+            }
+            finally
+            {
+                IsBusy = false;
+            }
+
+        }
+
+        async Task Edit()
+        {
+            if (IsBusy)
+                return;
+            IsBusy = true;
+
+            try
+            {
+                //await _fitnessService.DeleteUserWorkoutById("2", Workout.WorkoutID);
                 await NavService.GoBack();
             }
             finally

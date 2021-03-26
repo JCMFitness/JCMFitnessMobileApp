@@ -5,10 +5,6 @@
     x:Class="JCMFitnessMobileApp.Views.WorkoutDetailPage">
 
 
-    <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Delete" Command="{Binding DeleteCommand}" />
-    </ContentPage.ToolbarItems>
-
 
     <ContentPage.Content>
         <StackLayout Spacing="20" Padding="15">

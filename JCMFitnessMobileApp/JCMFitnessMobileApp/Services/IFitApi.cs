@@ -18,32 +18,32 @@ namespace JCMFitnessMobileApp.Services
         public Task<User> GetUserByIdAsync(string id);
 
         [Post("/api/user")]
-        public Task<User> AddNewUserAsync();
+        public Task AddNewUserAsync();
 
         [Put("/api/user?id={userid}")]
-        public Task<User> EditUserByIdAsync(string userid);
+        public Task EditUserByIdAsync(string userid);
 
         [Delete("/api/user/{id}")]
-        public Task<User> DeleteUserByIdAsync(string id);
+        public Task DeleteUserByIdAsync(string id);
 
 
 
 
         //Workout endpoints
         [Get("/api/workouts/getall")]
-        public Task<User> GetAllWorkoutsAsync();
+        public Task<List<Workout>> GetWorkoutAsync();
 
         [Get("/api/workouts?workoutid={id}")]
-        public Task<User> GetWorkoutsByIdAsync(string id);
+        public Task<Workout> GetWorkoutsByIdAsync(string id);
 
         [Post("/api/workouts")]
-        public Task<User> AddNewWorkoutAsync([Body] Workout workout);
+        public Task AddNewWorkoutAsync([Body] Workout workout);
 
         [Put("/api/workouts")]
-        public Task<User> EditWorkoutsByIdAsync(string id);
+        public Task EditWorkoutsByIdAsync(string id);
 
         [Delete("/api/workouts?workouts={id}")]
-        public Task<User> DeleteWorkoutsByIdAsync(string id);
+        public Task DeleteWorkoutsByIdAsync(string id);
 
 
         //UserWorkout
@@ -52,13 +52,13 @@ namespace JCMFitnessMobileApp.Services
 
 
         [Post("/api/userworkouts?userid={id}")]
-        public Task<User> AddNewUserWorkoutAsync(string id, [Body] Workout workout);
+        public Task AddNewUserWorkoutAsync(string id, [Body] Workout workout);
 
         [Put("/api/userworkouts")]
-        public Task<User> EditUserWorkoutByIdAsync(string id);
+        public Task EditUserWorkoutByIdAsync(string id);
 
         [Delete("/api/userworkouts?userid={userid}&workoutid={workoutid}")]
-        public Task<User> DeleteUserWorkoutByIdAsync(string userid, string workoutid);
+        public Task DeleteUserWorkoutByIdAsync(string userid, string workoutid);
 
 
 
