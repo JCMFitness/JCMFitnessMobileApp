@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Text;
 using System.Threading.Tasks;
 using JCMFitnessMobileApp.Models;
@@ -12,6 +13,20 @@ namespace JCMFitnessMobileApp.ViewModel
     {
         Workout _workout;
         readonly IFitnessService _fitnessService;
+
+
+        ObservableCollection<Exercise> _workoutExercises;
+
+
+        public ObservableCollection<Exercise> WorkoutExercises
+        {
+            get => _workoutExercises;
+            set
+            {
+                _workoutExercises = value;
+                OnPropertyChanged();
+            }
+        }
 
         public Workout Workout
         {
@@ -29,14 +44,32 @@ namespace JCMFitnessMobileApp.ViewModel
             _fitnessService = fitnessService;
         }
 
-        public override void Init(Workout workout)
+        public override async void Init(Workout workout)
         {
             Workout = workout;
+            WorkoutExercises = await LoadExercises(workout.WorkoutID);
         }
 
         Command _deleteCommand;
         public Command DeleteCommand =>
             _deleteCommand ?? (_deleteCommand = new Command(async () => await Delete()));
+
+        async Task<ObservableCollection<Exercise>> LoadExercises(string workoutid)
+        {
+
+            try
+            {
+                var workoutExercises = await _fitnessService.GetWorkoutExercises(workoutid);
+
+                ObservableCollection<Exercise> newWorkouts = new ObservableCollection<Exercise>(workoutExercises);
+
+                return new ObservableCollection<Exercise>(newWorkouts);
+            }
+            catch(Exception ex)
+            {
+                throw;
+            }
+        }
 
         async Task Delete()
         {

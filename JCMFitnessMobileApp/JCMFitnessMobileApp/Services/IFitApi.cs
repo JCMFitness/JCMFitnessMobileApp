@@ -59,6 +59,12 @@ namespace JCMFitnessMobileApp.Services
 
         [Delete("/api/userworkouts?userid={userid}&workoutid={workoutid}")]
         public Task<User> DeleteUserWorkoutByIdAsync(string userid, string workoutid);
+
+
+
+        //WorkoutExercise
+        [Get("/api/workoutexercises?workoutid={id}")]
+        public Task<List<Exercise>> GetWorkoutExercisesAsync(string id);
     }
 }
 

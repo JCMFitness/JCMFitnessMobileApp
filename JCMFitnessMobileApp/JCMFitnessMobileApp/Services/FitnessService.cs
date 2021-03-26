@@ -80,6 +80,19 @@ namespace JCMFitnessMobileApp.Services
             }
         }
 
+        public async Task<List<Exercise>> GetWorkoutExercises(string workoutID)
+        {
+            try
+            {
+                return await fitApi.GetWorkoutExercisesAsync(workoutID);
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine(ex.Message);
+                throw;
+            }
+        }
+
 
 
     }

@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    
+
     x:Class="JCMFitnessMobileApp.Views.WorkoutDetailPage">
 
 
@@ -20,6 +20,36 @@
 
             <Label Text="Category:" FontSize="Small" TextColor="Black"  />
             <Label Text="{Binding Workout.Category}" FontSize="Medium" TextColor="Red" />
+
+            <CollectionView x:Name="trips"
+            ItemsSource="{Binding WorkoutExercises}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout Padding="10">
+
+                            <Label Text="{Binding Name}"
+                            LineBreakMode="NoWrap"
+                            Style="{DynamicResource ListItemTextStyle}"
+                            FontSize="20"
+                            TextColor="Blue"
+                            FontAttributes="Bold, Italic"/>
+
+                            <Label Text="{Binding TimerValue}"
+                            LineBreakMode="NoWrap"
+                            Style="{DynamicResource ListItemDetailTextStyle}"
+                            FontSize="15"
+                               TextColor="Black" />
+
+                            <Label Text="{Binding Repititions}"
+                            LineBreakMode="NoWrap"
+                            Style="{DynamicResource ListItemDetailTextStyle}"
+                            FontSize="15"
+                               TextColor="Orange" />
+
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
 
             <StackLayout Orientation="Horizontal">
                 <Button Text="Delete" Command="{Binding DeleteCommand}" HorizontalOptions="FillAndExpand"></Button>
