@@ -8,7 +8,7 @@ namespace JCMFitnessMobileApp.Models
 {
     public class User
     {
-        [Key]
+        
         public string UserID { get; set; }
 
         public string FirstName { get; set; }

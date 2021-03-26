@@ -13,5 +13,6 @@ namespace JCMFitnessMobileApp.Models
         public bool IsPublic { get; set; }
 
         public List<UserWorkout> UserWorkouts { get; set; }
+        public List<WorkoutExercises> WorkoutExercises { get; set; }
     }
 }

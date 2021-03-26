@@ -40,6 +40,9 @@ namespace JCMFitnessMobileApp.ViewModel
 
         async Task Delete()
         {
+            if (IsBusy)
+                return;
+            IsBusy = true;
 
             try
             {
