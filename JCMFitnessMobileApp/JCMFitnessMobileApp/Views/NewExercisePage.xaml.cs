@@ -21,7 +21,7 @@ namespace JCMFitnessMobileApp.Views
         public NewExercisePage()
         {
             InitializeComponent();
-            BindingContextChanged += Page_BindingContextChanged;
+           /* BindingContextChanged += Page_BindingContextChanged;
 
 
             void Page_BindingContextChanged(object sender, EventArgs e)
@@ -35,18 +35,14 @@ namespace JCMFitnessMobileApp.Views
                     as List<string>)?.Any() == true;
                 switch (e.PropertyName)
                 {
-                    case nameof(ViewModel.Title):
-                        title.LabelColor = propHasErrors
-                            ? Color.Red : Color.Black;
-                        break;
-                    case nameof(ViewModel.Id):
+                    case nameof(ViewModel.Name):
                         title.LabelColor = propHasErrors
                             ? Color.Red : Color.Black;
                         break;
                     default:
                         break;
                 }
-            }
+            }*/
         }
     }
 }

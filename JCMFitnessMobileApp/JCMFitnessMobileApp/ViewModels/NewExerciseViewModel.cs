@@ -9,7 +9,7 @@ using Xamarin.Forms;
 
 namespace JCMFitnessMobileApp.ViewModels
 {
-    public class NewExerciseViewModel : BaseValidationViewModel
+    public class NewExerciseViewModel : BaseViewModel<Workout>
     {
 
         readonly IFitnessService _fitnessService;
@@ -23,47 +23,33 @@ namespace JCMFitnessMobileApp.ViewModels
         }
 
 
-        public void Init(Workout workout)
+       /* public void Init(Workout workout)
         {
             _workout = workout;
-        }
-
-
-      /*  public override async void Init(Workout workout)
-        {
-            Workout = workout;
-            WorkoutExercises = await LoadExercises(workout.WorkoutID);
-
         }*/
 
-        string _title;
-        public string Title
+
+        public override async void Init(Workout workout)
         {
-            get => _title;
+            _workout = workout;
+
+        }
+
+        string _name;
+        public string Name
+        {
+            get => _name;
             set
             {
-                _title = value;
-                Validate(() => !string.IsNullOrWhiteSpace(_title), "Title must be provided.");
+                _name = value;
+                //Validate(() => !string.IsNullOrWhiteSpace(_name), "Name must be provided.");
                 OnPropertyChanged();
                 SaveCommand.ChangeCanExecute();
             }
         }
 
-
-        string _description;
-        public string Description
-        {
-            get => _description;
-            set
-            {
-                _description = value;
-                OnPropertyChanged();
-            }
-        }
-
-
         string _id;
-        public string Id
+        public string ID
         {
             get => _id;
             set
@@ -74,20 +60,45 @@ namespace JCMFitnessMobileApp.ViewModels
         }
 
 
-        string _category;
-        public string Category
+        int _timerValue;
+        public int TimerValue
         {
-            get => _category;
+            get => _timerValue;
             set
             {
-                _category = value;
+                _timerValue = value;
+                OnPropertyChanged();
+            }
+        }
+
+
+        int _repetitions;
+        public int Repetitions
+        {
+            get => _repetitions;
+            set
+            {
+                _repetitions = value;
+                OnPropertyChanged();
+            }
+        }
+
+
+        int _sets;
+        public int Sets
+        {
+            get => _sets;
+            set
+            {
+                _sets = value;
                 OnPropertyChanged();
             }
         }
 
         Command _saveCommand;
         public Command SaveCommand =>
-            _saveCommand ?? (_saveCommand = new Command(async () => await Save(), CanSave));
+            _saveCommand ?? (_saveCommand = new Command(async () => await Save()));
+
         async Task Save()
         {
 
@@ -96,15 +107,16 @@ namespace JCMFitnessMobileApp.ViewModels
             IsBusy = true;
             try
             {
-                var newWorkout = new Workout
+                var newExercise = new Exercise
                 {
-                    WorkoutID = Id,
-                    Name = Title,
-                    Description = Description,
-                    Category = Category
+                    ExerciseID = ID,
+                    Name = Name,
+                    TimerValue = TimerValue,
+                    Repititions = Repetitions,
+                    Sets = Sets
 
                 };
-                await _fitnessService.AddNewUserWorkout("2", newWorkout);
+                await _fitnessService.AddWorkoutExercise(_workout.WorkoutID, newExercise);
                 await NavService.GoBack();
             }
             finally
@@ -113,7 +125,7 @@ namespace JCMFitnessMobileApp.ViewModels
             }
 
         }
-        bool CanSave() => !string.IsNullOrWhiteSpace(Title) && !HasErrors;
+       // bool CanSave() => !string.IsNullOrWhiteSpace(Name) && !HasErrors;
 
 
 
