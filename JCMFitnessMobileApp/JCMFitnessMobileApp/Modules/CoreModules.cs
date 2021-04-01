@@ -10,6 +10,7 @@ using System.Text.Json;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using Newtonsoft.Json.Converters;
+using JCMFitnessMobileApp.ViewModels;
 
 namespace JCMFitnessMobileApp.Modules
 {
@@ -22,6 +23,7 @@ namespace JCMFitnessMobileApp.Modules
             Bind<MainViewModel>().ToSelf();
             Bind<WorkoutDetailViewModel>().ToSelf();
             Bind<NewWorkoutViewModel>().ToSelf();
+            Bind<NewExerciseViewModel>().ToSelf();
 
             //var baseUrl = "https://jcmfitnessapi.herokuapp.com";
 

@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using JCMFitnessMobileApp.Models;
 using JCMFitnessMobileApp.Services;
+using JCMFitnessMobileApp.ViewModels;
 using Xamarin.Forms;
 
 namespace JCMFitnessMobileApp.ViewModel
@@ -57,6 +58,10 @@ namespace JCMFitnessMobileApp.ViewModel
         Command _editCommand;
         public Command EditCommand =>
             _editCommand ?? (_editCommand = new Command(async () => await Edit()));
+
+        public Command AddExerciseCommand =>
+              new Command(async () =>
+                  await NavService.NavigateTo<NewExerciseViewModel, Workout>(Workout));
 
         async Task<ObservableCollection<Exercise>> LoadExercises(string workoutid)
         {
@@ -111,6 +116,10 @@ namespace JCMFitnessMobileApp.ViewModel
             }
 
         }
+
+
+
+
 
     }
 }

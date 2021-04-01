@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:converters="clr-namespace:JCMFitnessMobileApp.Converters;assembly=JCMFitnessMobileApp"
+             x:Class="JCMFitnessMobileApp.Views.NewExercisePage">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:ReverseBooleanConverter x:Key="ReverseBooleanConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Save" Command="{Binding SaveCommand}" />
+    </ContentPage.ToolbarItems>
+
+    <ContentPage.Content>
+        <Grid>
+            <TableView Intent="Form" IsVisible="{Binding IsBusy, Converter={StaticResource ReverseBooleanConverter}}">
+                <TableView.Root>
+                    <TableSection>
+                        <EntryCell x:Name="id" Label="ID" Text="{Binding Id}" />
+                        <EntryCell x:Name="title" Label="Name" Text="{Binding Title}" />
+
+
+                        <EntryCell Label="Description" Text="{Binding Description}" />
+
+                        <EntryCell Label="Category" Text="{Binding Category}" />
+                    </TableSection>
+                </TableView.Root>
+            </TableView>
+
+            <StackLayout Orientation="Vertical" VerticalOptions="Center" HorizontalOptions="Center" IsVisible="{Binding IsBusy}">
+                <ActivityIndicator IsRunning="True" />
+                <Label Text="Please wait! Saving new entry..." />
+            </StackLayout>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
