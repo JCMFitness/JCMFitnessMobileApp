@@ -8,6 +8,7 @@ using JCMFitnessMobileApp.Modules;
 using Xamarin.Essentials;
 using JCMFitnessMobileApp.Views;
 using JCMFitnessMobileApp.ViewModel;
+using JCMFitnessMobileApp.ViewModels;
 
 namespace JCMFitnessMobileApp
 {
@@ -53,9 +54,9 @@ namespace JCMFitnessMobileApp
              };*/
 
 
-            var mainPage = new NavigationPage(new MainPage())
+            var mainPage = new NavigationPage(new LoginPage())
             {
-                BindingContext = Kernel.Get<MainViewModel>()
+                BindingContext = Kernel.Get<LoginViewModel>()
             };
 
             var navService = Kernel.Get<INavService>() as XamarinFormsNavService;

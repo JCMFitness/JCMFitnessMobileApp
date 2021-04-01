@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:converters="clr-namespace:JCMFitnessMobileApp.Converters;assembly=JCMFitnessMobileApp"
+             x:Class="JCMFitnessMobileApp.Views.LoginPage">
+
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:ReverseBooleanConverter x:Key="ReverseBooleanConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    
+    <ContentPage.Content>
+        <StackLayout>
+        <Grid>
+            <TableView Intent="Form" IsVisible="{Binding IsBusy, Converter={StaticResource ReverseBooleanConverter}}">
+                <TableView.Root>
+                    <TableSection>
+                        <EntryCell x:Name="UserName"  Text="{Binding UserName}" Placeholder="Name" />
+                        <EntryCell x:Name="Password"  Text="{Binding Password}" Placeholder="Password" />
+                    </TableSection>
+                </TableView.Root>
+                
+            </TableView>
+
+                
+                    
+               
+            </Grid>
+            <Button Text="Login" Command="{Binding LoginCommand}" VerticalOptions="CenterAndExpand"></Button>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

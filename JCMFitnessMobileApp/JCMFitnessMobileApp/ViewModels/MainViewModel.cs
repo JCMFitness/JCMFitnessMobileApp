@@ -10,7 +10,7 @@ using Akavache;
 
 namespace JCMFitnessMobileApp.ViewModel
 {
-    public class MainViewModel : BaseViewModel
+    public class MainViewModel : BaseViewModel<User>
     {
         ObservableCollection<Workout> _userWorkouts;
         User _user;
@@ -53,7 +53,7 @@ namespace JCMFitnessMobileApp.ViewModel
 
         Command _refreshCommand;
         public Command RefreshCommand =>
-            _refreshCommand ?? (_refreshCommand = new Command(LoadEntries));
+            _refreshCommand ?? (_refreshCommand = new Command(async () => await LoadEntries()));
 
 
         public MainViewModel(INavService navService, IFitnessService tripLogService, IBlobCache cache)
@@ -63,38 +63,15 @@ namespace JCMFitnessMobileApp.ViewModel
             _cache = cache;
             UserWorkouts = new ObservableCollection<Workout>();
         }
-        public async override void Init()
+        public override async void Init(User user)
         {
-            await LoginUser();
-            LoadEntries();
+            _user = user;
+            await LoadEntries();
         }
 
-        public async Task LoginUser()
-        {
-            if (IsBusy)
-                return;
-            IsBusy = true;
-
-            try
-            {
 
 
-                // Username and password needs to be entered by the user here
-
-                User = await _fitnessService.LoginUser("chancey", "1234");
-                IsBusy = false;
-            }
-            catch
-            {
-                throw;
-            }
-            finally
-            {
-                IsBusy = false;
-            }
-        }
-
-        public async void LoadEntries()
+        public async Task LoadEntries()
         {
             if (IsBusy)
                 return;

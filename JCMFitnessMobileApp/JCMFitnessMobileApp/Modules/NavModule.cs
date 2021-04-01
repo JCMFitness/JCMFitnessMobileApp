@@ -1,5 +1,6 @@
 ﻿using JCMFitnessMobileApp.Services;
 using JCMFitnessMobileApp.ViewModel;
+using JCMFitnessMobileApp.ViewModels;
 using JCMFitnessMobileApp.Views;
 using Ninject.Modules;
 using System;
@@ -18,6 +19,7 @@ namespace JCMFitnessMobileApp.Modules
             navService.RegisterViewMapping(typeof(MainViewModel), typeof(MainPage));
             navService.RegisterViewMapping(typeof(WorkoutDetailViewModel), typeof(WorkoutDetailPage));
             navService.RegisterViewMapping(typeof(NewWorkoutViewModel), typeof(NewWorkoutPage));
+            navService.RegisterViewMapping(typeof(LoginViewModel), typeof(LoginPage));
 
             Bind<INavService>()
             .ToMethod(x => navService)

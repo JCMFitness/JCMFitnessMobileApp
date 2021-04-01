@@ -25,8 +25,9 @@ namespace JCMFitnessMobileApp.Services
             {
                 return await fitApi.UserLoginAsync(id, password);
             }
-            catch
+            catch (Exception ex)
             {
+                System.Diagnostics.Debug.WriteLine(ex.Message);
                 throw;
             }
         }
@@ -37,8 +38,9 @@ namespace JCMFitnessMobileApp.Services
             {
                 return await fitApi.GetUserWorkoutsAsync(id);
             }
-            catch
+            catch(Exception ex)
             {
+                System.Diagnostics.Debug.WriteLine(ex.Message);
                 throw;
             }
         }
