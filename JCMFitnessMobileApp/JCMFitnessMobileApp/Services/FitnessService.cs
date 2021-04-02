@@ -84,6 +84,32 @@ namespace JCMFitnessMobileApp.Services
             }
         }
 
+        public async Task AddWorkoutExercise(string workoutID, Exercise exercise)
+        {
+            try
+            {
+                 await fitApi.PostNewWorkoutExerciseAsync(workoutID, exercise);
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine(ex.Message);
+                throw;
+            }
+        }
+
+        public async Task DeleteWorkoutExercise(string workoutID, string exerciseID)
+        {
+            try
+            {
+                await fitApi.DeleteWorkoutExerciseAsync(workoutID, exerciseID);
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine(ex.Message);
+                throw;
+            }
+        }
+
 
 
     }

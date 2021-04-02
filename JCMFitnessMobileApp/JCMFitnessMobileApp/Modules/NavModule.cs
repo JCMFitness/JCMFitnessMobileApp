@@ -19,6 +19,7 @@ namespace JCMFitnessMobileApp.Modules
             navService.RegisterViewMapping(typeof(MainViewModel), typeof(MainPage));
             navService.RegisterViewMapping(typeof(WorkoutDetailViewModel), typeof(WorkoutDetailPage));
             navService.RegisterViewMapping(typeof(NewWorkoutViewModel), typeof(NewWorkoutPage));
+            navService.RegisterViewMapping(typeof(NewExerciseViewModel), typeof(NewExercisePage));
             navService.RegisterViewMapping(typeof(LoginViewModel), typeof(LoginPage));
 
             Bind<INavService>()

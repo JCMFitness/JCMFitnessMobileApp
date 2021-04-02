@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:converters="clr-namespace:JCMFitnessMobileApp.Converters;assembly=JCMFitnessMobileApp"
+             x:Class="JCMFitnessMobileApp.Views.NewExercisePage">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:ReverseBooleanConverter x:Key="ReverseBooleanConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Save" Command="{Binding SaveCommand}" />
+    </ContentPage.ToolbarItems>
+
+    <ContentPage.Content>
+        <Grid>
+            <TableView Intent="Form" IsVisible="{Binding IsBusy, Converter={StaticResource ReverseBooleanConverter}}">
+                <TableView.Root>
+                    <TableSection>
+                        <EntryCell x:Name="ID" Label="ID" Text="{Binding ID}" />
+                        <EntryCell x:Name="Name" Label="Name" Text="{Binding Name}" />
+                        <EntryCell x:Name="TimerValue" Label="TimerValue" Text="{Binding TimerValue}" />
+
+
+                        <EntryCell Label="Repetitions" Text="{Binding Repetitions}" />
+
+                        <EntryCell Label="Sets" Text="{Binding Sets}" />
+                    </TableSection>
+                </TableView.Root>
+            </TableView>
+
+            <StackLayout Orientation="Vertical" VerticalOptions="Center" HorizontalOptions="Center" IsVisible="{Binding IsBusy}">
+                <ActivityIndicator IsRunning="True" />
+                <Label Text="Please wait! Saving new entry..." />
+            </StackLayout>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

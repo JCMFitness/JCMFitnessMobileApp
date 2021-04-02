@@ -61,9 +61,21 @@ namespace JCMFitnessMobileApp.Services
             {
                 return;
             }
-            var lastView = XamarinFormsNav.NavigationStack[XamarinFormsNav.NavigationStack.Count - 2];
+            var lastView = XamarinFormsNav.NavigationStack[XamarinFormsNav.NavigationStack.Count - 1];
             XamarinFormsNav.RemovePage(lastView);
         }
+        public void RemoveLastTwoViews()
+        {
+            if (XamarinFormsNav.NavigationStack.Count < 2)
+            {
+                return;
+            }
+            var lastView = XamarinFormsNav.NavigationStack[XamarinFormsNav.NavigationStack.Count - 1];
+            var lastView1 = XamarinFormsNav.NavigationStack[XamarinFormsNav.NavigationStack.Count - 2];
+            XamarinFormsNav.RemovePage(lastView);
+            XamarinFormsNav.RemovePage(lastView1);
+        }
+
         public void ClearBackStack()
         {
             if (XamarinFormsNav.NavigationStack.Count < 2)
