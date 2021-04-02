@@ -7,6 +7,7 @@ using Xamarin.Forms;
 using System.Threading.Tasks;
 using JCMFitnessMobileApp.Services;
 using Akavache;
+using MonkeyCache.FileStore;
 
 namespace JCMFitnessMobileApp.ViewModel
 {
@@ -14,6 +15,7 @@ namespace JCMFitnessMobileApp.ViewModel
     {
         ObservableCollection<Workout> _userWorkouts;
         User _user;
+        private bool _isRefreshing;
 
         readonly IFitnessService _fitnessService;
 
@@ -42,6 +44,16 @@ namespace JCMFitnessMobileApp.ViewModel
         }
 
 
+        public bool IsRefreshing
+        {
+            get => _isRefreshing;
+            set
+            {
+                _isRefreshing = value;
+                OnPropertyChanged();
+            }
+        }
+
         public Command<Workout> ViewCommand =>
             new Command<Workout>(async entry =>
                 await NavService.NavigateTo<WorkoutDetailViewModel, Workout>(entry));
@@ -53,7 +65,7 @@ namespace JCMFitnessMobileApp.ViewModel
 
         Command _refreshCommand;
         public Command RefreshCommand =>
-            _refreshCommand ?? (_refreshCommand = new Command(async () => await LoadEntries()));
+            _refreshCommand ?? (_refreshCommand = new Command(LoadEntries));
 
 
         public MainViewModel(INavService navService, IFitnessService tripLogService, IBlobCache cache)
@@ -62,19 +74,32 @@ namespace JCMFitnessMobileApp.ViewModel
             _fitnessService = tripLogService;
             _cache = cache;
             UserWorkouts = new ObservableCollection<Workout>();
+            Barrel.ApplicationId = "CachingDataSample";
         }
-        public override async void Init(User user)
+        public override void Init(User user)
         {
-            _user = user;
-            await LoadEntries();
+            User = user;
+
+           /* if(User != null)
+            {
+                Barrel.Current.Add(key: "user", data: User, expireIn: TimeSpan.FromDays(1));
+            }*/
+            
+            LoadEntries();
         }
 
 
 
-        public async Task LoadEntries()
+        public async void LoadEntries()
         {
-            if (IsBusy)
+            User = Barrel.Current.Get<User>(key: "user");
+
+            if (IsBusy || User == null)
+            {
+                IsRefreshing = false;
                 return;
+            }
+              
             IsBusy = true;
 
             try
@@ -87,8 +112,9 @@ namespace JCMFitnessMobileApp.ViewModel
                         UserWorkouts = new ObservableCollection<Workout>(newWorkouts);
                         IsBusy = false;
                     });
+                IsRefreshing = false;
             }
-            catch
+            catch(Exception ex)
             {
                 throw;
             }

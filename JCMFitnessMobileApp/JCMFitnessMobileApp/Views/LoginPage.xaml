@@ -10,25 +10,56 @@
             <converters:ReverseBooleanConverter x:Key="ReverseBooleanConverter" />
         </ResourceDictionary>
     </ContentPage.Resources>
+
+  
+    
     
     <ContentPage.Content>
-        <StackLayout>
-        <Grid>
-            <TableView Intent="Form" IsVisible="{Binding IsBusy, Converter={StaticResource ReverseBooleanConverter}}">
-                <TableView.Root>
-                    <TableSection>
-                        <EntryCell x:Name="UserName"  Text="{Binding UserName}" Placeholder="Name" />
-                        <EntryCell x:Name="Password"  Text="{Binding Password}" Placeholder="Password" />
-                    </TableSection>
-                </TableView.Root>
-                
-            </TableView>
+        <StackLayout  HorizontalOptions="Center"
+                 VerticalOptions="Center" IsVisible="{Binding IsBusy, Converter={StaticResource ReverseBooleanConverter}}">
 
-                
-                    
-               
-            </Grid>
-            <Button Text="Login" Command="{Binding LoginCommand}" VerticalOptions="CenterAndExpand"></Button>
+            <StackLayout Orientation="Horizontal">
+                <Label Text="Login:"
+                   FontSize="20"
+                   WidthRequest="95"
+                   HorizontalTextAlignment="End"
+                   TextColor="#000"
+                   VerticalOptions="Center"/>
+                <Entry Placeholder="Username"
+                   FontSize="18"
+                   Text="{Binding UserName}"
+                   WidthRequest="200"
+                   VerticalOptions="Center"/>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal">
+                <Label Text="Password:"
+                   HorizontalTextAlignment="End"
+                   FontSize="20"
+                   TextColor="#000"
+                   VerticalOptions="Center"/>
+                <Entry Placeholder="Password"
+                   IsPassword="True"
+                   FontSize="18"
+                   Text="{Binding Password}"
+                   WidthRequest="200"
+                   VerticalOptions="Center"/>
+            </StackLayout>
+
+            <StackLayout HorizontalOptions="Center"
+                     Margin="0,10">
+                <Button Text="Sign in"
+                    BackgroundColor="#09C"
+                    TextColor="#FFF"
+                    Command="{Binding LoginCommand}"
+                    WidthRequest="150"/>
+            </StackLayout>
+
+            <StackLayout Orientation="Vertical" VerticalOptions="Center" HorizontalOptions="Center" IsVisible="{Binding IsBusy}">
+                <ActivityIndicator IsRunning="True" />
+                <Label Text="Please wait! Logging in" />
+            </StackLayout>
+
+           
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

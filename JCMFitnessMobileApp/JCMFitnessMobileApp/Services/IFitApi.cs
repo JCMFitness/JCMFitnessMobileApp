@@ -10,8 +10,8 @@ namespace JCMFitnessMobileApp.Services
     public interface IFitApi
     {
         //Login
-        [Get("/api/user/login?username={username}&password={password}")]
-        public Task<User> UserLoginAsync(string username, string password);
+        [Get("/api/user/login?username={userid}&password={password}")]
+        public Task<User> UserLoginAsync(string userid, string password);
 
 
         //User endpoints
@@ -60,6 +60,7 @@ namespace JCMFitnessMobileApp.Services
         //WorkoutExercise
         [Get("/api/workoutexercises?workoutid={id}")]
         public Task<List<Exercise>> GetWorkoutExercisesAsync(string id);
+
     }
 }
 

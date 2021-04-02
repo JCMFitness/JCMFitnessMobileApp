@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Akavache;
 using JCMFitnessMobileApp.Models;
 using JCMFitnessMobileApp.ViewModel;
 using Xamarin.Forms;
@@ -13,7 +14,7 @@ namespace JCMFitnessMobileApp.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class MainPage : ContentPage
     {
-
+        
         MainViewModel ViewModel => BindingContext as MainViewModel;
 
         protected override void OnAppearing()

@@ -13,7 +13,7 @@
     <ContentPage.Content>
 
         <RefreshView
-            IsRefreshing="{Binding IsBusy, Mode=OneWay}"
+           IsRefreshing="{Binding IsRefreshing}"
             Command="{Binding RefreshCommand}">
 
             <CollectionView x:Name="trips"
