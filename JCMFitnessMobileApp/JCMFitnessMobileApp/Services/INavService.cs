@@ -16,6 +16,7 @@ namespace JCMFitnessMobileApp.Services
         Task NavigateTo<TVM, TParameter>(TParameter parameter)
             where TVM : BaseViewModel;
         void RemoveLastView();
+        void RemoveLastTwoViews();
         void ClearBackStack();
         void NavigateToUri(Uri uri);
         event PropertyChangedEventHandler CanGoBackChanged;

@@ -117,7 +117,11 @@ namespace JCMFitnessMobileApp.ViewModels
 
                 };
                 await _fitnessService.AddWorkoutExercise(_workout.WorkoutID, newExercise);
-                await NavService.GoBack();
+
+                //NavService.RemoveLastView();
+                NavService.RemoveLastTwoViews();
+                //NavService.ClearBackStack();
+                await NavService.NavigateTo<WorkoutDetailViewModel, Workout>(_workout);
             }
             finally
             {
