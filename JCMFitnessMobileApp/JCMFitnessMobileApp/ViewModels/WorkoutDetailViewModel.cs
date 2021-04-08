@@ -57,7 +57,8 @@ namespace JCMFitnessMobileApp.ViewModel
 
         Command _editCommand;
         public Command EditCommand =>
-            _editCommand ?? (_editCommand = new Command(async () => await Edit()));
+            _editCommand ?? (_editCommand = new Command(async () => await
+            NavService.NavigateTo<EditViewModel, Workout>(Workout)));
 
         public Command AddExerciseCommand =>
               new Command(async () =>
@@ -98,28 +99,6 @@ namespace JCMFitnessMobileApp.ViewModel
             }
 
         }
-
-        async Task Edit()
-        {
-            if (IsBusy)
-                return;
-            IsBusy = true;
-
-            try
-            {
-                //await _fitnessService.DeleteUserWorkoutById("2", Workout.WorkoutID);
-                await NavService.GoBack();
-            }
-            finally
-            {
-                IsBusy = false;
-            }
-
-        }
-
-
-
-
 
     }
 }

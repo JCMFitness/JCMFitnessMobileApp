@@ -36,7 +36,7 @@ namespace JCMFitnessMobileApp.Services
         public Task AddNewWorkoutAsync([Body] Workout workout);
 
         [Put("/api/workouts")]
-        public Task EditWorkoutdAsync(string id);
+        public Task EditWorkoutAsync([Body] Workout workout);
 
         [Delete("/api/workouts?workouts={id}")]
         public Task DeleteWorkoutAsync(string id);
