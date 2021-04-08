@@ -10,7 +10,7 @@ using Xamarin.Forms.Xaml;
 namespace JCMFitnessMobileApp.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class UserDetailPage : ContentView
+    public partial class UserDetailPage : ContentPage
     {
         public UserDetailPage()
         {

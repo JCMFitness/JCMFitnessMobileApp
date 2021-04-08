@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="JCMFitnessMobileApp.Views.UserDetailPage">
-  <ContentView.Content>
+  <ContentPage.Content>
         <StackLayout Spacing="20" Padding="15">
             <Label Text="Name:"  FontSize="Small" TextColor="Black" />
             <Label Text="{Binding User.FirstName}" FontSize="Medium" TextColor="Black" />
@@ -10,8 +10,6 @@
             <Label Text="Description:" FontSize="Small" TextColor="Black"  />
             <Label Text="{Binding User.LastName}" FontSize="Medium" TextColor="Black" />
 
-            <Label Text="Category:" FontSize="Small" TextColor="Black"  />
-            <Label Text="{Binding User.UserID}" FontSize="Medium" TextColor="Black" />
 
             <Label Text="Category:" FontSize="Small" TextColor="Black"  />
             <Label Text="{Binding User.UserName}" FontSize="Medium" TextColor="Black" />
@@ -27,5 +25,5 @@
                 <Button Text="Edit" Command="{Binding EditUserCommand}" HorizontalOptions="FillAndExpand"></Button>
             </StackLayout>
         </StackLayout>
-    </ContentView.Content>
-</ContentView>
+    </ContentPage.Content>
+</ContentPage>

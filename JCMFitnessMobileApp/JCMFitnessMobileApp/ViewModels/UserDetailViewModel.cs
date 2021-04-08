@@ -12,14 +12,15 @@ using JCMFitnessMobileApp.Models;
 using MonkeyCache.FileStore;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-
+using JCMFitnessMobileApp.Services;
 
 namespace JCMFitnessMobileApp.ViewModels
 {
     
-    class UserDetailViewModel
+    public class UserDetailViewModel:BaseViewModel
     {
         public User _user;
+       
         public User User
         {
             get => _user;
@@ -29,13 +30,24 @@ namespace JCMFitnessMobileApp.ViewModels
                 OnPropertyChanged();
             }
         }
-        public string UserUserId;
-        public string UserFirstName;
-        public string UserLastName;
-        public string UserUserName;
-        public string UserEmail;
-        public DateTime UserJoinedDate;
 
-        User = Barrel.Current.Get<User>(key: "user");
+            public UserDetailViewModel(INavService navService)
+            : base(navService)
+        {
+            
+
+            Barrel.ApplicationId = "CachingDataSample";
+        }
+
+        public override void Init()
+        {
+          
+            GetUserFromCache();
+        }
+
+        public void GetUserFromCache()
+        {
+            User = Barrel.Current.Get<User>(key: "user");
+        }
     }
 }

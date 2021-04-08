@@ -24,6 +24,7 @@ namespace JCMFitnessMobileApp.Modules
             Bind<WorkoutDetailViewModel>().ToSelf();
             Bind<NewWorkoutViewModel>().ToSelf();
             Bind<NewExerciseViewModel>().ToSelf();
+            Bind<UserDetailViewModel>().ToSelf();
 
             //var baseUrl = "https://jcmfitnessapi.herokuapp.com";
 

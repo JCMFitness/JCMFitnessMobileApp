@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using JCMFitnessMobileApp.Services;
 using Akavache;
 using MonkeyCache.FileStore;
+using JCMFitnessMobileApp.ViewModels;
 
 namespace JCMFitnessMobileApp.ViewModel
 {
@@ -60,6 +61,9 @@ namespace JCMFitnessMobileApp.ViewModel
         public Command NewCommand =>
             new Command(async () =>
                 await NavService.NavigateTo<NewWorkoutViewModel>());
+
+        public Command UserDetailsCommand => new Command(async () =>
+         await NavService.NavigateTo<UserDetailViewModel>());
 
 
         Command _refreshCommand;
