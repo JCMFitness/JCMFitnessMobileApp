@@ -30,9 +30,8 @@ namespace JCMFitnessMobileApp.ViewModel
                 _user = value;
                 OnPropertyChanged();
             }
-
-
         }
+
         public ObservableCollection<Workout> UserWorkouts
         {
             get => _userWorkouts;
