@@ -152,18 +152,13 @@ namespace JCMFitnessMobileApp.ViewModels
                 }
 
                 await NavService.NavigateTo<MainViewModel, User>(User);
-
-                IsBusy = false;
-
             }
             catch
             {
                 throw;
             }
-            finally
-            {
-                IsBusy = false;
-            }
+
+ 
             //await NavService.NavigateTo<MainViewModel, User>(user);
         }
     }

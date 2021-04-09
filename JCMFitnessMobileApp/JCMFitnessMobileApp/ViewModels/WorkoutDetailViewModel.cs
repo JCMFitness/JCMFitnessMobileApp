@@ -58,7 +58,7 @@ namespace JCMFitnessMobileApp.ViewModel
         Command _editCommand;
         public Command EditCommand =>
             _editCommand ?? (_editCommand = new Command(async () => await
-            NavService.NavigateTo<EditViewModel, Workout>(Workout)));
+            NavService.NavigateTo<EditWorkoutViewModel, Workout>(Workout)));
 
         public Command AddExerciseCommand =>
               new Command(async () =>
