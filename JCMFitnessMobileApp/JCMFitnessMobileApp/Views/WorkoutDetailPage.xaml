@@ -18,7 +18,10 @@
             <Label Text="{Binding Workout.Category}" FontSize="Medium" TextColor="Red" />
 
             <CollectionView x:Name="trips"
-            ItemsSource="{Binding WorkoutExercises}">
+            ItemsSource="{Binding WorkoutExercises}"
+                            SelectionMode="Single"
+                            SelectionChangedCommand="{Binding ExerciseSelectedCommand}"
+                            SelectedItem="{Binding SelectedExercise}">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <StackLayout Padding="10">

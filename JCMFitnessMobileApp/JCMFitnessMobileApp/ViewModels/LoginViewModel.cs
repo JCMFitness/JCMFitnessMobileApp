@@ -151,7 +151,10 @@ namespace JCMFitnessMobileApp.ViewModels
 
                 }
 
+                
                 await NavService.NavigateTo<MainViewModel, User>(User);
+
+                NavService.RemoveLastView();
             }
             catch
             {

@@ -78,6 +78,8 @@ namespace JCMFitnessMobileApp.ViewModel
         }
         public override void Init(User user)
         {
+           
+
             User = user;
 
            /* if(User != null)
@@ -90,7 +92,7 @@ namespace JCMFitnessMobileApp.ViewModel
 
 
 
-        public async void LoadEntries()
+        public void LoadEntries()
         {
             User = Barrel.Current.Get<User>(key: "user");
 
@@ -116,7 +118,7 @@ namespace JCMFitnessMobileApp.ViewModel
             }
             catch(Exception ex)
             {
-                throw;
+                throw ex;
             }
             finally
             {

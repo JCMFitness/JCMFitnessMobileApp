@@ -9,37 +9,37 @@ using Xamarin.Forms;
 
 namespace JCMFitnessMobileApp.ViewModels
 {
-    public class EditWorkoutViewModel : BaseViewModel<Workout>
+    public class EditExerciseViewModel : BaseViewModel<Exercise>
     {
-        Workout _workout;
+       Exercise _exercise;
         readonly IFitnessService _fitnessService;
-        public EditWorkoutViewModel(INavService navService, IFitnessService fitnessService)
+        public EditExerciseViewModel(INavService navService, IFitnessService fitnessService)
            : base(navService)
         {
             _fitnessService = fitnessService;
         }
 
-        public Workout Workout
+        public Exercise Exercise
         {
-            get => _workout;
+            get => _exercise;
             set
             {
-                _workout = value;
+                _exercise = value;
                 OnPropertyChanged();
             }
         }
 
-        public override void Init(Workout work)
+        public override void Init(Exercise exer)
         {
-            Workout = work;
+            Exercise = exer;
         }
 
-        Command _saveWorkoutEditCommand;
-        public Command SaveWorkoutCommand =>
-            _saveWorkoutEditCommand ?? (_saveWorkoutEditCommand = new Command(async () => await EditWorkout()));
+        Command _saveExerciseEditCommand;
+        public Command SaveExerciseCommand =>
+            _saveExerciseEditCommand ?? (_saveExerciseEditCommand = new Command(async () => await EditExercise()));
 
 
-        async Task EditWorkout()
+        async Task EditExercise()
         {
             if (IsBusy)
                 return;
@@ -47,10 +47,10 @@ namespace JCMFitnessMobileApp.ViewModels
 
             try
             {
-                await _fitnessService.EditWorkout(Workout);
+                await _fitnessService.EditExercise(Exercise);
 
                 NavService.RemoveLastTwoViews();
-                await NavService.NavigateTo<WorkoutDetailViewModel,Workout>(Workout);
+                await NavService.NavigateTo<ExerciseDetailViewModel, Exercise>(Exercise);
             }
             finally
             {
