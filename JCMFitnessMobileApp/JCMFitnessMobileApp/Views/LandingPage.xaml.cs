@@ -1,5 +1,4 @@
-﻿using JCMFitnessMobileApp.ViewModels;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,14 +10,11 @@ using Xamarin.Forms.Xaml;
 namespace JCMFitnessMobileApp.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class LoginPage : ContentPage
+    public partial class LandingPage : ContentPage
     {
-       
-        public LoginPage()
+        public LandingPage()
         {
             InitializeComponent();
         }
-
-
     }
 }

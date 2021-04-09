@@ -54,9 +54,9 @@ namespace JCMFitnessMobileApp
              };*/
 
 
-            var mainPage = new NavigationPage(new LoginPage())
+            var mainPage = new NavigationPage(new LandingPage())
             {
-                BindingContext = Kernel.Get<LoginViewModel>()
+                BindingContext = Kernel.Get<LandingViewModel>()
             };
 
             var navService = Kernel.Get<INavService>() as XamarinFormsNavService;
