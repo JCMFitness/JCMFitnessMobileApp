@@ -66,7 +66,7 @@
                     <Button Text="Sign up"
                     BackgroundColor="#09C"
                     TextColor="#FFF"
-                    Command="{Binding SignupCommand}"
+                    Command="{Binding SignUpCommand}"
                     WidthRequest="150"/>
                 </StackLayout>
 

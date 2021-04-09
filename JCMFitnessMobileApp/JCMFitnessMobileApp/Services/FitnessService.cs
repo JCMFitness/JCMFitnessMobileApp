@@ -19,11 +19,11 @@ namespace JCMFitnessMobileApp.Services
         }
 
 
-        public async Task<User> LoginUser(string id, string password)
+        public async Task<User> LoginUser(UserLogin userLogin)
         {
             try
             {
-                return await fitApi.UserLoginAsync(id, password);
+                return await fitApi.UserLoginAsync(userLogin;
             }
             catch (Exception ex)
             {
@@ -32,6 +32,20 @@ namespace JCMFitnessMobileApp.Services
             }
         }
 
+
+        public async Task<User> SignUpUser(UserSignUp userSignUp)
+        {
+            try
+            {
+                return await fitApi.UserSignUpAsync(userSignUp);
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine(ex.Message);
+                throw;
+            }
+
+        }
         public async Task<List<Workout>> GetUserWorkouts(string id)
         {
             try

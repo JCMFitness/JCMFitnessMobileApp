@@ -10,9 +10,12 @@ namespace JCMFitnessMobileApp.Services
     public interface IFitApi
     {
         //Login
-        [Get("/api/user/login?username={userid}&password={password}")]
-        public Task<User> UserLoginAsync(string userid, string password);
+        [Get("/api/authentication/login")]
+        public Task<User> UserLoginAsync(UserLogin userLogin);
 
+        //SignUp
+        [Get("/api/authentication/register")]
+        public Task<User> UserSignUpAsync([Body] UserSignUp userSignUp);
 
         //User endpoints
 
