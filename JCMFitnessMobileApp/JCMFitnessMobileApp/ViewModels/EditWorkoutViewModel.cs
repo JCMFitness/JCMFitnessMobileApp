@@ -48,7 +48,7 @@ namespace JCMFitnessMobileApp.ViewModels
             try
             {
                 await _fitnessService.EditWorkout(Workout);
-                await NavService.GoBack();
+                await NavService.NavigateTo<WorkoutDetailViewModel,Workout>(Workout);
             }
             finally
             {
