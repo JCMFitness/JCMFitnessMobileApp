@@ -110,7 +110,18 @@ namespace JCMFitnessMobileApp.Services
             }
         }
 
-
+        public async Task DeleteUser(string UserID)
+        {
+            try
+            {
+                await fitApi.DeleteUserAsync(UserID);
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine(ex.Message);
+                throw;
+            }
+        }
 
     }
 

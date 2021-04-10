@@ -142,7 +142,7 @@ namespace JCMFitnessMobileApp.ViewModels
             {
                 // Username and password needs to be entered by the user here
 
-                User = Barrel.Current.Get<User>(key: "user");
+                //User = Barrel.Current.Get<User>(key: "user");
 
                 if (User == null)
                 {

@@ -11,6 +11,7 @@ namespace JCMFitnessMobileApp.Services
 
 
         Task<User> LoginUser(string userId, string password);
+        Task DeleteUser(string userId);
 
         Task<List<Workout>> GetUserWorkouts(string userId);
 

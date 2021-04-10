@@ -19,9 +19,12 @@ namespace JCMFitnessMobileApp.ViewModels
     
     public class UserDetailViewModel:BaseViewModel
     {
+        Command _deleteUser;
+        public Command DeleteUserCommand =>
+            _deleteUser ?? (_deleteUser = new Command(DeleteUserAsync));
         public User _user;
-       
-        public User User
+        readonly IFitnessService _fitnessService;
+        public User user
         {
             get => _user;
             set
@@ -31,11 +34,11 @@ namespace JCMFitnessMobileApp.ViewModels
             }
         }
 
-            public UserDetailViewModel(INavService navService)
+            public UserDetailViewModel(INavService navService, IFitnessService fitnessService)
             : base(navService)
         {
-            
 
+            _fitnessService = fitnessService;
             Barrel.ApplicationId = "CachingDataSample";
         }
 
@@ -47,7 +50,23 @@ namespace JCMFitnessMobileApp.ViewModels
 
         public void GetUserFromCache()
         {
-            User = Barrel.Current.Get<User>(key: "user");
+            user = Barrel.Current.Get<User>(key: "user");
         }
+
+        public async void DeleteUserAsync()
+        {
+                //bool answer = await DisplayAlert("Question?", "Would you like to play a game", "Yes", "No");
+                //Debug.WriteLine("Answer: " + answer);
+            
+
+            //if (answer == true)
+            //{
+                await _fitnessService.DeleteUser(user.UserID);
+            //}
+            await NavService.NavigateTo<LoginViewModel>();
+            
+        }
+
+        
     }
 }
