@@ -17,10 +17,11 @@
             <Label Text="Category:" FontSize="Small" TextColor="Black"  />
             <Label Text="{Binding Workout.Category}" FontSize="Medium" TextColor="Red" />
 
-            <CollectionView x:Name="trips"
+
+            <CollectionView x:Name="exercises"
             ItemsSource="{Binding WorkoutExercises}"
                             SelectionMode="Single"
-                            SelectionChangedCommand="{Binding ExerciseSelectedCommand}"
+                            SelectionChanged="ExerciseSelectionChanged"
                             SelectedItem="{Binding SelectedExercise}">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
@@ -49,7 +50,6 @@
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
-
             <StackLayout Orientation="Horizontal">
                 <Button Text="Delete" Command="{Binding DeleteCommand}" HorizontalOptions="FillAndExpand"></Button>
                 <Button Text="Edit" Command="{Binding EditCommand}" HorizontalOptions="FillAndExpand"></Button>

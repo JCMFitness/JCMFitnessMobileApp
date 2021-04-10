@@ -13,7 +13,6 @@ namespace JCMFitnessMobileApp.ViewModel
     public class WorkoutDetailViewModel : BaseViewModel<Workout>
     {
         Workout _workout;
-        Exercise _selectedEx;
         readonly IFitnessService _fitnessService;
 
 
@@ -40,17 +39,6 @@ namespace JCMFitnessMobileApp.ViewModel
             }
         }
 
- 
-        public Exercise SelectedExercise
-        {
-            get => _selectedEx;
-
-            set
-            {
-                _selectedEx = value;
-                OnPropertyChanged();
-            }
-        }
 
         public WorkoutDetailViewModel(INavService navService, IFitnessService fitnessService)
             : base(navService)
@@ -58,15 +46,17 @@ namespace JCMFitnessMobileApp.ViewModel
             _fitnessService = fitnessService;
         }
 
+        public async Task SelectExercise(Exercise exercise)
+        {
+            await NavService.NavigateTo<ExerciseDetailViewModel, Exercise>(exercise);
+        }
+
         public override async void Init(Workout workout)
         {
             Workout = workout;
             WorkoutExercises = await LoadExercises(workout.WorkoutID);
+  
         }
-
-
-        public Command ExerciseSelectedCommand => new Command(async () =>
-          await NavService.NavigateTo<ExerciseDetailViewModel, Exercise>(SelectedExercise));
 
         Command _deleteCommand;
         public Command DeleteCommand =>

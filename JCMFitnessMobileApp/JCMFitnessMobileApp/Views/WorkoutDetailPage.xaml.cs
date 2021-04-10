@@ -13,6 +13,8 @@ using Newtonsoft.Json;
 using System.Diagnostics;
 using JCMFitnessMobileApp.ViewModel;
 using System.ComponentModel;
+using JCMFitnessMobileApp.Services;
+using JCMFitnessMobileApp.ViewModels;
 
 namespace JCMFitnessMobileApp.Views
 {
@@ -23,8 +25,18 @@ namespace JCMFitnessMobileApp.Views
         public WorkoutDetailPage()
         {
             InitializeComponent();
-            
         }
-        
+
+        async void ExerciseSelectionChanged(object s, SelectionChangedEventArgs e)
+        {
+            
+            var exercise = (Exercise)e.CurrentSelection.FirstOrDefault();
+            if (exercise != null)
+            {
+                await ViewModel.SelectExercise(exercise);
+            }
+            // Clear selection 
+            exercises.SelectedItem = null;
+        }
     }
 }
