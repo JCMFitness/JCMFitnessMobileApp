@@ -92,7 +92,9 @@ namespace JCMFitnessMobileApp.ViewModel
 
         public async void LoadEntries()
         {
-            User = Barrel.Current.Get<User>(key: "user");
+            var response = Barrel.Current.Get<LoginResponse>(key: "user");
+
+            User = response.User;
 
             if (IsBusy || User == null)
             {

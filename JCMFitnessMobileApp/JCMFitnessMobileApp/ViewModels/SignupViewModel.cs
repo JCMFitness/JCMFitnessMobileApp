@@ -85,7 +85,7 @@ namespace JCMFitnessMobileApp.ViewModels
                 await _fitnessService.SignUpUser(userSignUp);
                
 
-                await NavService.NavigateTo<MainViewModel, User>(User);
+                await NavService.NavigateTo<LoginViewModel>();
 
                 IsBusy = false;
 

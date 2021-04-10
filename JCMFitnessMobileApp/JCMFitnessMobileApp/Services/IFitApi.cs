@@ -11,11 +11,11 @@ namespace JCMFitnessMobileApp.Services
     {
         //Login
         [Get("/api/authentication/login")]
-        public Task<User> UserLoginAsync(UserLogin userLogin);
+        public Task<LoginResponse> UserLoginAsync([Body] UserLogin userLogin);
 
         //SignUp
         [Get("/api/authentication/register")]
-        public Task<User> UserSignUpAsync([Body] UserSignUp userSignUp);
+        public Task<SignUpResponse> UserSignUpAsync([Body] UserSignUp userSignUp);
 
         //User endpoints
 

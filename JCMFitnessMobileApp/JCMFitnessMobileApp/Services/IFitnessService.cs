@@ -10,9 +10,9 @@ namespace JCMFitnessMobileApp.Services
     {
 
 
-        Task<User> LoginUser(string userId, string password);
+        Task<LoginResponse> LoginUser(UserLogin userLogin);
 
-        Task<User> SignUpUser(UserSignUp userSignUp);
+        Task<SignUpResponse> SignUpUser(UserSignUp userSignUp);
 
         Task<List<Workout>> GetUserWorkouts(string userId);
 

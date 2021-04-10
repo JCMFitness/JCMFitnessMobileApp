@@ -19,11 +19,11 @@ namespace JCMFitnessMobileApp.Services
         }
 
 
-        public async Task<User> LoginUser(UserLogin userLogin)
+        public async Task<LoginResponse> LoginUser(UserLogin userLogin)
         {
             try
             {
-                return await fitApi.UserLoginAsync(userLogin;
+                return await fitApi.UserLoginAsync(userLogin);
             }
             catch (Exception ex)
             {
@@ -33,7 +33,7 @@ namespace JCMFitnessMobileApp.Services
         }
 
 
-        public async Task<User> SignUpUser(UserSignUp userSignUp)
+        public async Task<SignUpResponse> SignUpUser(UserSignUp userSignUp)
         {
             try
             {
