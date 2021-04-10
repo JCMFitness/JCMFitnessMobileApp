@@ -9,7 +9,7 @@ namespace JCMFitnessMobileApp.Models
     public class User
     {
         
-        public string UserID { get; set; }
+        public string Id { get; set; }
 
         public string FirstName { get; set; }
         public string LastName { get; set; }
@@ -19,7 +19,7 @@ namespace JCMFitnessMobileApp.Models
 
         [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
-        public string Password { get; set; }
+        public string PasswordHash { get; set; }
 
 
         public DateTime JoinedDate { get; set; } = DateTime.UtcNow;

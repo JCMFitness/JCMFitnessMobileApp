@@ -142,7 +142,7 @@ namespace JCMFitnessMobileApp.ViewModels
             {
                 // Username and password needs to be entered by the user here
 
-                User = Barrel.Current.Get<User>(key: "user");
+                //User = Barrel.Current.Get<User>(key: "user");
 
                 if (User == null)
                 {
@@ -156,7 +156,7 @@ namespace JCMFitnessMobileApp.ViewModels
 
                     var loginResponse = await _fitnessService.LoginUser(userLogin);
 
-                    Barrel.Current.Add(key: "user", data: loginResponse, expireIn: TimeSpan.FromDays(1));
+                    Barrel.Current.Add(key: "user", data: loginResponse, expireIn: TimeSpan.FromMinutes(1));
 
                 }
 
@@ -165,7 +165,7 @@ namespace JCMFitnessMobileApp.ViewModels
                 IsBusy = false;
 
             }
-            catch
+            catch 
             {
                 throw;
             }

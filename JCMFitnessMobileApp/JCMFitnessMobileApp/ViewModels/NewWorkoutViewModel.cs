@@ -4,6 +4,7 @@ using System.Text;
 using System.Threading.Tasks;
 using JCMFitnessMobileApp.Models;
 using JCMFitnessMobileApp.Services;
+using MonkeyCache.FileStore;
 using Xamarin.Forms;
 
 namespace JCMFitnessMobileApp.ViewModel
@@ -89,7 +90,12 @@ namespace JCMFitnessMobileApp.ViewModel
                     Category = Category
 
                 };
-                await _fitnessService.AddNewUserWorkout("2", newWorkout);
+
+                var response = Barrel.Current.Get<LoginResponse>(key: "user");
+
+                
+
+                await _fitnessService.AddNewUserWorkout(response.User.Id, newWorkout);
                 await NavService.GoBack();
             }
             finally

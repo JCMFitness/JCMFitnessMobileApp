@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using JCMFitnessMobileApp.Models;
 using JCMFitnessMobileApp.Services;
 using JCMFitnessMobileApp.ViewModels;
+using MonkeyCache.FileStore;
 using Xamarin.Forms;
 
 namespace JCMFitnessMobileApp.ViewModel
@@ -86,10 +87,10 @@ namespace JCMFitnessMobileApp.ViewModel
             if (IsBusy)
                 return;
             IsBusy = true;
-
+            var response = Barrel.Current.Get<LoginResponse>(key: "user");
             try
             {
-                await _fitnessService.DeleteUserWorkoutById("2", Workout.WorkoutID);
+                await _fitnessService.DeleteUserWorkoutById(response.User.Id, Workout.WorkoutID);
                 await NavService.GoBack();
             }
             finally
