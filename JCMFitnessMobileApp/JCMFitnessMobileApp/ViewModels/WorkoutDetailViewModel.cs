@@ -13,6 +13,7 @@ namespace JCMFitnessMobileApp.ViewModel
     public class WorkoutDetailViewModel : BaseViewModel<Workout>
     {
         Workout _workout;
+        Exercise _exercise;
         readonly IFitnessService _fitnessService;
 
 
@@ -39,6 +40,14 @@ namespace JCMFitnessMobileApp.ViewModel
             }
         }
 
+        public Exercise SelectedExercise {
+            get => _exercise;
+            set
+            {
+                _exercise = value;
+                OnPropertyChanged();
+            }
+        }
 
         public WorkoutDetailViewModel(INavService navService, IFitnessService fitnessService)
             : base(navService)
@@ -46,10 +55,7 @@ namespace JCMFitnessMobileApp.ViewModel
             _fitnessService = fitnessService;
         }
 
-        public async Task SelectExercise(Exercise exercise)
-        {
-            await NavService.NavigateTo<ExerciseDetailViewModel, Exercise>(exercise);
-        }
+
 
         public override async void Init(Workout workout)
         {
@@ -57,6 +63,18 @@ namespace JCMFitnessMobileApp.ViewModel
             WorkoutExercises = await LoadExercises(workout.WorkoutID);
   
         }
+
+
+        public Command ExerciseSelectedCommand => new Command(async () =>
+        {
+            if (SelectedExercise != null)
+            {
+                await NavService.NavigateTo<ExerciseDetailViewModel, Exercise>(SelectedExercise);
+                SelectedExercise = null;
+            }
+
+        }
+  );
 
         Command _deleteCommand;
         public Command DeleteCommand =>
@@ -70,6 +88,8 @@ namespace JCMFitnessMobileApp.ViewModel
         public Command AddExerciseCommand =>
               new Command(async () =>
                   await NavService.NavigateTo<NewExerciseViewModel, Workout>(Workout));
+
+      
 
         async Task<ObservableCollection<Exercise>> LoadExercises(string workoutid)
         {

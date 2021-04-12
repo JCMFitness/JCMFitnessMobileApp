@@ -21,7 +21,7 @@
             <CollectionView x:Name="exercises"
             ItemsSource="{Binding WorkoutExercises}"
                             SelectionMode="Single"
-                            SelectionChanged="ExerciseSelectionChanged"
+                            SelectionChangedCommand="{Binding ExerciseSelectedCommand}"
                             SelectedItem="{Binding SelectedExercise}">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>

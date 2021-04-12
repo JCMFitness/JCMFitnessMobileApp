@@ -27,16 +27,6 @@ namespace JCMFitnessMobileApp.Views
             InitializeComponent();
         }
 
-        async void ExerciseSelectionChanged(object s, SelectionChangedEventArgs e)
-        {
-            
-            var exercise = (Exercise)e.CurrentSelection.FirstOrDefault();
-            if (exercise != null)
-            {
-                await ViewModel.SelectExercise(exercise);
-            }
-            // Clear selection 
-            exercises.SelectedItem = null;
-        }
+
     }
 }
