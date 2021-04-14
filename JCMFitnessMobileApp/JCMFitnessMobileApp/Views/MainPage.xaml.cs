@@ -27,7 +27,7 @@ namespace JCMFitnessMobileApp.Views
         public MainPage()
         {
             InitializeComponent();
-           
+            //MainPage.HasBackButton(this, false);
         }
 
         void New_Clicked(object sender, EventArgs e)
