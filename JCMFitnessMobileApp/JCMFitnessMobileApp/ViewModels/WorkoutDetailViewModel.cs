@@ -14,6 +14,7 @@ namespace JCMFitnessMobileApp.ViewModel
     public class WorkoutDetailViewModel : BaseViewModel<Workout>
     {
         Workout _workout;
+        Exercise _exercise;
         readonly IFitnessService _fitnessService;
 
 
@@ -40,17 +41,41 @@ namespace JCMFitnessMobileApp.ViewModel
             }
         }
 
+        public Exercise SelectedExercise {
+            get => _exercise;
+            set
+            {
+                _exercise = value;
+                OnPropertyChanged();
+            }
+        }
+
         public WorkoutDetailViewModel(INavService navService, IFitnessService fitnessService)
             : base(navService)
         {
             _fitnessService = fitnessService;
         }
 
+
+
         public override async void Init(Workout workout)
         {
             Workout = workout;
             WorkoutExercises = await LoadExercises(workout.WorkoutID);
+  
         }
+
+
+        public Command ExerciseSelectedCommand => new Command(async () =>
+        {
+            if (SelectedExercise != null)
+            {
+                await NavService.NavigateTo<ExerciseDetailViewModel, Exercise>(SelectedExercise);
+                SelectedExercise = null;
+            }
+
+        }
+  );
 
         Command _deleteCommand;
         public Command DeleteCommand =>
@@ -58,11 +83,14 @@ namespace JCMFitnessMobileApp.ViewModel
 
         Command _editCommand;
         public Command EditCommand =>
-            _editCommand ?? (_editCommand = new Command(async () => await Edit()));
+            _editCommand ?? (_editCommand = new Command(async () => await
+            NavService.NavigateTo<EditWorkoutViewModel, Workout>(Workout)));
 
         public Command AddExerciseCommand =>
               new Command(async () =>
                   await NavService.NavigateTo<NewExerciseViewModel, Workout>(Workout));
+
+      
 
         async Task<ObservableCollection<Exercise>> LoadExercises(string workoutid)
         {
@@ -99,28 +127,6 @@ namespace JCMFitnessMobileApp.ViewModel
             }
 
         }
-
-        async Task Edit()
-        {
-            if (IsBusy)
-                return;
-            IsBusy = true;
-
-            try
-            {
-                //await _fitnessService.DeleteUserWorkoutById("2", Workout.WorkoutID);
-                await NavService.GoBack();
-            }
-            finally
-            {
-                IsBusy = false;
-            }
-
-        }
-
-
-
-
 
     }
 }

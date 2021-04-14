@@ -83,17 +83,16 @@ namespace JCMFitnessMobileApp.ViewModel
         {
             User = user;
 
-           /* if(User != null)
-            {
-                Barrel.Current.Add(key: "user", data: User, expireIn: TimeSpan.FromDays(1));
-            }*/
-            
+            /* if(User != null)
+             {
+                 Barrel.Current.Add(key: "user", data: User, expireIn: TimeSpan.FromDays(1));
+             }*/
             LoadEntries();
         }
 
 
 
-        public async void LoadEntries()
+        public void LoadEntries()
         {
             var response = Barrel.Current.Get<LoginResponse>(key: "user");
 
@@ -115,13 +114,12 @@ namespace JCMFitnessMobileApp.ViewModel
                     {
                         ObservableCollection<Workout> newWorkouts = new ObservableCollection<Workout>(workouts);
                         UserWorkouts = new ObservableCollection<Workout>(newWorkouts);
-                        IsBusy = false;
                     });
                 IsRefreshing = false;
             }
             catch(Exception ex)
             {
-                throw;
+                throw ex;
             }
             finally
             {

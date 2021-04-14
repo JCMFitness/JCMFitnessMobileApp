@@ -13,6 +13,8 @@ using Newtonsoft.Json;
 using System.Diagnostics;
 using JCMFitnessMobileApp.ViewModel;
 using System.ComponentModel;
+using JCMFitnessMobileApp.Services;
+using JCMFitnessMobileApp.ViewModels;
 
 namespace JCMFitnessMobileApp.Views
 {
@@ -23,8 +25,8 @@ namespace JCMFitnessMobileApp.Views
         public WorkoutDetailPage()
         {
             InitializeComponent();
-            
         }
-        
+
+
     }
 }

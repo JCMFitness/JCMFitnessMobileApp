@@ -12,6 +12,9 @@ namespace JCMFitnessMobileApp.Services
         Task DeleteUser(string UserID);
         Task<LoginResponse> LoginUser(UserLogin userLogin);
 
+        Task<User> LoginUser(string userId, string password);
+        Task EditWorkout(Workout workout);
+        Task EditExercise(Exercise exercise);
         Task<SignUpResponse> SignUpUser(UserSignUp userSignUp);
 
         Task<List<Workout>> GetUserWorkouts(string userId);
@@ -25,5 +28,6 @@ namespace JCMFitnessMobileApp.Services
         Task AddWorkoutExercise(string workoutID, Exercise exercise);
 
         Task DeleteWorkoutExercise(string workoutID, string exerciseID);
+        Task DeleteExercise(string exercise);
     }
 }

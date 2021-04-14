@@ -18,6 +18,30 @@ namespace JCMFitnessMobileApp.Services
             this.fitApi = newsApi;
         }
 
+        public async Task EditExercise(Exercise exercise)
+        {
+            try
+            {
+                await fitApi.EditExerciseAsync(exercise);
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine(ex.Message);
+                throw;
+            }
+        }
+        public async Task EditWorkout(Workout workout)
+        {
+            try
+            {
+                await fitApi.EditWorkoutAsync(workout);
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine(ex.Message);
+                throw;
+            }
+        }
 
         public async Task<LoginResponse> LoginUser(UserLogin userLogin)
         {
@@ -137,6 +161,18 @@ namespace JCMFitnessMobileApp.Services
             }
         }
 
+        public async Task DeleteExercise(string exercise)
+        {
+            try
+            {
+                await fitApi.DeleteExerciseAsync(exercise);
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine(ex.Message);
+                throw;
+            }
+        }
     }
 
 }

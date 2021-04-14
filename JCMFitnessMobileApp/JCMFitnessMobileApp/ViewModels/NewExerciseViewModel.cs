@@ -22,17 +22,9 @@ namespace JCMFitnessMobileApp.ViewModels
             _fitnessService = fitness;
         }
 
-
-       /* public void Init(Workout workout)
+        public override void Init(Workout workout)
         {
             _workout = workout;
-        }*/
-
-
-        public override async void Init(Workout workout)
-        {
-            _workout = workout;
-
         }
 
         string _name;

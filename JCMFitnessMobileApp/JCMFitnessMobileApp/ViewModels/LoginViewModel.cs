@@ -172,17 +172,14 @@ namespace JCMFitnessMobileApp.ViewModels
 
                
 
-                IsBusy = false;
-
+                NavService.RemoveLastView();
             }
             catch 
             {
                 throw;
             }
-            finally
-            {
-                IsBusy = false;
-            }
+
+ 
             //await NavService.NavigateTo<MainViewModel, User>(user);
         }
     }

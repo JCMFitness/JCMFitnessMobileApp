@@ -39,7 +39,7 @@ namespace JCMFitnessMobileApp.Services
         public Task AddNewWorkoutAsync([Body] Workout workout);
 
         [Put("/api/workouts")]
-        public Task EditWorkoutdAsync(string id);
+        public Task EditWorkoutAsync([Body] Workout workout);
 
         [Delete("/api/workouts?workouts={id}")]
         public Task DeleteWorkoutAsync(string id);
@@ -71,7 +71,12 @@ namespace JCMFitnessMobileApp.Services
         [Delete("/api/workoutexercises?exerciseid={exerciseid}&workoutid={workoutid}")]
         public Task DeleteWorkoutExerciseAsync(string exerciseid, string workoutid);
 
-
+        //Exercise
+        [Put("/api/excercise")]
+        public Task EditExerciseAsync([Body] Exercise exercise);
+        
+        [Delete("/api/exercise?exerciseid={exerciseid}")]
+        public Task DeleteExerciseAsync(string exerciseid);
     }
 }
 

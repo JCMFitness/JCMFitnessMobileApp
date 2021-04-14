@@ -57,11 +57,8 @@ namespace JCMFitnessMobileApp.Services
         }
         public void RemoveLastView()
         {
-            if (XamarinFormsNav.NavigationStack.Count < 2)
-            {
-                return;
-            }
-            var lastView = XamarinFormsNav.NavigationStack[XamarinFormsNav.NavigationStack.Count - 1];
+            
+            var lastView = XamarinFormsNav.NavigationStack[XamarinFormsNav.NavigationStack.Count - 2];
             XamarinFormsNav.RemovePage(lastView);
         }
         public void RemoveLastTwoViews()

@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="JCMFitnessMobileApp.Views.ExerciseEditPage">
+    <ContentPage.Content>
+        <StackLayout Spacing="20" Padding="15">
+                <Label Text="Name:"  FontSize="Small" TextColor="Black" />
+                <Entry Text="{Binding Exercise.Name}" FontSize="Medium" TextColor="Red" />
+
+                <Label Text="Time:" FontSize="Small" TextColor="Black"  />
+                <Entry Text="{Binding Exercise.TimerValue}" FontSize="Medium" TextColor="Red" />
+
+                <Label Text="Repitions:" FontSize="Small" TextColor="Black"  />
+                <Entry Text="{Binding Exercise.Repititions }" FontSize="Medium" TextColor="Red" />
+
+                <Label Text="Sets:" FontSize="Small" TextColor="Black"  />
+                <Entry Text="{Binding Exercise.Sets}" FontSize="Medium" TextColor="Red" />
+
+                <Label Text="Public:" FontSize="Small" TextColor="Black"  />
+                <Entry Text="{Binding Exercise.IsPublic}" FontSize="Medium" TextColor="Red" />
+
+            <Button Text="Save" Command="{Binding SaveExerciseCommand}" HorizontalOptions="FillAndExpand"/>
+        </StackLayout>
+
+    </ContentPage.Content>
+</ContentPage>

@@ -20,8 +20,6 @@ namespace JCMFitnessMobileApp.Views
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            // Initialize MainViewModel
-            ViewModel?.Init();
         }
 
         public MainPage()
