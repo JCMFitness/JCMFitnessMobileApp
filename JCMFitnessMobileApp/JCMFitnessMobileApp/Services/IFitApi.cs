@@ -22,7 +22,7 @@ namespace JCMFitnessMobileApp.Services
         [Put("/api/user?id={userid}")]
         public Task EditUserAsync(string userid);
 
-        [Delete("/api/user/{id}")]
+        [Delete("/api/user?userid={id}")]
         public Task DeleteUserAsync(string id);
 
 

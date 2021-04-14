@@ -37,6 +37,7 @@ namespace JCMFitnessMobileApp
             // Setup data service authentication delegates
             var dataService = Kernel.Get<IFitnessService>();
             //dataService.AuthorizedDelegate = OnSignIn;
+            //MainPage = new AppShell();
             SetMainPage();
         }
 

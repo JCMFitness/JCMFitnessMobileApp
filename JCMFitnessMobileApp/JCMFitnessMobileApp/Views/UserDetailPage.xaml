@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="JCMFitnessMobileApp.Views.UserDetailPage">
+  <ContentPage.Content>
+        <StackLayout Spacing="20" Padding="15">
+            <Label Text="First Name:"  FontSize="Medium" FontAttributes="Bold" TextColor="Black" />
+            <Label Text="{Binding user.FirstName}" FontSize="Medium" TextColor="Black" />
+
+            <Label Text="Last Name:" FontSize="Medium" FontAttributes="Bold" TextColor="Black"  />
+            <Label Text="{Binding user.LastName}" FontSize="Medium" TextColor="Black" />
+
+
+            <Label Text="User Name:" FontSize="Medium" FontAttributes="Bold" TextColor="Black"  />
+            <Label Text="{Binding user.UserName}" FontSize="Medium" TextColor="Black" />
+
+            <Label Text="Email:" FontSize="Medium" FontAttributes="Bold" TextColor="Black"  />
+            <Label Text="{Binding user.Email}" FontSize="Medium" TextColor="Black" />
+
+            <Label Text="Join Date:" FontSize="Medium" FontAttributes="Bold" TextColor="Black"  />
+            <Label Text="{Binding user.JoinedDate}" FontSize="Medium" TextColor="Black" />
+
+            <StackLayout Orientation="Horizontal">
+                <Button Text="Delete" Command="{Binding DeleteUserCommand}" HorizontalOptions="FillAndExpand"></Button>
+                <Button Text="Edit" Command="{Binding EditUserCommand}" HorizontalOptions="FillAndExpand"></Button>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

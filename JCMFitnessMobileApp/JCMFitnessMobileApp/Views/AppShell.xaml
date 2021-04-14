@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Shell xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="JCMFitnessMobileApp.Views.AppShell"
+             x:Name="shell"
+             FlyoutBackgroundImageAspect="AspectFill"
+             FlyoutHeaderBehavior="CollapseOnScroll">
+    <Shell.Resources></Shell.Resources>
+    <!--<FlyoutItem Title="Main Page"
+                Icon="">
+        <Tab>
+            <ShellContent ContentTemplate="{DataTemplate Views:MainPage}" />
+        </Tab>
+    </FlyoutItem>
+    <FlyoutItem Title="User Details"
+                Icon="">
+        <Tab>
+            <ShellContent ContentTemplate="{DataTemplate Views:UserDetailPage}" />
+        </Tab>
+    </FlyoutItem>
+    <FlyoutItem Title="New Workout"
+                Icon="">
+        <Tab>
+            <ShellContent ContentTemplate="{DataTemplate Views:NewWorkoutPage}" />
+        </Tab>
+    </FlyoutItem>-->
+</Shell>
