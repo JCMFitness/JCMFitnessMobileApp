@@ -22,7 +22,7 @@
 
         </StackLayout>
         <StackLayout Orientation="Horizontal">
-            <Button Text="Delete" Command="{Binding DeleteCommand}" HorizontalOptions="FillAndExpand"></Button>
+            <Button Text="Delete" Command="{Binding DeleteExerciseCommand}" HorizontalOptions="FillAndExpand"></Button>
             <Button Text="Edit" Command="{Binding EditCommand}" HorizontalOptions="FillAndExpand"></Button>
         </StackLayout>
         </StackLayout>

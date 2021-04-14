@@ -18,9 +18,9 @@
 
                 <Label Text="Public:" FontSize="Small" TextColor="Black"  />
                 <Entry Text="{Binding Exercise.IsPublic}" FontSize="Medium" TextColor="Red" />
-                
-                <Button Text="Save" Command="{Binding SaveExerciseCommand}" HorizontalOptions="FillAndExpand"/>
-            </StackLayout>
+
+            <Button Text="Save" Command="{Binding SaveExerciseCommand}" HorizontalOptions="FillAndExpand"/>
+        </StackLayout>
 
     </ContentPage.Content>
 </ContentPage>

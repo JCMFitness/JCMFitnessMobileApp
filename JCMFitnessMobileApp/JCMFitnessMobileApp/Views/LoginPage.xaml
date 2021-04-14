@@ -42,18 +42,18 @@
         </StackLayout>
 
         <StackLayout HorizontalOptions="Center"
-                     Margin="0,10"
-                     IsVisible="{Binding IsBusy, Converter={StaticResource ReverseBooleanConverter}}">
+                     Margin="0,10">
             <Button Text="Sign in"
                     BackgroundColor="#09C"
                     TextColor="#FFF"
                     Command="{Binding LoginCommand}"
-                    WidthRequest="150"/>
+                    WidthRequest="150"
+                    IsVisible="{Binding IsBusy, Converter={StaticResource ReverseBooleanConverter}}"/>
         </StackLayout>
 
         <StackLayout Orientation="Vertical" VerticalOptions="Center" HorizontalOptions="Center" IsVisible="{Binding IsBusy}">
             <ActivityIndicator IsRunning="True" />
-            <Label Text="Please wait! Logging in" />
+                <Label Text="Please wait! Logging in" IsVisible="{Binding IsBusy}"/>
         </StackLayout>
         </StackLayout>
     </ContentPage.Content>

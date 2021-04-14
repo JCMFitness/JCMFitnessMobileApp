@@ -4,6 +4,7 @@ using JCMFitnessMobileApp.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace JCMFitnessMobileApp.ViewModels
@@ -39,5 +40,14 @@ namespace JCMFitnessMobileApp.ViewModels
         public Command EditCommand =>
         _editCommand ?? (_editCommand = new Command(async () => await
         NavService.NavigateTo<EditExerciseViewModel, Exercise>(Exercise)));
+
+        Command _deleteExerciseCommand;
+        public Command DeleteExerciseCommand =>
+        _deleteExerciseCommand ?? (_deleteExerciseCommand = new Command(async () => await DeleteExercise()));
+
+        async Task DeleteExercise()
+        {
+            await _fitnessService.DeleteExercise(Exercise.ExerciseID);
+        }
     }
 }

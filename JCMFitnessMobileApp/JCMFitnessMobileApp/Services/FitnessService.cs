@@ -134,7 +134,18 @@ namespace JCMFitnessMobileApp.Services
             }
         }
 
-
+        public async Task DeleteExercise(string exercise)
+        {
+            try
+            {
+                await fitApi.DeleteExerciseAsync(exercise);
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine(ex.Message);
+                throw;
+            }
+        }
     }
 
 }

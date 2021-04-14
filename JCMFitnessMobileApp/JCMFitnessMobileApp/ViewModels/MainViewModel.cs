@@ -78,15 +78,12 @@ namespace JCMFitnessMobileApp.ViewModel
         }
         public override void Init(User user)
         {
-           
-
             User = user;
 
-           /* if(User != null)
-            {
-                Barrel.Current.Add(key: "user", data: User, expireIn: TimeSpan.FromDays(1));
-            }*/
-            
+            /* if(User != null)
+             {
+                 Barrel.Current.Add(key: "user", data: User, expireIn: TimeSpan.FromDays(1));
+             }*/
             LoadEntries();
         }
 
@@ -112,7 +109,6 @@ namespace JCMFitnessMobileApp.ViewModel
                     {
                         ObservableCollection<Workout> newWorkouts = new ObservableCollection<Workout>(workouts);
                         UserWorkouts = new ObservableCollection<Workout>(newWorkouts);
-                        IsBusy = false;
                     });
                 IsRefreshing = false;
             }
