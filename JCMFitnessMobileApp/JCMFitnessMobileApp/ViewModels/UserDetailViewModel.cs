@@ -50,23 +50,19 @@ namespace JCMFitnessMobileApp.ViewModels
 
         public void GetUserFromCache()
         {
-            user = Barrel.Current.Get<User>(key: "user");
+            user = Barrel.Current.Get<LoginResponse>(key: "user").User;
         }
 
         public async void DeleteUserAsync()
         {
-                //bool answer = await DisplayAlert("Question?", "Would you like to play a game", "Yes", "No");
-                //Debug.WriteLine("Answer: " + answer);
             
+            await _fitnessService.DeleteUser(user.Id);
 
-            //if (answer == true)
-            //{
-                await _fitnessService.DeleteUser(user.UserID);
-            //}
+
+            NavService.ClearBackStack();
             await NavService.NavigateTo<LoginViewModel>();
             
         }
 
-        
     }
 }

@@ -9,7 +9,7 @@ namespace JCMFitnessMobileApp.Services
     public interface IFitnessService
     {
 
-
+        Task DeleteUser(string UserID);
         Task<LoginResponse> LoginUser(UserLogin userLogin);
 
         Task<SignUpResponse> SignUpUser(UserSignUp userSignUp);
