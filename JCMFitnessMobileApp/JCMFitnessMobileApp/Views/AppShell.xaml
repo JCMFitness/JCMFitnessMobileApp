@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Shell xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:Xaminals.Controls"
+             x:Class="JCMFitnessMobileApp.Views.AppShell">
+    <FlyoutItem Title="Main Page"
+                Icon="cat.png">
+        <Tab>
+            <ShellContent ContentTemplate="{DataTemplate views:CatsPage}" />
+        </Tab>
+    </FlyoutItem>
+    <FlyoutItem Title="User Details"
+                Icon="dog.png">
+        <Tab>
+            <ShellContent ContentTemplate="{DataTemplate views:DogsPage}" />
+        </Tab>
+    </FlyoutItem>
+</Shell>
