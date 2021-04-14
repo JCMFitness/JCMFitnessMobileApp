@@ -37,10 +37,6 @@ namespace JCMFitnessMobileApp.Views
                         title.LabelColor = propHasErrors
                             ? Color.Red : Color.Black;
                         break;
-                    case nameof(ViewModel.Id):
-                        title.LabelColor = propHasErrors
-                            ? Color.Red : Color.Black;
-                        break;
                     default:
                         break;
                 }

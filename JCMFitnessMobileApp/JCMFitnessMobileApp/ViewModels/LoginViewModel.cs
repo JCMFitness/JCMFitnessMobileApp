@@ -154,13 +154,23 @@ namespace JCMFitnessMobileApp.ViewModels
 
                     };
 
-                    var loginResponse = await _fitnessService.LoginUser(userLogin);
 
-                    Barrel.Current.Add(key: "user", data: loginResponse, expireIn: TimeSpan.FromMinutes(1));
+                    try
+                    {
+                        var loginResponse = await _fitnessService.LoginUser(userLogin);
+                        Barrel.Current.Add(key: "user", data: loginResponse, expireIn: TimeSpan.FromMinutes(1));
+
+                        await NavService.NavigateTo<MainViewModel, User>(User);
+                    }
+                    catch
+                    {
+                        await App.Current.MainPage.DisplayAlert("Login Fail", "Please enter correct username or password", "OK");
+                        await NavService.NavigateTo<LoginViewModel>();
+                    }
 
                 }
 
-                await NavService.NavigateTo<MainViewModel, User>(User);
+               
 
                 IsBusy = false;
 

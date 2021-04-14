@@ -48,17 +48,6 @@ namespace JCMFitnessMobileApp.ViewModels
             }
         }
 
-        string _id;
-        public string ID
-        {
-            get => _id;
-            set
-            {
-                _id = value;
-                OnPropertyChanged();
-            }
-        }
-
 
         int _timerValue;
         public int TimerValue
@@ -109,11 +98,12 @@ namespace JCMFitnessMobileApp.ViewModels
             {
                 var newExercise = new Exercise
                 {
-                    ExerciseID = ID,
+                    ExerciseID = Guid.NewGuid().ToString(),
                     Name = Name,
                     TimerValue = TimerValue,
                     Repititions = Repetitions,
-                    Sets = Sets
+                    Sets = Sets,
+                    IsPublic = false
 
                 };
                 await _fitnessService.AddWorkoutExercise(_workout.WorkoutID, newExercise);

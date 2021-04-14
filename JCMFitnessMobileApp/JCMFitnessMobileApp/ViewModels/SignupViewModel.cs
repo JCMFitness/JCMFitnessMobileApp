@@ -82,10 +82,17 @@ namespace JCMFitnessMobileApp.ViewModels
 
                 };
 
-                await _fitnessService.SignUpUser(userSignUp);
-               
 
-                await NavService.NavigateTo<LoginViewModel>();
+                try
+                {
+                    await _fitnessService.SignUpUser(userSignUp);
+                    await NavService.NavigateTo<LoginViewModel>();
+                }
+                catch
+                {
+                    await App.Current.MainPage.DisplayAlert("Sign up Fail", "Please enter valid username or password", "OK");
+                    await NavService.NavigateTo<SignupViewModel>();
+                }
 
                 IsBusy = false;
 

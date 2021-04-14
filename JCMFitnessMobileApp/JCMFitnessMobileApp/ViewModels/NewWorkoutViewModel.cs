@@ -48,17 +48,6 @@ namespace JCMFitnessMobileApp.ViewModel
         }
 
 
-        string _id;
-        public string Id
-        {
-            get => _id;
-            set
-            {
-                _id = value;
-                OnPropertyChanged();
-            }
-        }
-
 
         string _category;
         public string Category
@@ -84,10 +73,11 @@ namespace JCMFitnessMobileApp.ViewModel
             {
                 var newWorkout = new Workout
                 {
-                    WorkoutID = Id,
+                    WorkoutID = Guid.NewGuid().ToString(),
                     Name = Title,
                     Description = Description,
-                    Category = Category
+                    Category = Category,
+                    IsPublic = false
 
                 };
 

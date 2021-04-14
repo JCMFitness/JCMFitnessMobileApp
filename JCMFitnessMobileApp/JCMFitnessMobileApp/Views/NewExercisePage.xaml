@@ -19,13 +19,9 @@
             <TableView Intent="Form" IsVisible="{Binding IsBusy, Converter={StaticResource ReverseBooleanConverter}}">
                 <TableView.Root>
                     <TableSection>
-                        <EntryCell x:Name="ID" Label="ID" Text="{Binding ID}" />
                         <EntryCell x:Name="Name" Label="Name" Text="{Binding Name}" />
                         <EntryCell x:Name="TimerValue" Label="TimerValue" Text="{Binding TimerValue}" />
-
-
                         <EntryCell Label="Repetitions" Text="{Binding Repetitions}" />
-
                         <EntryCell Label="Sets" Text="{Binding Sets}" />
                     </TableSection>
                 </TableView.Root>
