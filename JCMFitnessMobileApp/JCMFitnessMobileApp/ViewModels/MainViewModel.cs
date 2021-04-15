@@ -66,9 +66,12 @@ namespace JCMFitnessMobileApp.ViewModel
          await NavService.NavigateTo<UserDetailViewModel>());
 
 
-        Command _refreshCommand;
-        public Command RefreshCommand =>
-            _refreshCommand ?? (_refreshCommand = new Command(LoadEntries));
+      
+        public Command RefreshCommand => new Command(async () => 
+                await LoadEntriesAsync());
+
+        public Command SignoutCommand => new Command(async () =>
+                await SignoutAsync());
 
 
         public MainViewModel(INavService navService, IFitnessService tripLogService, IBlobCache cache)
@@ -79,20 +82,15 @@ namespace JCMFitnessMobileApp.ViewModel
             UserWorkouts = new ObservableCollection<Workout>();
             Barrel.ApplicationId = "CachingDataSample";
         }
-        public override void Init(User user)
+        public override void Init()
         {
-            User = user;
 
-            /* if(User != null)
-             {
-                 Barrel.Current.Add(key: "user", data: User, expireIn: TimeSpan.FromDays(1));
-             }*/
-            LoadEntries();
+            LoadEntriesAsync();
         }
 
 
 
-        public void LoadEntries()
+        public async Task LoadEntriesAsync()
         {
             var response = Barrel.Current.Get<LoginResponse>(key: "user");
 
@@ -114,8 +112,10 @@ namespace JCMFitnessMobileApp.ViewModel
                     {
                         ObservableCollection<Workout> newWorkouts = new ObservableCollection<Workout>(workouts);
                         UserWorkouts = new ObservableCollection<Workout>(newWorkouts);
+
+                        IsRefreshing = false;
                     });
-                IsRefreshing = false;
+                
             }
             catch(Exception ex)
             {
@@ -125,6 +125,15 @@ namespace JCMFitnessMobileApp.ViewModel
             {
                 IsBusy = false;
             }
+        }
+
+        public async Task SignoutAsync()
+        {
+            Barrel.Current.EmptyAll();
+
+            
+            await NavService.NavigateTo<LandingViewModel>();
+
         }
 
     }

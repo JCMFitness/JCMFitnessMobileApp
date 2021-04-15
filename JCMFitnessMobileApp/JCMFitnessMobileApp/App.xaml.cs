@@ -9,23 +9,20 @@ using Xamarin.Essentials;
 using JCMFitnessMobileApp.Views;
 using JCMFitnessMobileApp.ViewModel;
 using JCMFitnessMobileApp.ViewModels;
+using MonkeyCache.FileStore;
+using JCMFitnessMobileApp.Models;
 
 namespace JCMFitnessMobileApp
 {
     public partial class App : Application
     {
-        //bool IsSignedIn => !string.IsNullOrWhiteSpace(Preferences.Get("apitoken", ""));
+       
 
         public IKernel Kernel { get; set; }
         public App(params INinjectModule[] platformModules)
         {
             InitializeComponent();
-
-            /* var mainPage = new NavigationPage(new MainPage());
-             var navService = DependencyService.Get<INavService>() as XamarinFormsNavService;
-             navService.XamarinFormsNav = mainPage.Navigation;
-             MainPage = mainPage;*/
-
+            Barrel.ApplicationId = "CachingDataSample";
 
             // Register core services
             Kernel = new StandardKernel(
@@ -36,29 +33,33 @@ namespace JCMFitnessMobileApp
 
             // Setup data service authentication delegates
             var dataService = Kernel.Get<IFitnessService>();
-            //dataService.AuthorizedDelegate = OnSignIn;
-            //MainPage = new AppShell();
+           
             SetMainPage();
         }
 
 
+        
+
         void SetMainPage()
         {
-            /*var mainPage = IsSignedIn
+
+            bool IsSignedIn = Barrel.Current.Exists("user");
+
+            var mainPage = IsSignedIn
              ? new NavigationPage(new MainPage())
              {
                  BindingContext = Kernel.Get<MainViewModel>()
              }
-             : new NavigationPage(new SignInPage())
+             : new NavigationPage(new LandingPage())
              {
-                 BindingContext = Kernel.Get<SignInViewModel>()
-             };*/
+                 BindingContext = Kernel.Get<LandingViewModel>()
+             };
 
 
-            var mainPage = new NavigationPage(new LandingPage())
+            /*var mainPage = new NavigationPage(new LandingPage())
             {
                 BindingContext = Kernel.Get<LandingViewModel>()
-            };
+            };*/
 
             var navService = Kernel.Get<INavService>() as XamarinFormsNavService;
             navService.XamarinFormsNav = mainPage.Navigation;

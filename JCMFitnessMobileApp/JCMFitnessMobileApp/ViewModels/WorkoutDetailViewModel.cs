@@ -125,7 +125,7 @@ namespace JCMFitnessMobileApp.ViewModel
             try
             {
                 await _fitnessService.DeleteUserWorkoutById(response.User.Id, Workout.WorkoutID);
-                await NavService.GoBack();
+                await NavService.NavigateTo<MainViewModel>();
             }
             finally
             {

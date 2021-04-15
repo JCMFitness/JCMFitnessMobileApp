@@ -126,6 +126,11 @@ namespace JCMFitnessMobileApp.ViewModels
             }
         }
 
+        public override void Init()
+        {
+            NavService.ClearBackStack();
+        }
+
 
 
         Command _LoginCommand;
@@ -160,7 +165,7 @@ namespace JCMFitnessMobileApp.ViewModels
                         var loginResponse = await _fitnessService.LoginUser(userLogin);
                         Barrel.Current.Add(key: "user", data: loginResponse, expireIn: TimeSpan.FromMinutes(1));
 
-                        await NavService.NavigateTo<MainViewModel, User>(User);
+                        await NavService.NavigateTo<MainViewModel>();
                     }
                     catch
                     {

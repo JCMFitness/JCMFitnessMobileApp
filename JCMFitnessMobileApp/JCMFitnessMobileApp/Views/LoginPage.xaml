@@ -15,12 +15,7 @@
         <StackLayout HorizontalOptions="Center"
                  VerticalOptions="Center">
             <StackLayout Orientation="Horizontal" IsVisible="{Binding IsBusy, Converter={StaticResource ReverseBooleanConverter}}">
-            <Label Text="Login:"
-                   FontSize="20"
-                   WidthRequest="95"
-                   HorizontalTextAlignment="End"
-                   TextColor="#000"
-                   VerticalOptions="Center"/>
+         
             <Entry Placeholder="Username"
                    FontSize="18"
                    Text="{Binding UserName}"
@@ -28,11 +23,7 @@
                    VerticalOptions="Center"/>
         </StackLayout>
             <StackLayout Orientation="Horizontal" IsVisible="{Binding IsBusy, Converter={StaticResource ReverseBooleanConverter}}">
-            <Label Text="Password:"
-                   HorizontalTextAlignment="End"
-                   FontSize="20"
-                   TextColor="#000"
-                   VerticalOptions="Center"/>
+          
             <Entry Placeholder="Password"
                    IsPassword="True"
                    FontSize="18"

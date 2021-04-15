@@ -63,7 +63,7 @@ namespace JCMFitnessMobileApp.Services
         }
         public void RemoveLastTwoViews()
         {
-            if (XamarinFormsNav.NavigationStack.Count < 2)
+            if (XamarinFormsNav.NavigationStack.Count < 1)
             {
                 return;
             }
@@ -79,9 +79,10 @@ namespace JCMFitnessMobileApp.Services
             {
                 return;
             }
-            for (var i = 0; i < XamarinFormsNav.NavigationStack.Count - 1; i++)
+            for (var i = 0; XamarinFormsNav.NavigationStack.Count > 1;)
             {
-                XamarinFormsNav.RemovePage(XamarinFormsNav.NavigationStack[i]);
+                var page = XamarinFormsNav.NavigationStack[i];
+                XamarinFormsNav.RemovePage(page);
             }
         }
         public void NavigateToUri(Uri uri)

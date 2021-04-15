@@ -8,7 +8,7 @@
     Title="Workouts">
 
     <ContentPage.ToolbarItems >
-        
+        <ToolbarItem Text="Signout" Command="{Binding SignoutCommand}" />
         <ToolbarItem Text="New" Command="{Binding NewCommand}" />
         <ToolbarItem Text="User Details" Command="{Binding UserDetailsCommand}" />
     </ContentPage.ToolbarItems>
