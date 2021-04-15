@@ -1,6 +1,7 @@
 ﻿using JCMFitnessMobileApp.Models;
 using JCMFitnessMobileApp.Services;
 using JCMFitnessMobileApp.ViewModel;
+using MonkeyCache.FileStore;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -28,6 +29,7 @@ namespace JCMFitnessMobileApp.ViewModels
         public ExerciseDetailViewModel(INavService navService, IFitnessService fitnessService)
     : base(navService)
         {
+            Barrel.ApplicationId = "CachingDataSample";
             _fitnessService = fitnessService;
         }
 
@@ -47,7 +49,24 @@ namespace JCMFitnessMobileApp.ViewModels
 
         async Task DeleteExercise()
         {
-            await _fitnessService.DeleteExercise(Exercise.ExerciseID);
+            if (IsBusy)
+                return;
+            IsBusy = true;
+            
+            try
+            {
+                var workout = Barrel.Current.Get<Workout>(key: "workout");
+
+                await _fitnessService.DeleteWorkoutExercise(workout.WorkoutID, Exercise.ExerciseID);
+
+                NavService.RemoveLastTwoViews();
+                await NavService.NavigateTo<WorkoutDetailViewModel, Workout>(workout);
+            }
+            finally
+            {
+                IsBusy = false;
+            }
+           
         }
     }
 }

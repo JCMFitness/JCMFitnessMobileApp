@@ -53,6 +53,7 @@ namespace JCMFitnessMobileApp.ViewModel
         public WorkoutDetailViewModel(INavService navService, IFitnessService fitnessService)
             : base(navService)
         {
+            Barrel.ApplicationId = "CachingDataSample";
             _fitnessService = fitnessService;
         }
 
@@ -60,9 +61,14 @@ namespace JCMFitnessMobileApp.ViewModel
 
         public override async void Init(Workout workout)
         {
-            Workout = workout;
+            if(workout != null)
+            {
+                Barrel.Current.Add(key: "workout", data: workout, expireIn: TimeSpan.FromMinutes(5));
+                Workout = workout;
+                
+            }
+
             WorkoutExercises = await LoadExercises(workout.WorkoutID);
-  
         }
 
 
