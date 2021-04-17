@@ -70,6 +70,20 @@ namespace JCMFitnessMobileApp.Services
             }
 
         }
+
+        public async Task<User> GetUserById(string id)
+        {
+            try
+            {
+                return await fitApi.GetUserById(id);
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine(ex.Message);
+                throw;
+            }
+        }
+
         public async Task<List<Workout>> GetUserWorkouts(string id)
         {
             try

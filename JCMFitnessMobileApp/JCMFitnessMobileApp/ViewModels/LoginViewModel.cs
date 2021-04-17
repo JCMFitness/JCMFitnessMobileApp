@@ -163,7 +163,7 @@ namespace JCMFitnessMobileApp.ViewModels
                     try
                     {
                         var loginResponse = await _fitnessService.LoginUser(userLogin);
-                        Barrel.Current.Add(key: "user", data: loginResponse, expireIn: TimeSpan.FromMinutes(1));
+                        Barrel.Current.Add(key: "user", data: loginResponse, expireIn: TimeSpan.FromMinutes(10));
 
                         await NavService.NavigateTo<MainViewModel>();
                     }

@@ -2,6 +2,7 @@
 using JCMFitnessMobileApp.MyConstants;
 using JCMFitnessMobileApp.Services;
 using JCMFitnessMobileApp.ViewModel;
+using MonkeyCache.FileStore;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -17,8 +18,13 @@ namespace JCMFitnessMobileApp.ViewModels
 {
     public class LandingViewModel:BaseViewModel
     {
-        //const string authenticationUrl = "https://tranquil-bastion-01081.herokuapp.com/mobileauth/";
-        const string authenticationUrl = "https://xamarin-essentials-auth-sample.azurewebsites.net/mobileauth/";
+        //const string authenticationUrl = "https://192.168.0.6:38604/mobileauth/";
+        //const string authenticationUrl = "https://xamarin-essentials-auth-sample.azurewebsites.net/mobileauth/";
+
+        const string authenticationUrl = "https://jcmfitness1.azurewebsites.net/api/authentication/";
+        //const string authenticationUrl = "https://googleauth2.azurewebsites.net/mobileauth/";
+
+
         private JsonSerializer _serializer = new JsonSerializer();
 
         public LandingViewModel(INavService navService)
@@ -27,7 +33,7 @@ namespace JCMFitnessMobileApp.ViewModels
             MicrosoftCommand = new Command(async () => await OnAuthenticate("Microsoft"));
             GoogleCommand = new Command(async () => await OnAuthenticate("Google"));
             FacebookCommand = new Command(async () => await OnAuthenticate("Facebook"));
-           
+            Barrel.ApplicationId = "CachingDataSample";
         }
 
 
@@ -72,6 +78,16 @@ namespace JCMFitnessMobileApp.ViewModels
                 var callbackUrl = new Uri("xamarinessentials://");
 
                 r = await WebAuthenticator.AuthenticateAsync(authUrl, callbackUrl);
+
+                var loginResponse = new LoginResponse
+                {
+                    Token = r.Properties["access_token"],
+                    ValidTo = r.Properties["expires"],
+                    Email = r.Properties["email"],
+                    UserId = r.Properties["id"]
+                };
+
+                Barrel.Current.Add(key: "user", data: loginResponse, expireIn: TimeSpan.FromMinutes(10));
 
                 AuthToken = r?.AccessToken ?? r?.IdToken;
                 GetUserInfoUsingToken(AuthToken);

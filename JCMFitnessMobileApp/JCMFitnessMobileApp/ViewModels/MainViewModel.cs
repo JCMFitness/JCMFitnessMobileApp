@@ -96,6 +96,16 @@ namespace JCMFitnessMobileApp.ViewModel
 
             User = response.User;
 
+            if (User == null)
+            {
+                var userId = response.UserId;
+                User = await _fitnessService.GetUserById(userId);
+
+                response.User = User;
+
+                Barrel.Current.Add(key: "user", data: response, expireIn: TimeSpan.FromMinutes(10));
+            }
+
             if (IsBusy || User == null)
             {
                 IsRefreshing = false;

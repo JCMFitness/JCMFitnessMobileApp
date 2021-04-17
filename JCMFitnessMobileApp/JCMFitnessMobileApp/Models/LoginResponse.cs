@@ -10,5 +10,7 @@ namespace JCMFitnessMobileApp.Models
         public string ValidTo { get; set; }
 
         public User User { get; set; }
+        public string Email { get; set; }
+        public string UserId { get; set; }
     }
 }

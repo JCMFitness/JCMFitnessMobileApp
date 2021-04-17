@@ -25,6 +25,9 @@ namespace JCMFitnessMobileApp.Services
         [Delete("/api/user?userid={id}")]
         public Task DeleteUserAsync(string id);
 
+        [Get("/api/user?userid={id}")]
+        public Task<User> GetUserById(string id);
+
 
 
 
