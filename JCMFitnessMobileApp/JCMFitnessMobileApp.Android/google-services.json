@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "485380889769",
+    "project_id": "jcmfitnesspush",
+    "storage_bucket": "jcmfitnesspush.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:485380889769:android:b68701cecfc8d5a3de1db8",
+        "android_client_info": {
+          "package_name": "com.companyname.jcmfitnessmobileapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "485380889769-ebfuvniu4i27h2ku478e03mp1h76o3sh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD9dPhLt4ccaAAoxQQLnB6bvqAl7GP9dHI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "485380889769-ebfuvniu4i27h2ku478e03mp1h76o3sh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

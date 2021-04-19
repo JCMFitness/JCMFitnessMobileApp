@@ -11,6 +11,7 @@ using JCMFitnessMobileApp.ViewModel;
 using JCMFitnessMobileApp.ViewModels;
 using MonkeyCache.FileStore;
 using JCMFitnessMobileApp.Models;
+using Plugin.FirebasePushNotification;
 
 namespace JCMFitnessMobileApp
 {
@@ -33,8 +34,10 @@ namespace JCMFitnessMobileApp
 
             // Setup data service authentication delegates
             var dataService = Kernel.Get<IFitnessService>();
-           
+          
             SetMainPage();
+
+         
         }
 
 
