@@ -67,8 +67,8 @@ namespace JCMFitnessMobileApp.ViewModel
 
 
       
-        public Command RefreshCommand => new Command(async () => 
-                await LoadEntriesAsync());
+        public Command RefreshCommand => new Command(() => 
+                LoadEntriesAsync());
 
         public Command SignoutCommand => new Command(async () =>
                 await SignoutAsync());
@@ -90,7 +90,7 @@ namespace JCMFitnessMobileApp.ViewModel
 
 
 
-        public async Task LoadEntriesAsync()
+        public void LoadEntriesAsync()
         {
             var response = Barrel.Current.Get<LoginResponse>(key: "user");
 
