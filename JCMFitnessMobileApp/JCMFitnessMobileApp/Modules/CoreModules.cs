@@ -49,7 +49,7 @@ namespace JCMFitnessMobileApp.Modules
 
             var tripLogService = new FitnessService(refitInstance);
 
-
+            var localDBService = new LocalDatabase();
 
             /*var fitApiService = new IFitApi();
 
@@ -64,7 +64,8 @@ namespace JCMFitnessMobileApp.Modules
                 .ToMethod(x => tripLogService)
                 .InSingletonScope();
 
-            Bind<LocalDatabase>().ToSelf()
+            Bind<ILocalDatabase>()
+               .ToMethod(x => localDBService)
                .InSingletonScope();
 
         }

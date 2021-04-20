@@ -1,4 +1,5 @@
-﻿using JCMFitnessMobileApp.Models;
+﻿using JCMFitnessMobileApp.LocalDB;
+using JCMFitnessMobileApp.Models;
 using JCMFitnessMobileApp.Services;
 using JCMFitnessMobileApp.ViewModel;
 using MonkeyCache.FileStore;
@@ -15,6 +16,7 @@ namespace JCMFitnessMobileApp.ViewModels
     public class LoginViewModel : BaseViewModel<User>
     {
         private IFitnessService _fitnessService;
+        private ILocalDatabase _localDatabase;
 
         public User _user;
         public User User
@@ -32,10 +34,11 @@ namespace JCMFitnessMobileApp.ViewModels
         public DelegateCommand ValidatePwdCommand { get; private set; }
 
 
-        public LoginViewModel(INavService navService, IFitnessService fitService)
+        public LoginViewModel(INavService navService, IFitnessService fitService, ILocalDatabase localDatabase)
             : base(navService)
         {
             _fitnessService = fitService;
+            _localDatabase = localDatabase;
 
             Barrel.ApplicationId = "CachingDataSample";
 
@@ -163,6 +166,9 @@ namespace JCMFitnessMobileApp.ViewModels
                     try
                     {
                         var loginResponse = await _fitnessService.LoginUser(userLogin);
+
+                        await _localDatabase.AddUser(loginResponse.User);
+
                         Barrel.Current.Add(key: "user", data: loginResponse, expireIn: TimeSpan.FromMinutes(10));
 
                         await NavService.NavigateTo<MainViewModel>();

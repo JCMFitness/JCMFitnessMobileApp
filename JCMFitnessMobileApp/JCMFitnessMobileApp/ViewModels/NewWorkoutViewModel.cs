@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using JCMFitnessMobileApp.LocalDB;
 using JCMFitnessMobileApp.Models;
 using JCMFitnessMobileApp.Services;
 using MonkeyCache.FileStore;
@@ -14,10 +15,13 @@ namespace JCMFitnessMobileApp.ViewModel
 
         readonly IFitnessService _fitnessService;
 
-        public NewWorkoutViewModel(INavService navService, IFitnessService fitness)
+        readonly ILocalDatabase _localDatabase;
+
+        public NewWorkoutViewModel(INavService navService, IFitnessService fitness, ILocalDatabase localDatabase)
             : base(navService)
         {
             _fitnessService = fitness;
+            _localDatabase = localDatabase;
         }
 
 
@@ -86,6 +90,7 @@ namespace JCMFitnessMobileApp.ViewModel
                 
 
                 await _fitnessService.AddNewUserWorkout(response.User.Id, newWorkout);
+                await _localDatabase.CreateWorkout(newWorkout);
                 await NavService.GoBack();
             }
             finally

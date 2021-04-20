@@ -1,17 +1,14 @@
-﻿using JCMFitnessMobileApp.MyConstants;
+﻿using JCMFitnessMobileApp.Models;
+using JCMFitnessMobileApp.MyConstants;
 using SQLite;
 using SQLiteNetExtensionsAsync.Extensions;
-using SQLiteNetExtensions;
-using SQLitePCL;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace JCMFitnessMobileApp.LocalDB
 {
-    public class LocalDatabase
+    public class LocalDatabase : ILocalDatabase
     {
         static readonly Lazy<SQLiteAsyncConnection> lazyInitializer = new Lazy<SQLiteAsyncConnection>(() =>
         {
@@ -30,32 +27,37 @@ namespace JCMFitnessMobileApp.LocalDB
         {
             if (!initialized)
             {
-                
-                await Database.CreateTablesAsync(CreateFlags.None, typeof(LocalUser)).ConfigureAwait(false);
-                await Database.CreateTablesAsync(CreateFlags.None, typeof(LocalWorkout)).ConfigureAwait(false);
-                await Database.CreateTablesAsync(CreateFlags.None, typeof(LocalExercise)).ConfigureAwait(false);
+
+                await Database.CreateTablesAsync(CreateFlags.None, typeof(Models.User)).ConfigureAwait(false);
+                await Database.CreateTablesAsync(CreateFlags.None, typeof(Models.Workout)).ConfigureAwait(false);
+                await Database.CreateTablesAsync(CreateFlags.None, typeof(Exercise)).ConfigureAwait(false);
 
                 initialized = true;
             }
         }
 
-        public Task<List<LocalWorkout>> GetWorkouts()
+        public Task<List<Workout>> GetWorkouts()
         {
-            return Database.Table<LocalWorkout>().ToListAsync();
+            return Database.Table<Workout>().ToListAsync();
         }
 
-        public Task CreateWorkout(LocalWorkout localWorkout)
+        public Task AddWorkouts(IEnumerable<Workout> workouts)
         {
-            
-           return Database.InsertAsync(localWorkout);
+            return Database.InsertAllAsync(workouts);
         }
 
-        public Task UpdateWorkout(LocalWorkout localWorkout)
+        public Task CreateWorkout(Workout localWorkout)
+        {
+
+            return Database.InsertAsync(localWorkout);
+        }
+
+        public Task UpdateWorkout(Workout localWorkout)
         {
             return Database.UpdateAsync(localWorkout);
         }
 
-        public Task DeleteWorkout(LocalWorkout localWorkout)
+        public Task DeleteWorkout(Workout localWorkout)
         {
             return Database.DeleteAsync(localWorkout);
         }
@@ -63,10 +65,28 @@ namespace JCMFitnessMobileApp.LocalDB
         //////////////////////////////////////////////////////////
         ///
 
-        public Task<List<LocalWorkout>> getWorkoutExercises(string workoutID)
+        public Task<List<Workout>> GetWorkoutExercises(string workoutID)
         {
-            return Database.GetAllWithChildrenAsync<LocalWorkout>(w => w.WorkoutID == workoutID);
+            return Database.GetAllWithChildrenAsync<Workout>(w => w.WorkoutID == workoutID);
         }
+
+        //**********************************************************************************
+
+        public Task AddUser(User localUser)
+        {
+
+            return Database.InsertAsync(localUser);
+        }
+
+        public Task<User> GetUser(string id)
+        {
+            return Database.GetAsync<User>(u => u.Id == id);
+        }
+        public Task UpdateUser(User user)
+        {
+            return Database.UpdateAsync(user);
+        }
+
 
     }
 }

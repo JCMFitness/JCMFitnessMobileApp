@@ -9,6 +9,7 @@ using JCMFitnessMobileApp.Services;
 using Akavache;
 using MonkeyCache.FileStore;
 using JCMFitnessMobileApp.ViewModels;
+using JCMFitnessMobileApp.LocalDB;
 
 namespace JCMFitnessMobileApp.ViewModel
 {
@@ -19,6 +20,7 @@ namespace JCMFitnessMobileApp.ViewModel
         private bool _isRefreshing;
 
         readonly IFitnessService _fitnessService;
+        readonly ILocalDatabase _localDatabase;
 
         readonly IBlobCache _cache;
 
@@ -74,10 +76,11 @@ namespace JCMFitnessMobileApp.ViewModel
                 await SignoutAsync());
 
 
-        public MainViewModel(INavService navService, IFitnessService tripLogService, IBlobCache cache)
+        public MainViewModel(INavService navService, IFitnessService tripLogService, IBlobCache cache, ILocalDatabase localDatabase)
             : base(navService)
         {
             _fitnessService = tripLogService;
+            _localDatabase = localDatabase;
             _cache = cache;
             UserWorkouts = new ObservableCollection<Workout>();
             Barrel.ApplicationId = "CachingDataSample";
@@ -95,6 +98,8 @@ namespace JCMFitnessMobileApp.ViewModel
             var response = Barrel.Current.Get<LoginResponse>(key: "user");
 
             User = response.User;
+
+            User = await _localDatabase.GetUser(User.Id);
 
             if (User == null)
             {
@@ -125,7 +130,14 @@ namespace JCMFitnessMobileApp.ViewModel
 
                         IsRefreshing = false;
                     });
-                
+
+                /*foreach (var v in UserWorkouts)
+                {
+                    await _localDatabase.CreateWorkout(v);
+                }*/
+
+                var workouts = await _localDatabase.GetWorkouts();
+               
             }
             catch(Exception ex)
             {
