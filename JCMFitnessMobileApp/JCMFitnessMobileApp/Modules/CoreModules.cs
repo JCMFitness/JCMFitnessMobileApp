@@ -11,6 +11,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using Newtonsoft.Json.Converters;
 using JCMFitnessMobileApp.ViewModels;
+using JCMFitnessMobileApp.LocalDB;
 
 namespace JCMFitnessMobileApp.Modules
 {
@@ -62,6 +63,9 @@ namespace JCMFitnessMobileApp.Modules
             Bind<IFitnessService>()
                 .ToMethod(x => tripLogService)
                 .InSingletonScope();
+
+            Bind<LocalDatabase>().ToSelf()
+               .InSingletonScope();
 
         }
     }

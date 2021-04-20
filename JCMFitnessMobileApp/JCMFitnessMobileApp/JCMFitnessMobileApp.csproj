@@ -20,6 +20,8 @@
     <PackageReference Include="Prism.Core" Version="8.0.0.1909" />
     <PackageReference Include="Refit" Version="6.0.38" />
     <PackageReference Include="Refit.Newtonsoft.Json" Version="6.0.38" />
+    <PackageReference Include="sqlite-net-pcl" Version="1.7.335" />
+    <PackageReference Include="SQLiteNetExtensions.Async" Version="2.1.0" />
     <PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" />
     <PackageReference Include="Xamarin.Forms" Version="5.0.0.2012" />
     <PackageReference Include="Xamarin.Essentials" Version="1.6.1" />
@@ -71,9 +73,5 @@
     <EmbeddedResource Update="Views\WorkoutEditPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="MyConstants\" />
   </ItemGroup>
 </Project>
