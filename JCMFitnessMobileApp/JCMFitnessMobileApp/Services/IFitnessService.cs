@@ -29,6 +29,9 @@ namespace JCMFitnessMobileApp.Services
 
         Task DeleteWorkoutExercise(string workoutID, string exerciseID);
 
-        Task PushSyncWorkout(List<Workout> workouts);
+        public Task PushSyncWorkout(List<Workout> workouts);
+        public Task PushSyncExercises(List<Exercise> exercises);
+        public Task PushSyncUser(User user);
+
     }
 }

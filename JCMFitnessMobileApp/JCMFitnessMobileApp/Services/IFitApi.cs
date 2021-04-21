@@ -28,6 +28,9 @@ namespace JCMFitnessMobileApp.Services
         [Get("/api/user?userid={id}")]
         public Task<User> GetUserById(string id);
 
+        [Post("/api/user/sync")]
+        public Task SyncUser(User user);
+
 
 
 
@@ -46,6 +49,9 @@ namespace JCMFitnessMobileApp.Services
 
         [Delete("/api/workouts?workouts={id}")]
         public Task DeleteWorkoutAsync(string id);
+
+        [Post("/api/workouts/sync")]
+        public Task SyncWorkouts(List<Workout> workouts);
 
 
         //UserWorkout
@@ -80,6 +86,9 @@ namespace JCMFitnessMobileApp.Services
         
         [Delete("/api/exercise?exerciseid={exerciseid}")]
         public Task DeleteExerciseAsync(string exerciseid);
+
+        [Post("/api/exercise/sync")]
+        public Task SyncExercises(List<Exercise> exercises);
     }
 }
 

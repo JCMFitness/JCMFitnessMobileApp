@@ -62,6 +62,11 @@ namespace JCMFitnessMobileApp.LocalDB
             return Database.DeleteAsync(localWorkout);
         }
 
+        public Task<Workout> GetWorkoutByID(string workoutID)
+        {
+            return Database.GetAsync<Workout>(u => u.WorkoutID == workoutID);
+        }
+
         //////////////////////////////////////////////////////////
         ///
 

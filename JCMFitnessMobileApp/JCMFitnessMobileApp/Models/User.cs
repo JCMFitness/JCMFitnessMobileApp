@@ -31,6 +31,7 @@ namespace JCMFitnessMobileApp.Models
 
         public bool IsDeleted { get; set; }
 
+
         //public List<UserWorkout> UserWorkouts { get; set; }
 
     }

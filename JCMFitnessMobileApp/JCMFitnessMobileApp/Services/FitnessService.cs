@@ -177,17 +177,42 @@ namespace JCMFitnessMobileApp.Services
 
         public async Task PushSyncWorkout(List<Workout> workouts)
         {
-            foreach(var v in workouts)
+            try
             {
-                await EditWorkout(v);
+                await fitApi.SyncWorkouts(workouts);
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine(ex.Message);
+                throw;
+            }
+            
+            
+        }
+
+        public async Task PushSyncExercises(List<Exercise> exercises)
+        {
+            try
+            {
+                await fitApi.SyncExercises(exercises);
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine(ex.Message);
+                throw;
             }
         }
 
-        public async Task PullSyncWorkout(List<Workout> workouts)
+        public async Task PushSyncUser(User user)
         {
-            foreach (var v in workouts)
+            try
             {
-                await EditWorkout(v);
+                await fitApi.SyncUser(user);
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine(ex.Message);
+                throw;
             }
         }
 
