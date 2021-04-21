@@ -27,6 +27,10 @@ namespace JCMFitnessMobileApp.Models
         public DateTime JoinedDate { get; set; } = DateTime.UtcNow;
         public bool IsAdmin { get; set; }
 
+        public DateTimeOffset LastUpdated { get; set; }
+
+        public bool IsDeleted { get; set; }
+
         //public List<UserWorkout> UserWorkouts { get; set; }
 
     }

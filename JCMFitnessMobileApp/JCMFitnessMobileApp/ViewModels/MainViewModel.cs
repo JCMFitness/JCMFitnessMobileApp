@@ -99,7 +99,7 @@ namespace JCMFitnessMobileApp.ViewModel
 
             User = response.User;
 
-            User = await _localDatabase.GetUser(User.Id);
+            var DbUser = await _localDatabase.GetUser(User.Id);
 
             if (User == null)
             {
@@ -121,15 +121,13 @@ namespace JCMFitnessMobileApp.ViewModel
 
             try
             {
-                // Load from local cache and then immediately load from API
-                _cache.GetAndFetchLatest("userworkouts", async () => await _fitnessService.GetUserWorkouts(User.Id))
-                    .Subscribe(workouts =>
-                    {
-                        ObservableCollection<Workout> newWorkouts = new ObservableCollection<Workout>(workouts);
-                        UserWorkouts = new ObservableCollection<Workout>(newWorkouts);
+                
+                var newWorkouts = await _fitnessService.GetUserWorkouts(User.Id);
 
-                        IsRefreshing = false;
-                    });
+                UserWorkouts = new ObservableCollection<Workout>(newWorkouts);
+
+                IsRefreshing = false;
+                   
 
                 /*foreach (var v in UserWorkouts)
                 {

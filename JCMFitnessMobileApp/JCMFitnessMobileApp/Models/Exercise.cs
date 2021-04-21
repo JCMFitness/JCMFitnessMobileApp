@@ -1,5 +1,6 @@
 ﻿using SQLite;
 using SQLiteNetExtensions.Attributes;
+using System;
 using System.Collections.Generic;
 
 
@@ -15,6 +16,9 @@ namespace JCMFitnessMobileApp.Models
         public int Sets { get; set; }
         public bool IsPublic { get; set; }
 
+        public DateTimeOffset LastUpdated { get; set; }
+
+        public bool IsDeleted { get; set; }
 
         [ForeignKey(typeof(Workout))]     // Specify the foreign key
         public int WorkoutID { get; set; }

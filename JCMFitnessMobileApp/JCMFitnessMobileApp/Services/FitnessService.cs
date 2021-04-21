@@ -175,6 +175,23 @@ namespace JCMFitnessMobileApp.Services
             }
         }
 
+        public async Task PushSyncWorkout(List<Workout> workouts)
+        {
+            foreach(var v in workouts)
+            {
+                await EditWorkout(v);
+            }
+        }
+
+        public async Task PullSyncWorkout(List<Workout> workouts)
+        {
+            foreach (var v in workouts)
+            {
+                await EditWorkout(v);
+            }
+        }
+
+
     }
 
 }

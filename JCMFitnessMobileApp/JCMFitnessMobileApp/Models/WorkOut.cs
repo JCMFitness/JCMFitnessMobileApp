@@ -14,6 +14,10 @@ namespace JCMFitnessMobileApp.Models
         public string Category { get; set; }
         public bool IsPublic { get; set; }
 
+        public DateTimeOffset LastUpdated { get; set; }
+
+        public bool IsDeleted { get; set; }
+
         [OneToMany(CascadeOperations = CascadeOperation.All)]      // One to many relationship with Valuation
         public List<Exercise> Exercises { get; set; }
     }
