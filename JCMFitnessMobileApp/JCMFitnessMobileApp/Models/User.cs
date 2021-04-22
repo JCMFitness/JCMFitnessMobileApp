@@ -8,7 +8,6 @@ namespace JCMFitnessMobileApp.Models
 {
     public class User
     {
-        
         public string Id { get; set; }
 
         public string FirstName { get; set; }
@@ -19,15 +18,30 @@ namespace JCMFitnessMobileApp.Models
         public string SecurityStamp{ get; set; }
 
         public string ConcurrencyStamp  { get; set; }
-        public string UserName { get; set; }
 
-        [DataType(DataType.EmailAddress)]
+        public string UserName { get; set; }
+        public string NormalizedUserName { get; set; }
+
         public string Email { get; set; }
 
+        public string NormalizedEmail { get; set; }
 
-        public DateTime JoinedDate { get; set; } = DateTime.UtcNow;
+        public bool EmailConfirmed { get; set; }
+
+        public string PhoneNumber { get; set; }
+        public bool PhoneNumberConfirmed { get; set; }
+
+        public bool TwoFactorEnabled { get; set; }
+
+        public string LockoutEnd { get; set; }
+        public bool LockoutEnabled { get; set; }
+
+        public int AccessFailedCount { get; set; }
+
+        public DateTime JoinedDate { get; set; }
         public bool IsAdmin { get; set; }
         public List<UserWorkout> UserWorkouts { get; set; }
 
     }
 }
+

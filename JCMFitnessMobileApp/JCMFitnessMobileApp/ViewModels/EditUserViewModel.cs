@@ -1,6 +1,7 @@
 ﻿using JCMFitnessMobileApp.Models;
 using JCMFitnessMobileApp.Services;
 using JCMFitnessMobileApp.ViewModel;
+using MonkeyCache.FileStore;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -17,6 +18,7 @@ namespace JCMFitnessMobileApp.ViewModels
            : base(navService)
         {
             _fitnessService = fitnessService;
+            Barrel.ApplicationId = "CachingDataSample";
         }
 
         public User User
@@ -47,7 +49,16 @@ namespace JCMFitnessMobileApp.ViewModels
 
             try
             {
+                User.NormalizedUserName = User.UserName.ToUpper();
+                User.NormalizedEmail = User.Email.ToUpper();
+
                 await _fitnessService.EditUser(User);
+
+                var loginResponse = Barrel.Current.Get<LoginResponse>(key: "user");
+                loginResponse.User = User;
+                Barrel.Current.Add(key: "user", data: loginResponse, expireIn: TimeSpan.FromMinutes(10));
+
+                NavService.RemoveLastTwoViews();
                 await NavService.NavigateTo<UserDetailViewModel>();
             }
             finally

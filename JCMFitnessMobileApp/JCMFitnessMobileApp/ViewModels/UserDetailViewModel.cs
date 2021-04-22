@@ -24,6 +24,7 @@ namespace JCMFitnessMobileApp.ViewModels
             _deleteUser ?? (_deleteUser = new Command(DeleteUserAsync));
         public User _user;
         readonly IFitnessService _fitnessService;
+
         public User user
         {
             get => _user;
