@@ -48,9 +48,7 @@ namespace JCMFitnessMobileApp.ViewModels
             try
             {
                 await _fitnessService.EditUser(User);
-
-                NavService.RemoveLastTwoViews();
-                await NavService.NavigateTo<UserDetailViewModel, User>(User);
+                await NavService.NavigateTo<UserDetailViewModel>();
             }
             finally
             {

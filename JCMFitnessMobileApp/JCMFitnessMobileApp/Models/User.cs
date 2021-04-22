@@ -14,17 +14,19 @@ namespace JCMFitnessMobileApp.Models
         public string FirstName { get; set; }
         public string LastName { get; set; }
 
+        public string PasswordHash { get; set; }
 
+        public string SecurityStamp{ get; set; }
+
+        public string ConcurrencyStamp  { get; set; }
         public string UserName { get; set; }
 
         [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
-        public string PasswordHash { get; set; }
 
 
         public DateTime JoinedDate { get; set; } = DateTime.UtcNow;
         public bool IsAdmin { get; set; }
-
         public List<UserWorkout> UserWorkouts { get; set; }
 
     }

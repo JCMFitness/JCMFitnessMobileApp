@@ -168,7 +168,7 @@ namespace JCMFitnessMobileApp.Services
                 await fitApi.EditUserAsync(user);
             }
             catch (Exception ex)
-            {
+            { 
                 System.Diagnostics.Debug.WriteLine(ex.Message);
                 throw;
             }

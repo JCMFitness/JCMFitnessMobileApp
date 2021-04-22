@@ -48,6 +48,11 @@ namespace JCMFitnessMobileApp.ViewModels
             GetUserFromCache();
         }
 
+        Command _editUserCommand;
+        public Command EditUserCommand =>
+        _editUserCommand ?? (_editUserCommand = new Command(async () => await
+        NavService.NavigateTo<EditUserViewModel, User>(user)));
+
         public void GetUserFromCache()
         {
             user = Barrel.Current.Get<LoginResponse>(key: "user").User;
