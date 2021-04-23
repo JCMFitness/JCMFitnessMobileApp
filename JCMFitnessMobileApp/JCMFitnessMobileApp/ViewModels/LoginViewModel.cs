@@ -9,12 +9,16 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Xamarin.Forms;
+using Xamarin.Essentials;
+using System.Timers;
 
 namespace JCMFitnessMobileApp.ViewModels
 {
     public class LoginViewModel : BaseViewModel<User>
     {
         private IFitnessService _fitnessService;
+        private static Timer timer;
+        private static int timerCounter;
 
         public User _user;
         public User User
@@ -164,11 +168,12 @@ namespace JCMFitnessMobileApp.ViewModels
                     {
                         var loginResponse = await _fitnessService.LoginUser(userLogin);
                         Barrel.Current.Add(key: "user", data: loginResponse, expireIn: TimeSpan.FromMinutes(1));
-
+                        Vibration.Vibrate(50);
                         await NavService.NavigateTo<MainViewModel>();
                     }
                     catch
                     {
+                        FailedVibration();
                         await App.Current.MainPage.DisplayAlert("Login Fail", "Please enter correct username or password", "OK");
                         await NavService.NavigateTo<LoginViewModel>();
                     }
@@ -186,6 +191,27 @@ namespace JCMFitnessMobileApp.ViewModels
 
  
             //await NavService.NavigateTo<MainViewModel, User>(user);
+        }
+
+        void FailedVibration()
+        {
+            timerCounter = 0;
+            timer = new Timer(500);
+            timer.Elapsed += OnTimedEvent;
+            timer.Enabled = true;    
+        }
+        private static void OnTimedEvent(Object source, ElapsedEventArgs e)
+        {
+            if (timerCounter == 2)
+            {
+                timer.Stop();
+            }
+            else
+            {
+                Vibration.Vibrate(50);
+            }
+            timerCounter++;
+            
         }
     }
 }

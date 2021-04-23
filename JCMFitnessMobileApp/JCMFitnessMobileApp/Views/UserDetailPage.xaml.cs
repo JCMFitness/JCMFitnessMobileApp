@@ -16,5 +16,6 @@ namespace JCMFitnessMobileApp.Views
         {
             InitializeComponent();
         }
+
     }
 }

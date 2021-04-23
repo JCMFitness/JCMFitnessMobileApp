@@ -81,26 +81,44 @@ namespace JCMFitnessMobileApp.ViewModel
             _cache = cache;
             UserWorkouts = new ObservableCollection<Workout>();
             Barrel.ApplicationId = "CachingDataSample";
+            LoadEntriesAsync();
         }
         public override void Init()
         {
-
             LoadEntriesAsync();
         }
 
 
 
-        public void LoadEntriesAsync()
+        public async void LoadEntriesAsync()
         {
             var response = Barrel.Current.Get<LoginResponse>(key: "user");
+            if(response.User == null)
+            {
+                try
+                {
+                   User = response.User;
+                }
+                catch (Exception ex)
+                {
 
-            User = response.User;
+                    IsRefreshing = false;
+                    await NavService.NavigateTo<LandingViewModel>();
+                }
 
-            if (IsBusy || User == null)
+            }
+            else
+            {
+                User = response.User;
+            }
+            if (IsBusy)
             {
                 IsRefreshing = false;
                 return;
             }
+
+
+
               
             IsBusy = true;
 
