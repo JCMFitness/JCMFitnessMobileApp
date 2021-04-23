@@ -6,18 +6,15 @@ namespace JCMFitnessMobileApp.LocalDB
 {
     public interface ILocalDatabase
     {
-        Task AddUser(User localUser);
-        Task<User> GetUser(string id);
-
 
         Task CreateWorkout(Workout localWorkout);
         Task DeleteWorkout(Workout localWorkout);
         Task<List<Workout>> GetWorkouts();
         Task UpdateWorkout(Workout localWorkout);
-        Task AddWorkouts(IEnumerable<Workout> workouts);
+        Task AddWorkout(Workout workouts);
         Task<Workout> GetWorkoutByID(string workoutID);
 
-        Task<List<Workout>> GetWorkoutExercises(string workoutID);
+        Task<List<Exercise>> GetWorkoutExercises(string workoutID);
        
     }
 }

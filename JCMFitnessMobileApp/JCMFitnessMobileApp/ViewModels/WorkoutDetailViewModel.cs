@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text;
 using System.Threading.Tasks;
+using JCMFitnessMobileApp.LocalDB;
 using JCMFitnessMobileApp.Models;
 using JCMFitnessMobileApp.Services;
 using JCMFitnessMobileApp.ViewModels;
@@ -15,9 +16,9 @@ namespace JCMFitnessMobileApp.ViewModel
     {
         Workout _workout;
         Exercise _exercise;
+        private readonly INavService navService;
         readonly IFitnessService _fitnessService;
-
-
+        private readonly ILocalDatabase localDatabase;
         ObservableCollection<Exercise> _workoutExercises;
 
 
@@ -50,11 +51,13 @@ namespace JCMFitnessMobileApp.ViewModel
             }
         }
 
-        public WorkoutDetailViewModel(INavService navService, IFitnessService fitnessService)
+        public WorkoutDetailViewModel(INavService navService, IFitnessService fitnessService, ILocalDatabase localDatabase)
             : base(navService)
         {
             Barrel.ApplicationId = "CachingDataSample";
+            this.navService = navService;
             _fitnessService = fitnessService;
+            this.localDatabase = localDatabase;
         }
 
 
@@ -106,6 +109,8 @@ namespace JCMFitnessMobileApp.ViewModel
                 var workoutExercises = await _fitnessService.GetWorkoutExercises(workoutid);
 
                 ObservableCollection<Exercise> newWorkouts = new ObservableCollection<Exercise>(workoutExercises);
+
+                var LocalworkoutExercise = await localDatabase.GetWorkoutExercises(workoutid);
 
                 return new ObservableCollection<Exercise>(newWorkouts);
             }

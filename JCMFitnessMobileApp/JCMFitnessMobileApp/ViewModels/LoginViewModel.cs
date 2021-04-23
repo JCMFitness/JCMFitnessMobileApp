@@ -167,7 +167,6 @@ namespace JCMFitnessMobileApp.ViewModels
                     {
                         var loginResponse = await _fitnessService.LoginUser(userLogin);
 
-                        await _localDatabase.AddUser(loginResponse.User);
 
                         Barrel.Current.Add(key: "user", data: loginResponse, expireIn: TimeSpan.FromMinutes(10));
 

@@ -43,7 +43,7 @@ namespace JCMFitnessMobileApp.Services
             {
                 try
                 {
-                    await _fitnessService.PushSyncExercises(v.Exercises);
+                    await _fitnessService.PushSyncExercises(v.WorkoutExercises);
                 }
                 catch (Exception ex)
                 {

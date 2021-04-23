@@ -28,7 +28,6 @@ namespace JCMFitnessMobileApp.LocalDB
             if (!initialized)
             {
 
-                await Database.CreateTablesAsync(CreateFlags.None, typeof(Models.User)).ConfigureAwait(false);
                 await Database.CreateTablesAsync(CreateFlags.None, typeof(Models.Workout)).ConfigureAwait(false);
                 await Database.CreateTablesAsync(CreateFlags.None, typeof(Exercise)).ConfigureAwait(false);
 
@@ -36,61 +35,66 @@ namespace JCMFitnessMobileApp.LocalDB
             }
         }
 
-        public Task<List<Workout>> GetWorkouts()
+        public async Task<List<Workout>> GetWorkouts()
         {
-            return Database.Table<Workout>().ToListAsync();
+            return await Database.GetAllWithChildrenAsync<Workout>();
         }
 
-        public Task AddWorkouts(IEnumerable<Workout> workouts)
+        public async Task AddWorkout(Workout workout)
         {
-            return Database.InsertAllAsync(workouts);
+            
+            if (ExistingWorkout(workout.WorkoutID))
+            {
+                await Database.InsertWithChildrenAsync(workout);
+            }
+
         }
 
-        public Task CreateWorkout(Workout localWorkout)
+        public bool ExistingWorkout(string workoutID)
         {
-
-            return Database.InsertAsync(localWorkout);
+            var b = Database.FindAsync<Workout>(m => m.WorkoutID == workoutID) == null;
+            return b;
         }
 
-        public Task UpdateWorkout(Workout localWorkout)
+        public async Task CreateWorkout(Workout localWorkout)
         {
-            return Database.UpdateAsync(localWorkout);
+            if (ExistingWorkout(localWorkout.WorkoutID))
+            {
+                await Database.InsertAsync(localWorkout);
+            }
+            
         }
 
-        public Task DeleteWorkout(Workout localWorkout)
+        public async Task UpdateWorkout(Workout localWorkout)
         {
-            return Database.DeleteAsync(localWorkout);
+            await Database.UpdateAsync(localWorkout);
         }
 
-        public Task<Workout> GetWorkoutByID(string workoutID)
+        public async Task DeleteWorkout(Workout localWorkout)
         {
-            return Database.GetAsync<Workout>(u => u.WorkoutID == workoutID);
+            await Database.DeleteAsync(localWorkout);
+        }
+
+        public async Task<Workout> GetWorkoutByID(string workoutID)
+        {
+            return await Database.GetAsync<Workout>(u => u.WorkoutID == workoutID);
         }
 
         //////////////////////////////////////////////////////////
         ///
 
-        public Task<List<Workout>> GetWorkoutExercises(string workoutID)
+        public async Task<List<Exercise>> GetWorkoutExercises(string workoutID)
         {
-            return Database.GetAllWithChildrenAsync<Workout>(w => w.WorkoutID == workoutID);
+            return await Database.GetAllWithChildrenAsync<Exercise>(w => w.WorkoutID  == workoutID);
+        }
+
+        public async Task AddWorkoutExercises(IEnumerable<Exercise> exercise)
+        {
+
+            await Database.InsertAllWithChildrenAsync(exercise);
         }
 
         //**********************************************************************************
-
-        public Task AddUser(User localUser)
-        {
-
-            return Database.InsertAsync(localUser);
-        }
-
-        public Task<User> GetUser(string id)
-        {
-            return Database.GetAsync<User>(u => u.Id == id);
-        }
-        public Task UpdateUser(User user)
-        {
-            return Database.UpdateAsync(user);
-        }
 
 
     }

@@ -82,7 +82,6 @@ namespace JCMFitnessMobileApp.ViewModel
             _fitnessService = tripLogService;
             _localDatabase = localDatabase;
             _cache = cache;
-            UserWorkouts = new ObservableCollection<Workout>();
             Barrel.ApplicationId = "CachingDataSample";
         }
         public override void Init()
@@ -99,7 +98,6 @@ namespace JCMFitnessMobileApp.ViewModel
 
             User = response.User;
 
-            var DbUser = await _localDatabase.GetUser(User.Id);
 
             if (User == null)
             {
@@ -127,12 +125,12 @@ namespace JCMFitnessMobileApp.ViewModel
                 UserWorkouts = new ObservableCollection<Workout>(newWorkouts);
 
                 IsRefreshing = false;
-                   
 
-                /*foreach (var v in UserWorkouts)
+
+                foreach (var v in UserWorkouts)
                 {
-                    await _localDatabase.CreateWorkout(v);
-                }*/
+                    await _localDatabase.AddWorkout(v);
+                }
 
                 var workouts = await _localDatabase.GetWorkouts();
                
