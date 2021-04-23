@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text;
 using System.Threading.Tasks;
+using System.Timers;
 using JCMFitnessMobileApp.Models;
 using JCMFitnessMobileApp.Services;
 using JCMFitnessMobileApp.ViewModels;
 using MonkeyCache.FileStore;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace JCMFitnessMobileApp.ViewModel
@@ -16,7 +18,8 @@ namespace JCMFitnessMobileApp.ViewModel
         Workout _workout;
         Exercise _exercise;
         readonly IFitnessService _fitnessService;
-
+        private static Timer timer;
+        private static int timerCounter;
 
         ObservableCollection<Exercise> _workoutExercises;
 
@@ -122,15 +125,52 @@ namespace JCMFitnessMobileApp.ViewModel
                 return;
             IsBusy = true;
             var response = Barrel.Current.Get<LoginResponse>(key: "user");
+
+
             try
             {
-                await _fitnessService.DeleteUserWorkoutById(response.User.Id, Workout.WorkoutID);
-                await NavService.NavigateTo<MainViewModel>();
+                var answer = await App.Current.MainPage.DisplayAlert("Are You Sure?", "Are you sure you want to delete this workout?", "No", "Yes");
+                if (answer == false)
+                {
+                    await _fitnessService.DeleteUserWorkoutById(response.User.Id, Workout.WorkoutID);
+                    Vibration.Vibrate(50);
+                    await NavService.NavigateTo<MainViewModel>();
+                }
+                else
+                {
+                    FailedVibration();
+                    return;
+                }
+
+            }
+            catch
+            {
+                FailedVibration();
             }
             finally
             {
                 IsBusy = false;
             }
+
+        }
+        void FailedVibration()
+        {
+            timerCounter = 0;
+            timer = new Timer(500);
+            timer.Elapsed += OnTimedEvent;
+            timer.Enabled = true;
+        }
+        private static void OnTimedEvent(Object source, ElapsedEventArgs e)
+        {
+            if (timerCounter == 2)
+            {
+                timer.Stop();
+            }
+            else
+            {
+                Vibration.Vibrate(50);
+            }
+            timerCounter++;
 
         }
 
