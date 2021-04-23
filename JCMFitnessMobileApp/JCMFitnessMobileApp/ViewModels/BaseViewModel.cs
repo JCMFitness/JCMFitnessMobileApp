@@ -52,5 +52,7 @@ namespace JCMFitnessMobileApp.ViewModel
         public virtual void Init(TParameter parameter)
         {
         }
+
+
     }
 }

@@ -58,9 +58,17 @@ namespace JCMFitnessMobileApp.ViewModel
         {
             Barrel.ApplicationId = "CachingDataSample";
             _fitnessService = fitnessService;
+            Task.Run(async () =>  WorkoutExercises = await LoadExercises(_workout.WorkoutID));
         }
 
 
+        public async void RefreshExercisesOnAppearing()
+        {
+            if (_workout != null)
+            {
+                WorkoutExercises = await LoadExercises(_workout.WorkoutID);
+            }
+        }
 
         public override async void Init(Workout workout)
         {

@@ -47,7 +47,7 @@ namespace JCMFitnessMobileApp
         {
 
             bool IsSignedIn = Barrel.Current.Exists("user");
-
+            var navService = Kernel.Get<INavService>() as XamarinFormsNavService;
             var mainPage = IsSignedIn
              ? new NavigationPage(new MainPage())
              {
@@ -64,7 +64,7 @@ namespace JCMFitnessMobileApp
                 BindingContext = Kernel.Get<LandingViewModel>()
             };*/
 
-            var navService = Kernel.Get<INavService>() as XamarinFormsNavService;
+
             navService.XamarinFormsNav = mainPage.Navigation;
             MainPage = mainPage;
         }

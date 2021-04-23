@@ -89,6 +89,13 @@ namespace JCMFitnessMobileApp.ViewModel
         }
 
 
+        public void RefreshWorkoutsOnAppearing()
+        {
+            if (_userWorkouts != null)
+            {
+                LoadEntriesAsync();
+            }
+        }
 
         public async void LoadEntriesAsync()
         {
@@ -149,8 +156,8 @@ namespace JCMFitnessMobileApp.ViewModel
         {
             Barrel.Current.EmptyAll();
 
-            
             await NavService.NavigateTo<LandingViewModel>();
+            
 
         }
 

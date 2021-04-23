@@ -8,15 +8,19 @@ using Xamarin.Forms;
 
 namespace JCMFitnessMobileApp.ViewModels
 {
-    public class LandingViewModel:BaseViewModel
+    public class LandingViewModel : BaseViewModel
     {
 
         public LandingViewModel(INavService navService)
         : base(navService)
         {
-           
+            
         }
 
+        public override void Init()
+        {
+            NavService.ClearBackStack();
+        }
 
         public Command LoginCommand =>
           new Command(async () =>

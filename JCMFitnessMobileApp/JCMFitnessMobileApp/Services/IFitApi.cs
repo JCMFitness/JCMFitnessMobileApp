@@ -72,7 +72,7 @@ namespace JCMFitnessMobileApp.Services
         public Task DeleteWorkoutExerciseAsync(string workoutid, string exerciseid);
 
         //Exercise
-        [Put("/api/excercise")]
+        [Put("/api/exercise")]
         public Task EditExerciseAsync([Body] Exercise exercise);
         
         [Delete("/api/exercise?exerciseid={exerciseid}")]

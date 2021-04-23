@@ -86,7 +86,7 @@ namespace JCMFitnessMobileApp.ViewModel
                 
 
                 await _fitnessService.AddNewUserWorkout(response.User.Id, newWorkout);
-                await NavService.GoBack();
+                await NavService.NavigateTo<MainViewModel>();
             }
             finally
             {

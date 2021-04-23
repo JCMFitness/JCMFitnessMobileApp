@@ -27,6 +27,10 @@ namespace JCMFitnessMobileApp.Views
             InitializeComponent();
         }
 
-
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            ViewModel.RefreshExercisesOnAppearing();
+        }
     }
 }
