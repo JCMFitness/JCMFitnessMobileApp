@@ -18,6 +18,7 @@ namespace JCMFitnessMobileApp.Models
         public DateTimeOffset LastUpdated { get; set; }
         public bool IsDeleted { get; set; }
 
+        public List<ApiUserWorkout> UserWorkouts { get; set; }
         public List<ApiWorkoutExercises> WorkoutExercises { get; set; }
 
     }

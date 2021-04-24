@@ -19,7 +19,7 @@ namespace JCMFitnessMobileApp.Services
 
         Task<List<Workout>> GetUserWorkouts(string userId);
 
-        Task AddNewUserWorkout(string id, Workout workout);
+        Task AddNewUserWorkout(string id, ApiWorkout workout);
 
         Task DeleteUserWorkoutById(string userID, string workoutID);
 

@@ -75,7 +75,7 @@ namespace JCMFitnessMobileApp.ViewModel
             IsBusy = true;
             try
             {
-                var newWorkout = new Workout
+                var newWorkout = new ApiWorkout
                 {
                     WorkoutID = Guid.NewGuid().ToString(),
                     Name = Title,
@@ -90,7 +90,7 @@ namespace JCMFitnessMobileApp.ViewModel
                 
 
                 await _fitnessService.AddNewUserWorkout(response.User.Id, newWorkout);
-                await _localDatabase.CreateWorkout(newWorkout);
+                //await _localDatabase.CreateWorkout(newWorkout);
                 await NavService.GoBack();
             }
             finally

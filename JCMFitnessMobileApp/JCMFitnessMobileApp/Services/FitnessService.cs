@@ -97,7 +97,7 @@ namespace JCMFitnessMobileApp.Services
             }
         }
 
-        public async Task AddNewUserWorkout(string id, Workout workout)
+        public async Task AddNewUserWorkout(string id, ApiWorkout workout)
         {
             try
             {
