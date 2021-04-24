@@ -1,11 +1,41 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="JCMFitnessMobileApp.Views.LandingPage">
-    <ContentPage.Content>
-        <StackLayout Orientation="Vertical" VerticalOptions="Center" HorizontalOptions="Center">
-            <Button Text="Login" Command="{Binding LoginCommand}"></Button>
-            <Button Text="Sign up" Command="{Binding SignupCommand}"></Button>
+             x:Class="JCMFitnessMobileApp.Views.LandingPage"
+             xmlns:forms="clr-namespace:Lottie.Forms;assembly=Lottie.Forms"
+             NavigationPage.HasNavigationBar="False">
+
+    <AbsoluteLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+    <StackLayout Orientation="Vertical" HorizontalOptions="Center" VerticalOptions="Start">
+        <forms:AnimationView x:Name="animationView"
+                ImageAssetsFolder="Assets"
+                AnimationSource="AssetOrBundle"
+                Animation="Workout.json"
+                RepeatMode="Infinite"
+                RepeatCount="1"
+                VerticalOptions="Start"
+                HorizontalOptions="Center"/>
         </StackLayout>
-    </ContentPage.Content>
+        <StackLayout Orientation="Vertical" HorizontalOptions="Center" VerticalOptions="End">
+            <StackLayout Orientation="Vertical" HorizontalOptions="Center" VerticalOptions="End">
+                <Label FontSize="75" HorizontalOptions="Center" FontAttributes="Bold" TextColor="Black" HorizontalTextAlignment="Center">JCM FITNESS</Label>
+            </StackLayout>
+            <Button Text="Login" 
+                Command="{Binding LoginCommand}" 
+                VerticalOptions="End" 
+                HorizontalOptions="Center" 
+                Margin="8, 60, 0, 0"
+                BackgroundColor="Black"
+                TextColor="White"></Button>
+        </StackLayout>
+        <StackLayout Orientation="Vertical" HorizontalOptions="Center" VerticalOptions="End">
+        <Button Text="Sign up" 
+                Command="{Binding SignupCommand}" 
+                VerticalOptions="Center" 
+                HorizontalOptions="Center" 
+                Margin="165, 200, 0, 0"
+                BackgroundColor="Black"
+                TextColor="White"></Button>
+        </StackLayout>
+    </AbsoluteLayout>
 </ContentPage>

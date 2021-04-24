@@ -2,7 +2,8 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:converters="clr-namespace:JCMFitnessMobileApp.Converters;assembly=JCMFitnessMobileApp"
-             x:Class="JCMFitnessMobileApp.Views.SignupPage">
+             x:Class="JCMFitnessMobileApp.Views.SignupPage"
+            >
  
         
         <ContentPage.Resources>
@@ -51,7 +52,7 @@
                 <StackLayout HorizontalOptions="Center"
                      Margin="0,10">
                     <Button Text="Sign up"
-                    BackgroundColor="#09C"
+                    BackgroundColor="Black"
                     TextColor="#FFF"
                     Command="{Binding SignUpCommand}"
                     WidthRequest="150"/>
