@@ -75,7 +75,7 @@ namespace JCMFitnessMobileApp.ViewModel
             IsBusy = true;
             try
             {
-                var newWorkout = new ApiWorkout
+                var newWorkout = new Workout
                 {
                     WorkoutID = Guid.NewGuid().ToString(),
                     Name = Title,
