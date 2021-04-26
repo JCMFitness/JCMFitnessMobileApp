@@ -1,4 +1,5 @@
 ﻿using JCMFitnessMobileApp.Models;
+using JCMFitnessMobileApp.Models.LocalDB;
 using JCMFitnessMobileApp.Services;
 using JCMFitnessMobileApp.ViewModel;
 using System;
@@ -47,7 +48,19 @@ namespace JCMFitnessMobileApp.ViewModels
 
             try
             {
-                await _fitnessService.EditWorkout(Workout);
+                var ApiWorkout = new ApiWorkout
+                {
+                    WorkoutID = Workout.WorkoutID,
+                    Name = Workout.Name,
+                    Description = Workout.Description,
+                    Category = Workout.Category,
+                    IsPublic = Workout.IsPublic,
+                    LastUpdated = TimeZoneInfo.ConvertTimeToUtc(DateTime.Now, TimeZoneInfo.Local),
+                    IsDeleted = Workout.IsDeleted
+
+                };
+
+                await _fitnessService.EditWorkout(ApiWorkout);
 
                 NavService.RemoveLastTwoViews();
                 await NavService.NavigateTo<WorkoutDetailViewModel,Workout>(Workout);

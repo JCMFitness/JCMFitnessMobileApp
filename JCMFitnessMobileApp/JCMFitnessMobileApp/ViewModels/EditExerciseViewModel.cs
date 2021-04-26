@@ -47,7 +47,19 @@ namespace JCMFitnessMobileApp.ViewModels
 
             try
             {
-                await _fitnessService.EditExercise(Exercise);
+                var ApiExercise = new ApiExercise
+                {
+                    ExerciseID = Exercise.ExerciseID,
+                    Name = Exercise.Name,
+                    TimerValue = Exercise.TimerValue,
+                    Repititions = Exercise.Repititions,
+                    Sets = Exercise.Sets,
+                    IsPublic = Exercise.IsPublic,
+                    LastUpdated = TimeZoneInfo.ConvertTimeToUtc(DateTime.Now, TimeZoneInfo.Local),
+                    IsDeleted = Exercise.IsDeleted
+                };
+
+                await _fitnessService.EditExercise(ApiExercise);
 
                 NavService.RemoveLastTwoViews();
                 await NavService.NavigateTo<ExerciseDetailViewModel, Exercise>(Exercise);

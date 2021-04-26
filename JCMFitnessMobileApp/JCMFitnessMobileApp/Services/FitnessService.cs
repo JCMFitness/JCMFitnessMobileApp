@@ -18,7 +18,7 @@ namespace JCMFitnessMobileApp.Services
             this.fitApi = newsApi;
         }
 
-        public async Task EditExercise(Exercise exercise)
+        public async Task EditExercise(ApiExercise exercise)
         {
             try
             {
@@ -30,7 +30,7 @@ namespace JCMFitnessMobileApp.Services
                 throw;
             }
         }
-        public async Task EditWorkout(Workout workout)
+        public async Task EditWorkout(ApiWorkout workout)
         {
             try
             {

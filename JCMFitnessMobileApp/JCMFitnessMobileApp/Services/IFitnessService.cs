@@ -13,8 +13,8 @@ namespace JCMFitnessMobileApp.Services
         Task<LoginResponse> LoginUser(UserLogin userLogin);
         Task<User> GetUserById(string id);
 
-        Task EditWorkout(Workout workout);
-        Task EditExercise(Exercise exercise);
+        Task EditWorkout(ApiWorkout workout);
+        Task EditExercise(ApiExercise exercise);
         Task<SignUpResponse> SignUpUser(UserSignUp userSignUp);
 
         Task<List<Workout>> GetUserWorkouts(string userId);
