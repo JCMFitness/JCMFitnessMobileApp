@@ -43,22 +43,21 @@ namespace JCMFitnessMobileApp.LocalDB
         public async Task AddWorkout(Workout workout)
         {
             
-            if (ExistingWorkout(workout.WorkoutID))
+            if (ExistingWorkout(workout.WorkoutID) == null)
             {
                 await Database.InsertWithChildrenAsync(workout);
             }
 
         }
 
-        public bool ExistingWorkout(string workoutID)
+        public async Task<Workout> ExistingWorkout(string workoutID)
         {
-            var b = Database.FindAsync<Workout>(m => m.WorkoutID == workoutID) == null;
-            return b;
+            return await Database.FindAsync<Workout>(m => m.WorkoutID == workoutID);
         }
 
         public async Task CreateWorkout(Workout localWorkout)
         {
-            if (ExistingWorkout(localWorkout.WorkoutID))
+            if (ExistingWorkout(localWorkout.WorkoutID) == null)
             {
                 await Database.InsertAsync(localWorkout);
             }

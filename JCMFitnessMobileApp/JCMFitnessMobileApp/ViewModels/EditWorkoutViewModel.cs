@@ -1,5 +1,4 @@
 ﻿using JCMFitnessMobileApp.Models;
-using JCMFitnessMobileApp.Models.LocalDB;
 using JCMFitnessMobileApp.Services;
 using JCMFitnessMobileApp.ViewModel;
 using System;

@@ -8,6 +8,7 @@ using JCMFitnessMobileApp.Models;
 using JCMFitnessMobileApp.Services;
 using JCMFitnessMobileApp.ViewModels;
 using MonkeyCache.FileStore;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace JCMFitnessMobileApp.ViewModel
@@ -58,19 +59,20 @@ namespace JCMFitnessMobileApp.ViewModel
             this.navService = navService;
             _fitnessService = fitnessService;
             this.localDatabase = localDatabase;
+            //Task.Run(async () => WorkoutExercises = await LoadExercises(_workout.WorkoutID));
         }
 
-
+        public async void RefreshExercisesOnAppearing()
+        {
+            if (_workout != null)
+            {
+                WorkoutExercises = await LoadExercises(_workout.WorkoutID);
+            }
+        }
 
         public override async void Init(Workout workout)
         {
-            if(workout != null)
-            {
-                Barrel.Current.Add(key: "workout", data: workout, expireIn: TimeSpan.FromMinutes(5));
-                Workout = workout;
-                
-            }
-
+            Workout = workout;
             WorkoutExercises = await LoadExercises(workout.WorkoutID);
         }
 
@@ -106,13 +108,23 @@ namespace JCMFitnessMobileApp.ViewModel
 
             try
             {
-                var workoutExercises = await _fitnessService.GetWorkoutExercises(workoutid);
+                var current = Connectivity.NetworkAccess;
 
-                ObservableCollection<Exercise> newWorkouts = new ObservableCollection<Exercise>(workoutExercises);
+                if (current == NetworkAccess.Internet)
+                {
 
-                var LocalworkoutExercise = await localDatabase.GetWorkoutExercises(workoutid);
+                    var workoutExercises = await _fitnessService.GetWorkoutExercises(workoutid);
 
-                return new ObservableCollection<Exercise>(newWorkouts);
+                    ObservableCollection<Exercise> newWorkouts = new ObservableCollection<Exercise>(workoutExercises);
+                    return new ObservableCollection<Exercise>(newWorkouts);
+                }
+                else
+                {
+                    var LocalWorkoutExercises = await localDatabase.GetWorkoutExercises(workoutid);
+
+                    ObservableCollection<Exercise> newWorkouts = new ObservableCollection<Exercise>(LocalWorkoutExercises);
+                    return new ObservableCollection<Exercise>(newWorkouts);
+                }
             }
             catch(Exception ex)
             {
@@ -129,7 +141,16 @@ namespace JCMFitnessMobileApp.ViewModel
             var response = Barrel.Current.Get<LoginResponse>(key: "user");
             try
             {
-                await _fitnessService.DeleteUserWorkoutById(response.User.Id, Workout.WorkoutID);
+                var current = Connectivity.NetworkAccess;
+
+                if (current == NetworkAccess.Internet)
+                {
+                    await _fitnessService.DeleteUserWorkoutById(response.User.Id, Workout.WorkoutID);
+                }
+                else
+                {
+                    Workout.IsDeleted = true;
+                }
                 await NavService.NavigateTo<MainViewModel>();
             }
             finally

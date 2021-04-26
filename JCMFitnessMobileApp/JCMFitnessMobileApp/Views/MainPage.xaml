@@ -15,11 +15,7 @@
 
     <ContentPage.Content>
         <StackLayout>
-            
-            <StackLayout Orientation="Vertical" VerticalOptions="Center" HorizontalOptions="Center" IsVisible="{Binding IsBusy}">
-                <ActivityIndicator IsRunning="True" />
-                <Label Text="Please wait! Logging in" IsVisible="{Binding IsBusy}"/>
-            </StackLayout>
+          
 
             <RefreshView
            IsRefreshing="{Binding IsRefreshing}"

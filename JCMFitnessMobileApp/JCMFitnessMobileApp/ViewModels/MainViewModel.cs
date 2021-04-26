@@ -10,6 +10,7 @@ using Akavache;
 using MonkeyCache.FileStore;
 using JCMFitnessMobileApp.ViewModels;
 using JCMFitnessMobileApp.LocalDB;
+using Xamarin.Essentials;
 
 namespace JCMFitnessMobileApp.ViewModel
 {
@@ -83,14 +84,20 @@ namespace JCMFitnessMobileApp.ViewModel
             _localDatabase = localDatabase;
             _cache = cache;
             Barrel.ApplicationId = "CachingDataSample";
+            Task.Run(async () => await LoadEntriesAsync());
         }
-        public override void Init()
+        /*  public override void Init()
+          {
+              LoadEntriesAsync();
+          }*/
+
+        public void RefreshWorkoutsOnAppearing()
         {
-
-            LoadEntriesAsync();
+            if (_userWorkouts != null)
+            {
+                LoadEntriesAsync();
+            }
         }
-
-
 
         public async Task LoadEntriesAsync()
         {
@@ -106,7 +113,7 @@ namespace JCMFitnessMobileApp.ViewModel
 
                 response.User = User;
 
-                Barrel.Current.Add(key: "user", data: response, expireIn: TimeSpan.FromMinutes(10));
+                Barrel.Current.Add(key: "user", data: response, expireIn: TimeSpan.FromDays(1));
             }
 
             if (IsBusy || User == null)
@@ -119,21 +126,26 @@ namespace JCMFitnessMobileApp.ViewModel
 
             try
             {
-                
-                var newWorkouts = await _fitnessService.GetUserWorkouts(User.Id);
+                var current = Connectivity.NetworkAccess;
 
-                UserWorkouts = new ObservableCollection<Workout>(newWorkouts);
-
-                IsRefreshing = false;
-
-
-                foreach (var v in UserWorkouts)
+                if (current == NetworkAccess.Internet)
                 {
-                    await _localDatabase.AddWorkout(v);
+                    var ApiWorkouts = await _fitnessService.GetUserWorkouts(User.Id);
+                    UserWorkouts = new ObservableCollection<Workout>(ApiWorkouts);
+
+                    foreach (var v in UserWorkouts)
+                    {
+                        await _localDatabase.AddWorkout(v);
+                    }
+                }
+                else
+                {
+                    var LocalWorkouts = await _localDatabase.GetWorkouts();
+                    UserWorkouts = new ObservableCollection<Workout>(LocalWorkouts);
                 }
 
-                var workouts = await _localDatabase.GetWorkouts();
-               
+
+                IsRefreshing = false;
             }
             catch(Exception ex)
             {
@@ -148,7 +160,6 @@ namespace JCMFitnessMobileApp.ViewModel
         public async Task SignoutAsync()
         {
             Barrel.Current.EmptyAll();
-
             
             await NavService.NavigateTo<LandingViewModel>();
 
