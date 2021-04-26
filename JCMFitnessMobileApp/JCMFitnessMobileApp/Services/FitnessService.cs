@@ -84,7 +84,7 @@ namespace JCMFitnessMobileApp.Services
             }
         }
 
-        public async Task<List<Workout>> GetUserWorkouts(string id)
+        public async Task<List<ApiWorkout>> GetUserWorkouts(string id)
         {
             try
             {
