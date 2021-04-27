@@ -15,6 +15,9 @@ namespace JCMFitnessMobileApp.LocalDB
         Task<Workout> GetWorkoutByID(string workoutID);
 
         Task<List<Exercise>> GetWorkoutExercises(string workoutID);
-       
+        Task AddWorkoutExercises(string WorkoutID, List<Exercise> exercise);
+        Task AddWorkoutExercise(string WorkoutID, Exercise exercise);
+
+
     }
 }

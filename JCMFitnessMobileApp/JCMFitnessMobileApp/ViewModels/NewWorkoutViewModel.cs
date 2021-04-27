@@ -6,6 +6,7 @@ using JCMFitnessMobileApp.LocalDB;
 using JCMFitnessMobileApp.Models;
 using JCMFitnessMobileApp.Services;
 using MonkeyCache.FileStore;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace JCMFitnessMobileApp.ViewModel
@@ -87,10 +88,18 @@ namespace JCMFitnessMobileApp.ViewModel
 
                 var response = Barrel.Current.Get<LoginResponse>(key: "user");
 
-                
+                var current = Connectivity.NetworkAccess;
 
-                await _fitnessService.AddNewUserWorkout(response.User.Id, newWorkout);
-                //await _localDatabase.CreateWorkout(newWorkout);
+                if (current == NetworkAccess.Internet)
+                {
+                    await _fitnessService.AddNewUserWorkout(response.User.Id, newWorkout);
+                }
+                else
+                {
+                    await _localDatabase.AddWorkout(newWorkout);
+                }
+
+
                 await NavService.GoBack();
             }
             finally

@@ -42,22 +42,22 @@ namespace JCMFitnessMobileApp.LocalDB
 
         public async Task AddWorkout(Workout workout)
         {
-            
-            if (ExistingWorkout(workout.WorkoutID) == null)
+            var w = await Database.FindAsync<Workout>(m => m.WorkoutID == workout.WorkoutID);
+
+            if (w == null)
             {
-                await Database.InsertWithChildrenAsync(workout);
+                await Database.InsertAsync(workout);
             }
 
         }
 
-        public async Task<Workout> ExistingWorkout(string workoutID)
-        {
-            return await Database.FindAsync<Workout>(m => m.WorkoutID == workoutID);
-        }
+     
 
         public async Task CreateWorkout(Workout localWorkout)
         {
-            if (ExistingWorkout(localWorkout.WorkoutID) == null)
+            var w = await Database.FindAsync<Workout>(m => m.WorkoutID == localWorkout.WorkoutID);
+
+            if (w == null)
             {
                 await Database.InsertAsync(localWorkout);
             }
@@ -76,7 +76,7 @@ namespace JCMFitnessMobileApp.LocalDB
 
         public async Task<Workout> GetWorkoutByID(string workoutID)
         {
-            return await Database.GetAsync<Workout>(u => u.WorkoutID == workoutID);
+            return await Database.GetWithChildrenAsync<Workout>(workoutID);
         }
 
         //////////////////////////////////////////////////////////
@@ -87,14 +87,44 @@ namespace JCMFitnessMobileApp.LocalDB
             return await Database.GetAllWithChildrenAsync<Exercise>(w => w.WorkoutID  == workoutID);
         }
 
-        public async Task AddWorkoutExercises(IEnumerable<Exercise> exercise)
+        public async Task AddWorkoutExercises(string WorkoutID, List<Exercise> exercise)
         {
+            var workout = await GetWorkoutByID(WorkoutID);
 
-            await Database.InsertAllWithChildrenAsync(exercise);
+            foreach(var e in exercise)
+            {
+                await AddExercise(e);
+            }
+
+            workout.WorkoutExercises = exercise;
+
+
+            await Database.UpdateWithChildrenAsync(workout);
+        }
+
+        public async Task AddWorkoutExercise(string WorkoutID, Exercise exercise)
+        {
+            var workout = await GetWorkoutByID(WorkoutID);
+
+            await AddExercise(exercise);
+
+            workout.WorkoutExercises.Add(exercise);
+
+
+            await Database.UpdateWithChildrenAsync(workout);
         }
 
         //**********************************************************************************
 
+        public async Task AddExercise(Exercise exercise)
+        {
+            var w = await Database.FindAsync<Exercise>(m => m.ExerciseID == exercise.ExerciseID);
 
+            if (w == null)
+            {
+                await Database.InsertAsync(exercise);
+            }
+
+        }
     }
 }

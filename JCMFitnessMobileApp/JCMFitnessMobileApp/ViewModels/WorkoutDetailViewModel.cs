@@ -116,13 +116,20 @@ namespace JCMFitnessMobileApp.ViewModel
                     var workoutExercises = await _fitnessService.GetWorkoutExercises(workoutid);
 
                     ObservableCollection<Exercise> newWorkouts = new ObservableCollection<Exercise>(workoutExercises);
+
+
+                    await localDatabase.AddWorkoutExercises(workoutid, workoutExercises);
+
+                   /* var LocalWorkout = await localDatabase.GetWorkoutByID(workoutid);
+                    var LocalWorkoutExer = await localDatabase.GetWorkoutExercises(workoutid);*/
+
                     return new ObservableCollection<Exercise>(newWorkouts);
                 }
                 else
                 {
-                    var LocalWorkoutExercises = await localDatabase.GetWorkoutExercises(workoutid);
+                    var LocalWorkout = await localDatabase.GetWorkoutByID(workoutid);
 
-                    ObservableCollection<Exercise> newWorkouts = new ObservableCollection<Exercise>(LocalWorkoutExercises);
+                    ObservableCollection<Exercise> newWorkouts = new ObservableCollection<Exercise>(LocalWorkout.WorkoutExercises);
                     return new ObservableCollection<Exercise>(newWorkouts);
                 }
             }

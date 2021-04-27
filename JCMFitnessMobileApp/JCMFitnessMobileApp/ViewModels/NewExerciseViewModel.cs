@@ -1,25 +1,29 @@
-﻿using JCMFitnessMobileApp.Models;
+﻿using JCMFitnessMobileApp.LocalDB;
+using JCMFitnessMobileApp.Models;
 using JCMFitnessMobileApp.Services;
 using JCMFitnessMobileApp.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace JCMFitnessMobileApp.ViewModels
 {
     public class NewExerciseViewModel : BaseViewModel<Workout>
     {
-
+        private readonly INavService navService;
         readonly IFitnessService _fitnessService;
-
+        private readonly ILocalDatabase localDatabase;
         public Workout _workout;
 
-        public NewExerciseViewModel(INavService navService, IFitnessService fitness)
+        public NewExerciseViewModel(INavService navService, IFitnessService fitness, ILocalDatabase localDatabase)
             : base(navService)
         {
+            this.navService = navService;
             _fitnessService = fitness;
+            this.localDatabase = localDatabase;
         }
 
         public override void Init(Workout workout)
@@ -98,7 +102,18 @@ namespace JCMFitnessMobileApp.ViewModels
                     IsPublic = false
 
                 };
-                await _fitnessService.AddWorkoutExercise(_workout.WorkoutID, newExercise);
+
+                var current = Connectivity.NetworkAccess;
+
+                if (current == NetworkAccess.Internet)
+                {
+                    await _fitnessService.AddWorkoutExercise(_workout.WorkoutID, newExercise);
+                }
+                else
+                {
+                    await localDatabase.AddWorkoutExercise(_workout.WorkoutID, newExercise);
+                }
+                
 
                 //NavService.RemoveLastView();
                 NavService.RemoveLastTwoViews();
