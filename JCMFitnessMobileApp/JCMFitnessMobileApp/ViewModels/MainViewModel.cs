@@ -11,13 +11,12 @@ using MonkeyCache.FileStore;
 using JCMFitnessMobileApp.ViewModels;
 using JCMFitnessMobileApp.LocalDB;
 using Xamarin.Essentials;
-using System.Linq;
 
 namespace JCMFitnessMobileApp.ViewModel
 {
     public class MainViewModel : BaseViewModel<User>
     {
-        ObservableCollection<ApiWorkout> _userWorkouts;
+        ObservableCollection<Workout> _userWorkouts;
         User _user;
         private bool _isRefreshing;
 
@@ -37,7 +36,7 @@ namespace JCMFitnessMobileApp.ViewModel
             }
         }
 
-        public ObservableCollection<ApiWorkout> UserWorkouts
+        public ObservableCollection<Workout> UserWorkouts
         {
             get => _userWorkouts;
             set
@@ -132,30 +131,18 @@ namespace JCMFitnessMobileApp.ViewModel
                 if (current == NetworkAccess.Internet)
                 {
                     var ApiWorkouts = await _fitnessService.GetUserWorkouts(User.Id);
-                    UserWorkouts = new ObservableCollection<ApiWorkout>(ApiWorkouts);
+                    UserWorkouts = new ObservableCollection<Workout>(ApiWorkouts);
 
                     foreach (var v in UserWorkouts)
                     {
-                        var LocalWorkout = new Workout
-                        {
-                            WorkoutID = v.WorkoutID,
-                            Name = v.Name,
-                            Category = v.Category,
-                            Description = v.Description,
-                            IsPublic = v.IsPublic,
-                            LastUpdated = v.LastUpdated,
-                            WorkoutExercises = v.WorkoutExercises.Select(m => m.Exercise).ToList()
-
-                        };
-
-                        await _localDatabase.AddWorkout(LocalWorkout);
+                        await _localDatabase.AddWorkout(v);
                     }
                 }
-              /*  else
+                else
                 {
                     var LocalWorkouts = await _localDatabase.GetWorkouts();
-                    UserWorkouts = new ObservableCollection<ApiWorkout>(LocalWorkouts);
-                }*/
+                    UserWorkouts = new ObservableCollection<Workout>(LocalWorkouts);
+                }
 
 
                 IsRefreshing = false;

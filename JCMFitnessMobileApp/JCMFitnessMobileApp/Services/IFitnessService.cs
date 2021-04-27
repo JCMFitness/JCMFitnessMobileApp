@@ -17,7 +17,7 @@ namespace JCMFitnessMobileApp.Services
         Task EditExercise(ApiExercise exercise);
         Task<SignUpResponse> SignUpUser(UserSignUp userSignUp);
 
-        Task<List<ApiWorkout>> GetUserWorkouts(string userId);
+        Task<List<Workout>> GetUserWorkouts(string userId);
 
         Task AddNewUserWorkout(string id, Workout workout);
 

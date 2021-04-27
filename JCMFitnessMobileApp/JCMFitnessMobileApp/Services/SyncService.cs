@@ -90,7 +90,7 @@ namespace JCMFitnessMobileApp.Services
 
 
 
-            List<ApiWorkout> ApiWorkouts = new List<ApiWorkout>();
+            List<Workout> ApiWorkouts = new List<Workout>();
 
 
             try
