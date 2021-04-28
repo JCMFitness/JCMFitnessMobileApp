@@ -25,6 +25,9 @@ namespace JCMFitnessMobileApp.Views
         public WorkoutDetailPage()
         {
             InitializeComponent();
+            NavigationPage.SetHasBackButton(this, true);
+            ((NavigationPage)Application.Current.MainPage).BarBackgroundColor = Color.Black;
+            ((NavigationPage)Application.Current.MainPage).BarTextColor = Color.White;
         }
 
 

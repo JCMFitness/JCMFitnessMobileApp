@@ -15,6 +15,7 @@ namespace JCMFitnessMobileApp.Views
         public SignupPage()
         {
             InitializeComponent();
+            animationView.PlayAnimation();
             NavigationPage.SetHasBackButton(this, true);
             ((NavigationPage)Application.Current.MainPage).BarBackgroundColor = Color.Black;
             ((NavigationPage)Application.Current.MainPage).BarTextColor = Color.White;

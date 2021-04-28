@@ -23,7 +23,6 @@ namespace JCMFitnessMobileApp
         {
             InitializeComponent();
             Barrel.ApplicationId = "CachingDataSample";
-
             // Register core services
             Kernel = new StandardKernel(
                 new CoreModule(),

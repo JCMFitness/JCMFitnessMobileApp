@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using Lottie;
 
 namespace JCMFitnessMobileApp.Views
 {
@@ -17,6 +18,10 @@ namespace JCMFitnessMobileApp.Views
         public LoginPage()
         {
             InitializeComponent();
+            animationView.PlayAnimation();
+            NavigationPage.SetHasBackButton(this, true);
+            ((NavigationPage)Application.Current.MainPage).BarBackgroundColor = Color.Black;
+            ((NavigationPage)Application.Current.MainPage).BarTextColor = Color.White;
         }
 
 

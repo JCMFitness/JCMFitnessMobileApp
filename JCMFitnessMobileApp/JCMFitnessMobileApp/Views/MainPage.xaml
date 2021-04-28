@@ -4,7 +4,6 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     x:Class="JCMFitnessMobileApp.Views.MainPage"
     xmlns:vm="clr-namespace:JCMFitnessMobileApp.ViewModel"
-    NavigationPage.HasBackButton="False"
     Title="Workouts">
 
     <ContentPage.ToolbarItems >
@@ -37,7 +36,7 @@
                             LineBreakMode="NoWrap"
                             Style="{DynamicResource ListItemTextStyle}"
                             FontSize="20"
-                            TextColor="Blue"
+                            TextColor="Black"
                             FontAttributes="Bold, Italic"/>
 
                             <Label Text="{Binding Description}"

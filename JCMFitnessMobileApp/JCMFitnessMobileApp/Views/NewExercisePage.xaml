@@ -1,8 +1,9 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:converters="clr-namespace:JCMFitnessMobileApp.Converters;assembly=JCMFitnessMobileApp"
-             x:Class="JCMFitnessMobileApp.Views.NewExercisePage">
+             xmlns:converters="clr-namespace:JCMFitnessMobileApp.Converters;assembly=JCMFitnessMobileApp" xmlns:forms="clr-namespace:Lottie.Forms;assembly=Lottie.Forms"
+             x:Class="JCMFitnessMobileApp.Views.NewExercisePage"
+             Title="New Exercise">
 
     <ContentPage.Resources>
         <ResourceDictionary>
@@ -15,17 +16,27 @@
     </ContentPage.ToolbarItems>
 
     <ContentPage.Content>
-        <Grid>
-            <TableView Intent="Form" IsVisible="{Binding IsBusy, Converter={StaticResource ReverseBooleanConverter}}">
-                <TableView.Root>
-                    <TableSection>
-                        <EntryCell x:Name="Name" Label="Name" Text="{Binding Name}" />
-                        <EntryCell x:Name="TimerValue" Label="TimerValue" Text="{Binding TimerValue}" />
-                        <EntryCell Label="Repetitions" Text="{Binding Repetitions}" />
-                        <EntryCell Label="Sets" Text="{Binding Sets}" />
-                    </TableSection>
-                </TableView.Root>
-            </TableView>
+        <Grid RowDefinitions="Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto,*">
+            <forms:AnimationView x:Name="animationView"
+                    ImageAssetsFolder="Assets"
+                    AnimationSource="AssetOrBundle"
+                    Animation="exercisingman.json"
+                    RepeatMode="Infinite"
+                    RepeatCount="1"
+                    HorizontalOptions="Center"
+                    Grid.Row="0"
+                    Margin="0, 0, 0, 0"
+                    IsVisible="{Binding IsBusy, Converter={StaticResource ReverseBooleanConverter}}"/>
+            <Label Text="Name" VerticalOptions="Center" Margin="10, 0, 0, 0" Grid.Row="1" TextColor="Black" FontAttributes="Bold"/>
+            <Entry x:Name="Name" VerticalOptions="Center" Margin="10, 0, 25, 0" Text="{Binding Name}" IsVisible="{Binding IsBusy, Converter={StaticResource ReverseBooleanConverter}}" Grid.Row="2"/>
+            <Label Text="Timer" VerticalOptions="Center" Margin="10, 0, 0, 0" Grid.Row="3" TextColor="Black" FontAttributes="Bold"/>
+            <Entry x:Name="TimerValue" VerticalOptions="Center" Margin="10, 0, 25, 0" Text="{Binding TimerValue}" IsVisible="{Binding IsBusy, Converter={StaticResource ReverseBooleanConverter}}" Grid.Row="4"/>
+            <Label Text="Repetitions" VerticalOptions="Center" Margin="10, 0, 0, 0" Grid.Row="5" TextColor="Black" FontAttributes="Bold"/>
+            <Entry x:Name="Repetitions" VerticalOptions="Center" Margin="10, 0, 25, 0"  Text="{Binding Repetitions}" IsVisible="{Binding IsBusy, Converter={StaticResource ReverseBooleanConverter}}" Grid.Row="6"/>
+            <Label Text="Sets" Grid.Row="7" VerticalOptions="Center" Margin="10, 0, 0, 0" TextColor="Black" FontAttributes="Bold"/>
+            <Entry x:Name="Sets" VerticalOptions="Center" Margin="10, 0, 25, 0"  Text="{Binding Sets}" IsVisible="{Binding IsBusy, Converter={StaticResource ReverseBooleanConverter}}" Grid.Row="8"/>
+
+
 
             <StackLayout Orientation="Vertical" VerticalOptions="Center" HorizontalOptions="Center" IsVisible="{Binding IsBusy}">
                 <ActivityIndicator IsRunning="True" />

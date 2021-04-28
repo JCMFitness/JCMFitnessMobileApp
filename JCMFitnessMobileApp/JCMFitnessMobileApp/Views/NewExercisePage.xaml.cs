@@ -9,6 +9,7 @@ using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 using System.ComponentModel;
+using Lottie;
 
 namespace JCMFitnessMobileApp.Views
 {
@@ -21,28 +22,11 @@ namespace JCMFitnessMobileApp.Views
         public NewExercisePage()
         {
             InitializeComponent();
-           /* BindingContextChanged += Page_BindingContextChanged;
+            animationView.PlayAnimation();
+            NavigationPage.SetHasBackButton(this, true);
+            ((NavigationPage)Application.Current.MainPage).BarBackgroundColor = Color.Black;
+            ((NavigationPage)Application.Current.MainPage).BarTextColor = Color.White;
 
-
-            void Page_BindingContextChanged(object sender, EventArgs e)
-            {
-                ViewModel.ErrorsChanged += ViewModel_ErrorsChanged;
-            }
-            void ViewModel_ErrorsChanged(object sender,
-                DataErrorsChangedEventArgs e)
-            {
-                var propHasErrors = (ViewModel.GetErrors(e.PropertyName)
-                    as List<string>)?.Any() == true;
-                switch (e.PropertyName)
-                {
-                    case nameof(ViewModel.Name):
-                        title.LabelColor = propHasErrors
-                            ? Color.Red : Color.Black;
-                        break;
-                    default:
-                        break;
-                }
-            }*/
         }
     }
 }

@@ -15,7 +15,7 @@ namespace JCMFitnessMobileApp.Views
         public LandingPage()
         {
             InitializeComponent();
-            
+            animationView.PlayAnimation();
         }
     }
 }

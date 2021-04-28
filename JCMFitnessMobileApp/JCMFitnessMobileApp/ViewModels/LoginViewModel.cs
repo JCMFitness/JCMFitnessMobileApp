@@ -126,10 +126,10 @@ namespace JCMFitnessMobileApp.ViewModels
             }
         }
 
-        public override void Init()
+        /*public override void Init()
         {
             NavService.ClearBackStack();
-        }
+        }*/
 
 
 
