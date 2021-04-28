@@ -5,10 +5,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace JCMFitnessMobileApp.Services
 {
-    public class SyncService
+    public class SyncService : ISyncService
     {
         private readonly IFitnessService _fitnessService;
         private readonly ILocalDatabase _localDatabase;
@@ -23,7 +24,7 @@ namespace JCMFitnessMobileApp.Services
 
 
 
-        public async void PushSync()
+        public async Task PushSync()
         {
 
             var workouts = await _localDatabase.GetWorkouts();
@@ -66,7 +67,7 @@ namespace JCMFitnessMobileApp.Services
 
         }
 
-        public async void PullSync()
+        public async Task PullSync()
         {
             var LocalUser = Barrel.Current.Get<LoginResponse>(key: "user").User;
             var ApiUser = new User();
@@ -80,7 +81,7 @@ namespace JCMFitnessMobileApp.Services
                 Console.WriteLine(ex.Message);
             }
 
-            if(ApiUser.LastUpdated > LocalUser.LastUpdated)
+            if (ApiUser.LastUpdated > LocalUser.LastUpdated)
             {
                 var loginResponse = Barrel.Current.Get<LoginResponse>(key: "user");
                 loginResponse.User = ApiUser;
@@ -103,35 +104,35 @@ namespace JCMFitnessMobileApp.Services
             }
 
 
-            foreach(var w in ApiWorkouts)
+            foreach (var w in ApiWorkouts)
             {
                 var localWorkout = await _localDatabase.GetWorkoutByID(w.WorkoutID);
 
 
                 if (w.LastUpdated > localWorkout.LastUpdated)
                 {
-                    
+
                 }
             }
-           
+
 
 
 
 
         }
-/*
+        /*
 
-            // Pull sync is just getting all records that have changed since that date.
-            foreach (var row in _fitnessService.PullSync(_lastSync))
-                if (!_rows.Any(x => x.Id == row.Id)) // Does not exist, hence insert 
-                    InsertRow(new ClientTableSchema(row));
-                else if (row.Deleted.HasValue)
-                    DeleteRow(row.Id);
-                else
-                    UpdateRow(new ClientTableSchema(row));
+                    // Pull sync is just getting all records that have changed since that date.
+                    foreach (var row in _fitnessService.PullSync(_lastSync))
+                        if (!_rows.Any(x => x.Id == row.Id)) // Does not exist, hence insert 
+                            InsertRow(new ClientTableSchema(row));
+                        else if (row.Deleted.HasValue)
+                            DeleteRow(row.Id);
+                        else
+                            UpdateRow(new ClientTableSchema(row));
 
-            _lastSync = DateTimeOffset.Now;*/
-        
+                    _lastSync = DateTimeOffset.Now;*/
+
 
     }
 }

@@ -51,6 +51,8 @@ namespace JCMFitnessMobileApp.Modules
 
             var localDBService = new LocalDatabase();
 
+            var SyncService = new SyncService(tripLogService, localDBService);
+
             /*var fitApiService = new IFitApi();
 
             containerBuilder.RegisterInstance(refitInstance)
@@ -67,6 +69,10 @@ namespace JCMFitnessMobileApp.Modules
             Bind<ILocalDatabase>()
                .ToMethod(x => localDBService)
                .InSingletonScope();
+
+            Bind<ISyncService>()
+              .ToMethod(x => SyncService)
+              .InSingletonScope();
 
         }
     }

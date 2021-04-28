@@ -76,12 +76,14 @@ namespace JCMFitnessMobileApp.ViewModel
         public Command SignoutCommand => new Command(async () =>
                 await SignoutAsync());
 
+        public ISyncService SyncService { get; }
 
-        public MainViewModel(INavService navService, IFitnessService tripLogService, IBlobCache cache, ILocalDatabase localDatabase)
+        public MainViewModel(INavService navService, IFitnessService tripLogService, IBlobCache cache, ILocalDatabase localDatabase, ISyncService syncService)
             : base(navService)
         {
             _fitnessService = tripLogService;
             _localDatabase = localDatabase;
+            SyncService = syncService;
             _cache = cache;
             Barrel.ApplicationId = "CachingDataSample";
             Task.Run(async () => await LoadEntriesAsync());
@@ -130,6 +132,9 @@ namespace JCMFitnessMobileApp.ViewModel
 
                 if (current == NetworkAccess.Internet)
                 {
+
+                    await SyncService.PushSync();
+
                     var ApiWorkouts = await _fitnessService.GetUserWorkouts(User.Id);
                     UserWorkouts = new ObservableCollection<Workout>(ApiWorkouts);
 
