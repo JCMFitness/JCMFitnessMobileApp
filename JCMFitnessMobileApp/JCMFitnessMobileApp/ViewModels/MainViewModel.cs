@@ -145,7 +145,7 @@ namespace JCMFitnessMobileApp.ViewModel
                 }
                 else
                 {
-                    var LocalWorkouts = await _localDatabase.GetWorkouts();
+                    var LocalWorkouts = await _localDatabase.GetWorkoutsWithExercises();
                     UserWorkouts = new ObservableCollection<Workout>(LocalWorkouts);
                 }
 

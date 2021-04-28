@@ -37,6 +37,11 @@ namespace JCMFitnessMobileApp.LocalDB
 
         public async Task<List<Workout>> GetWorkouts()
         {
+            return await Database.Table<Workout>().ToListAsync();
+        }
+
+        public async Task<List<Workout>> GetWorkoutsWithExercises()
+        {
             return await Database.GetAllWithChildrenAsync<Workout>();
         }
 

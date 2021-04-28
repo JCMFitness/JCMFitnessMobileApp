@@ -31,20 +31,28 @@ namespace JCMFitnessMobileApp.Services
 
             try
             {
-                await _fitnessService.PushSyncWorkout(workouts);
+                if (workouts != null)
+                {
+                    await _fitnessService.PushSyncWorkout(workouts);
+                }
+
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
             }
 
-
+            workouts = await _localDatabase.GetWorkoutsWithExercises();
 
             foreach (var v in workouts)
             {
                 try
                 {
-                    await _fitnessService.PushSyncExercises(v.WorkoutExercises);
+                    if(v.WorkoutExercises != null)
+                    {
+                        await _fitnessService.PushSyncExercises(v.WorkoutExercises);
+                    }
+                    
                 }
                 catch (Exception ex)
                 {
