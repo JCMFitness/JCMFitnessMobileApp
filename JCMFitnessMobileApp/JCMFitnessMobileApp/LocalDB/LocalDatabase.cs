@@ -89,7 +89,7 @@ namespace JCMFitnessMobileApp.LocalDB
 
         public async Task<List<Exercise>> GetWorkoutExercises(string workoutID)
         {
-            return await Database.GetAllWithChildrenAsync<Exercise>(w => w.WorkoutID  == workoutID);
+            return await Database.Table<Exercise>().Where(w => w.WorkoutID  == workoutID).ToListAsync();
         }
 
         public async Task AddWorkoutExercises(string WorkoutID, List<Exercise> exercise)

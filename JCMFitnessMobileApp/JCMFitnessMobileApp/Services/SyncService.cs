@@ -26,40 +26,6 @@ namespace JCMFitnessMobileApp.Services
 
         public async Task PushSync()
         {
-
-            var workouts = await _localDatabase.GetWorkouts();
-
-            try
-            {
-                if (workouts != null)
-                {
-                    await _fitnessService.PushSyncWorkout(workouts);
-                }
-
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
-
-            workouts = await _localDatabase.GetWorkoutsWithExercises();
-
-            foreach (var v in workouts)
-            {
-                try
-                {
-                    if(v.WorkoutExercises != null)
-                    {
-                        await _fitnessService.PushSyncExercises(v.WorkoutExercises);
-                    }
-                    
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine(ex.Message);
-                }
-            }
-
             var user = Barrel.Current.Get<LoginResponse>(key: "user").User;
 
             try
@@ -70,6 +36,47 @@ namespace JCMFitnessMobileApp.Services
             {
                 Console.WriteLine(ex.Message);
             }
+
+
+
+            var workouts = await _localDatabase.GetWorkouts();
+
+            try
+            {
+                if (workouts != null)
+                {
+                    await _fitnessService.PushSyncWorkout(user.Id, workouts);
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+
+           
+
+            foreach (var v in workouts)
+            {
+                try
+                {
+                    var workoutExercises = await _localDatabase.GetWorkoutExercises(v.WorkoutID);
+
+                    if(workoutExercises != null)
+                    {
+                        await _fitnessService.PushSyncExercises(v.WorkoutID, workoutExercises);
+
+                    }
+                   
+                    
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
+            }
+
+         
 
 
 

@@ -50,8 +50,7 @@ namespace JCMFitnessMobileApp.Services
         [Delete("/api/workouts?workouts={id}")]
         public Task DeleteWorkoutAsync(string id);
 
-        [Post("/api/workouts/sync")]
-        public Task SyncWorkouts(List<Workout> workouts);
+       
 
 
         //UserWorkout
@@ -67,6 +66,9 @@ namespace JCMFitnessMobileApp.Services
         [Delete("/api/userworkouts?userid={userid}&workoutid={workoutid}")]
         public Task DeleteUserWorkoutAsync(string userid, string workoutid);
 
+        [Post("/api/userworkouts/sync?userid={id}")]
+        public Task SyncWorkouts(string id, List<Workout> workouts);
+
 
 
         //WorkoutExercise
@@ -80,6 +82,9 @@ namespace JCMFitnessMobileApp.Services
         [Delete("/api/workoutexercises?exerciseid={exerciseid}&workoutid={workoutid}")]
         public Task DeleteWorkoutExerciseAsync(string workoutid, string exerciseid);
 
+        [Post("/api/workoutexercises/sync?workoutid={id}")]
+        public Task SyncExercises(string id, List<Exercise> exercises);
+
         //Exercise
         [Put("/api/exercise")]
         public Task EditExerciseAsync([Body] ApiExercise exercise);
@@ -87,8 +92,7 @@ namespace JCMFitnessMobileApp.Services
         [Delete("/api/exercise?exerciseid={exerciseid}")]
         public Task DeleteExerciseAsync(string exerciseid);
 
-        [Post("/api/exercise/sync")]
-        public Task SyncExercises(List<Exercise> exercises);
+       
     }
 }
 

@@ -175,11 +175,11 @@ namespace JCMFitnessMobileApp.Services
             }
         }
 
-        public async Task PushSyncWorkout(List<Workout> workouts)
+        public async Task PushSyncWorkout(string UserId, List<Workout> workouts)
         {
             try
             {
-                await fitApi.SyncWorkouts(workouts);
+                await fitApi.SyncWorkouts(UserId, workouts);
             }
             catch (Exception ex)
             {
@@ -190,11 +190,11 @@ namespace JCMFitnessMobileApp.Services
             
         }
 
-        public async Task PushSyncExercises(List<Exercise> exercises)
+        public async Task PushSyncExercises(string WorkoutId, List<Exercise> exercises)
         {
             try
             {
-                await fitApi.SyncExercises(exercises);
+                await fitApi.SyncExercises(WorkoutId, exercises);
             }
             catch (Exception ex)
             {
