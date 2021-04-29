@@ -84,7 +84,6 @@ namespace JCMFitnessMobileApp.ViewModel
         }
         public override void Init()
         {
-
             LoadEntriesAsync();
         }
 

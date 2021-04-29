@@ -22,6 +22,7 @@ namespace JCMFitnessMobileApp
         public App(params INinjectModule[] platformModules)
         {
             InitializeComponent();
+            
             Barrel.ApplicationId = "CachingDataSample";
             // Register core services
             Kernel = new StandardKernel(
@@ -53,7 +54,6 @@ namespace JCMFitnessMobileApp
              {
                  BindingContext = Kernel.Get<LandingViewModel>()
              };
-
 
             /*var mainPage = new NavigationPage(new LandingPage())
             {

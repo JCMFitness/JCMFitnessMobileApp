@@ -14,7 +14,7 @@ namespace JCMFitnessMobileApp.ViewModels
         public LandingViewModel(INavService navService)
         : base(navService)
         {
-           
+
         }
 
 

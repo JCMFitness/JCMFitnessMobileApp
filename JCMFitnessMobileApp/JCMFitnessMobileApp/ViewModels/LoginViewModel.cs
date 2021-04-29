@@ -36,11 +36,7 @@ namespace JCMFitnessMobileApp.ViewModels
             : base(navService)
         {
             _fitnessService = fitService;
-
             Barrel.ApplicationId = "CachingDataSample";
-
-            
-
             SignInCommand = new DelegateCommand(SignIp, CanExecuteSignIn);
             ValidateLoginCommand = new DelegateCommand(ValidateLogin, () => UserName != null);
             ValidatePwdCommand = new DelegateCommand(ValidatePwd, () => UserName != null);

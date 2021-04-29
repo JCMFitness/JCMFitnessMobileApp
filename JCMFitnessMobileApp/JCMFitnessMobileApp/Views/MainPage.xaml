@@ -6,7 +6,7 @@
     xmlns:vm="clr-namespace:JCMFitnessMobileApp.ViewModel"
     Title="Workouts">
 
-    <ContentPage.ToolbarItems >
+    <ContentPage.ToolbarItems>
         <ToolbarItem Text="Signout" Command="{Binding SignoutCommand}" />
         <ToolbarItem Text="New" Command="{Binding NewCommand}" />
         <ToolbarItem Text="User Details" Command="{Binding UserDetailsCommand}" />

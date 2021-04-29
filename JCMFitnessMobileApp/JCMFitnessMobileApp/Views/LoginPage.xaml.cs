@@ -17,6 +17,7 @@ namespace JCMFitnessMobileApp.Views
        
         public LoginPage()
         {
+            
             InitializeComponent();
             animationView.PlayAnimation();
             NavigationPage.SetHasBackButton(this, true);

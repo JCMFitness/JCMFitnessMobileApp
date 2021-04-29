@@ -10,7 +10,7 @@
         </ResourceDictionary>
     </ContentPage.Resources>
 
-    <Grid RowDefinitions="Auto, Auto, Auto, Auto, *">
+    <Grid RowDefinitions="Auto, Auto, Auto, Auto, Auto, Auto, *">
         <forms:AnimationView x:Name="animationView"
                     ImageAssetsFolder="Assets"
                     AnimationSource="AssetOrBundle"
@@ -19,8 +19,10 @@
                     RepeatCount="1"
                     HorizontalOptions="Center"
                     Grid.Row="0"
-                    Margin="0, 25, 0, -15"
+                    Margin="0, 25, 0, -25"
+                    Grid.Column="0"
                     IsVisible="{Binding IsBusy, Converter={StaticResource ReverseBooleanConverter}}"/>
+        
         <Entry Placeholder="Username"
                    FontSize="18"
                    Text="{Binding UserName}"

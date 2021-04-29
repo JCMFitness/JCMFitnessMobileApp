@@ -25,8 +25,9 @@
                     RepeatCount="1"
                     HorizontalOptions="Center"
                     Grid.Row="0"
-                    Margin="0, 0, 0, 0"
+                    Margin="0, 15, 0, 15"
                     IsVisible="{Binding IsBusy, Converter={StaticResource ReverseBooleanConverter}}"/>
+            
             <Label Text="Name" VerticalOptions="Center" Margin="10, 0, 0, 0" Grid.Row="1" TextColor="Black" FontAttributes="Bold"/>
             <Entry x:Name="Name" VerticalOptions="Center" Margin="10, 0, 25, 0" Text="{Binding Name}" IsVisible="{Binding IsBusy, Converter={StaticResource ReverseBooleanConverter}}" Grid.Row="2"/>
             <Label Text="Timer" VerticalOptions="Center" Margin="10, 0, 0, 0" Grid.Row="3" TextColor="Black" FontAttributes="Bold"/>

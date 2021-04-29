@@ -1,30 +1,36 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:forms="clr-namespace:Lottie.Forms;assembly=Lottie.Forms"
              x:Class="JCMFitnessMobileApp.Views.UserDetailPage"
              Title="User Details">
   <ContentPage.Content>
-        <StackLayout Spacing="20" Padding="15">
-            <Label Text="First Name:"  FontSize="Medium" FontAttributes="Bold" TextColor="Black" />
-            <Label Text="{Binding user.FirstName}" FontSize="Medium" TextColor="Black" />
+        <Grid RowDefinitions="Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto, *">
+            <Label Text="First Name:"  FontSize="Medium" Margin="0, 0, 0, 0" FontAttributes="Bold" TextColor="Black" Grid.Row="0"/>
+            <Label Text="{Binding user.FirstName}" FontSize="Medium" Margin="0, 0, 0, 0" TextColor="Black" Grid.Row="1"/>
 
-            <Label Text="Last Name:" FontSize="Medium" FontAttributes="Bold" TextColor="Black"  />
-            <Label Text="{Binding user.LastName}" FontSize="Medium" TextColor="Black" />
+            <Label Text="Last Name:" FontSize="Medium" Margin="0, 15, 0, 0" FontAttributes="Bold" TextColor="Black" Grid.Row="2" />
+            <Label Text="{Binding user.LastName}" FontSize="Medium" Margin="0, 0, 0, 0" TextColor="Black" Grid.Row="3"/>
 
+            <Label Text="User Name:" FontSize="Medium" Margin="0, 15, 0, 0" FontAttributes="Bold" TextColor="Black" Grid.Row="4"/>
+            <Label Text="{Binding user.UserName}" FontSize="Medium" Margin="0, 0, 0, 0" TextColor="Black" Grid.Row="5"/>
 
-            <Label Text="User Name:" FontSize="Medium" FontAttributes="Bold" TextColor="Black"  />
-            <Label Text="{Binding user.UserName}" FontSize="Medium" TextColor="Black" />
+            <Label Text="Email:" FontSize="Medium" Margin="0, 15, 0, 0" FontAttributes="Bold" TextColor="Black" Grid.Row="6" />
+            <Label Text="{Binding user.Email}" FontSize="Medium" Margin="0, 0, 0, 0" TextColor="Black" Grid.Row="7"/>
 
-            <Label Text="Email:" FontSize="Medium" FontAttributes="Bold" TextColor="Black"  />
-            <Label Text="{Binding user.Email}" FontSize="Medium" TextColor="Black" />
+            <Label Text="Join Date:" FontSize="Medium" Margin="0, 15, 0, 0" FontAttributes="Bold" TextColor="Black" Grid.Row="8" />
+            <Label Text="{Binding user.JoinedDate}" Margin="0, 5, 0, 0" FontSize="Medium" TextColor="Black" Grid.Row="9"/>
 
-            <Label Text="Join Date:" FontSize="Medium" FontAttributes="Bold" TextColor="Black"  />
-            <Label Text="{Binding user.JoinedDate}" FontSize="Medium" TextColor="Black" />
+            
+            <Button Text="Delete" Command="{Binding DeleteUserCommand}" Margin="0, 15, 120, 0" HorizontalOptions="Center" BackgroundColor="Black" TextColor="White" Grid.Row="10"></Button>
+            <Button Text="Edit" Command="{Binding EditUserCommand}" Margin="120, 15, 0, 0" HorizontalOptions="Center" BackgroundColor="Black" TextColor="White" Grid.Row="10" ></Button>
 
-            <StackLayout Orientation="Horizontal">
-                <Button Text="Delete" Command="{Binding DeleteUserCommand}" HorizontalOptions="FillAndExpand"></Button>
-                <Button Text="Edit" Command="{Binding EditUserCommand}" HorizontalOptions="FillAndExpand"></Button>
-            </StackLayout>
-        </StackLayout>
+            <forms:AnimationView x:Name="animationView"
+                ImageAssetsFolder="Assets"
+                AnimationSource="AssetOrBundle"
+                Animation="profile.json"
+                RepeatMode="Restart"
+                RepeatCount="0"
+                Grid.Row="11"/>
+        </Grid>
     </ContentPage.Content>
 </ContentPage>

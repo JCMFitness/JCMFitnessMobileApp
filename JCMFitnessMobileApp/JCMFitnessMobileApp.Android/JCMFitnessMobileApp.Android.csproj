@@ -85,6 +85,7 @@
     <AndroidAsset Include="Assets\armflex.json" />
     <AndroidAsset Include="Assets\runnershoe.json" />
     <AndroidAsset Include="Assets\exercisingman.json" />
+    <AndroidAsset Include="Assets\profile.json" />
     <None Include="Resources\AboutResources.txt" />
     <None Include="Assets\AboutAssets.txt" />
     <None Include="Properties\AndroidManifest.xml" />

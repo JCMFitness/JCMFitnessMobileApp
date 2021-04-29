@@ -26,10 +26,6 @@ namespace JCMFitnessMobileApp.Views
         {
             InitializeComponent();
             NavigationPage.SetHasBackButton(this, false);
-            
-           //((NavigationPage)Application.Current.MainPage).BarBackgroundColor = Color.Black;
-            //((NavigationPage)Application.Current.MainPage).BarTextColor = Color.White;
-            //MainPage.HasBackButton(this, false);
         }
 
         void New_Clicked(object sender, EventArgs e)
