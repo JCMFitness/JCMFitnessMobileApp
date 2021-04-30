@@ -10,6 +10,7 @@
             <local:EnumPicker ios:Picker.UpdateMode="WhenFinished"
                           EnumType="{x:Type local:Theme}"
                           Title="Select Theme"
+                          TitleColor="{DynamicResource PrimaryTextColor}"
                           TextColor="{DynamicResource PrimaryTextColor}"
                           SelectedIndexChanged="OnPickerSelectionChanged" />
             <Label x:Name="statusLabel"

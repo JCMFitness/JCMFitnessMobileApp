@@ -24,7 +24,8 @@
                     IsVisible="{Binding IsBusy, Converter={StaticResource ReverseBooleanConverter}}"/>
         
         <Entry Placeholder="Username"
-                   TextColor="{DynamicResource PrimaryTextColor}"
+                   TextColor="{DynamicResource SecondaryColor}"
+                   BackgroundColor="{DynamicResource PrimaryColor}"
                    FontSize="18"
                    Text="{Binding UserName}"
                    WidthRequest="200"
@@ -35,7 +36,8 @@
                    IsVisible="{Binding IsBusy, Converter={StaticResource ReverseBooleanConverter}}"/>
 
             <Entry Placeholder="Password"
-                   TextColor="{DynamicResource PrimaryTextColor}"
+                   TextColor="{DynamicResource SecondaryColor}"
+                   BackgroundColor="{DynamicResource PrimaryColor}"
                    IsPassword="True"
                    FontSize="18"
                    Text="{Binding Password}"
