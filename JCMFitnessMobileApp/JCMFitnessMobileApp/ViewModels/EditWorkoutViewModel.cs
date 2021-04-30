@@ -1,10 +1,12 @@
-﻿using JCMFitnessMobileApp.Models;
+﻿using JCMFitnessMobileApp.LocalDB;
+using JCMFitnessMobileApp.Models;
 using JCMFitnessMobileApp.Services;
 using JCMFitnessMobileApp.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace JCMFitnessMobileApp.ViewModels
@@ -12,11 +14,16 @@ namespace JCMFitnessMobileApp.ViewModels
     public class EditWorkoutViewModel : BaseViewModel<Workout>
     {
         Workout _workout;
+        private readonly INavService navService;
         readonly IFitnessService _fitnessService;
-        public EditWorkoutViewModel(INavService navService, IFitnessService fitnessService)
+        private readonly ILocalDatabase localDatabase;
+
+        public EditWorkoutViewModel(INavService navService, IFitnessService fitnessService, ILocalDatabase localDatabase)
            : base(navService)
         {
+            this.navService = navService;
             _fitnessService = fitnessService;
+            this.localDatabase = localDatabase;
         }
 
         public Workout Workout
@@ -47,19 +54,46 @@ namespace JCMFitnessMobileApp.ViewModels
 
             try
             {
-                var ApiWorkout = new ApiWorkout
+               
+
+                var current = Connectivity.NetworkAccess;
+
+                if (current == NetworkAccess.Internet)
                 {
-                    WorkoutID = Workout.WorkoutID,
-                    Name = Workout.Name,
-                    Description = Workout.Description,
-                    Category = Workout.Category,
-                    IsPublic = Workout.IsPublic,
-                    LastUpdated = TimeZoneInfo.ConvertTimeToUtc(DateTime.Now, TimeZoneInfo.Local),
-                    IsDeleted = Workout.IsDeleted
+                    var ApiWorkout = new ApiWorkout
+                    {
+                        WorkoutID = Workout.WorkoutID,
+                        Name = Workout.Name,
+                        Description = Workout.Description,
+                        Category = Workout.Category,
+                        IsPublic = Workout.IsPublic,
+                        LastUpdated = TimeZoneInfo.ConvertTimeToUtc(DateTime.Now, TimeZoneInfo.Local),
+                        IsDeleted = Workout.IsDeleted
 
-                };
+                    };
 
-                await _fitnessService.EditWorkout(ApiWorkout);
+                    await _fitnessService.EditWorkout(ApiWorkout);
+                }
+                else
+                {
+                    var LocalWorkout = new Workout
+                    {
+                        WorkoutID = Workout.WorkoutID,
+                        Name = Workout.Name,
+                        Description = Workout.Description,
+                        Category = Workout.Category,
+                        IsPublic = Workout.IsPublic,
+                        LastUpdated = TimeZoneInfo.ConvertTimeToUtc(DateTime.Now, TimeZoneInfo.Local),
+                        IsDeleted = Workout.IsDeleted,
+                        WorkoutExercises = Workout.WorkoutExercises
+
+                    };
+
+                    await localDatabase.UpdateWorkout(LocalWorkout);
+                }
+
+
+               
 
                 NavService.RemoveLastTwoViews();
                 await NavService.NavigateTo<WorkoutDetailViewModel,Workout>(Workout);

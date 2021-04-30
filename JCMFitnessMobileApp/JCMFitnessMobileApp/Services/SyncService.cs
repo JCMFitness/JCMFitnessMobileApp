@@ -78,6 +78,17 @@ namespace JCMFitnessMobileApp.Services
                     {
                         await _fitnessService.PushSyncExercises(v.WorkoutID, workoutExercises);
 
+                        var DeletedExercises = workoutExercises.FindAll(w => w.IsDeleted == true);
+
+                        if (DeletedExercises != null && DeletedExercises.Count != 0)
+                        {
+
+                            foreach (var e in DeletedExercises)
+                            {
+                                await _localDatabase.DeleteExercise(e);
+                            }
+                        }
+
                     }
                    
                     

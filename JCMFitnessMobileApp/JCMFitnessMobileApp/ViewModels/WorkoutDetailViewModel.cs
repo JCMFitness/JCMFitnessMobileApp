@@ -73,7 +73,13 @@ namespace JCMFitnessMobileApp.ViewModel
 
         public override async void Init(Workout workout)
         {
-            Workout = workout;
+            if (workout != null)
+            {
+                Barrel.Current.Add(key: "workout", data: workout, expireIn: TimeSpan.FromHours(1));
+                Workout = workout;
+
+            }
+
             WorkoutExercises = await LoadExercises(workout.WorkoutID);
         }
 
