@@ -11,6 +11,7 @@ using MonkeyCache.FileStore;
 using JCMFitnessMobileApp.ViewModels;
 using JCMFitnessMobileApp.LocalDB;
 using Xamarin.Essentials;
+using System.Linq;
 
 namespace JCMFitnessMobileApp.ViewModel
 {
@@ -146,7 +147,7 @@ namespace JCMFitnessMobileApp.ViewModel
                 else
                 {
                     var LocalWorkouts = await _localDatabase.GetWorkoutsWithExercises();
-                    UserWorkouts = new ObservableCollection<Workout>(LocalWorkouts);
+                    UserWorkouts = new ObservableCollection<Workout>(LocalWorkouts.Where(w => w.IsDeleted != true));
                 }
 
 

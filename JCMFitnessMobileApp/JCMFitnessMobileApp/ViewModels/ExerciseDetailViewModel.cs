@@ -1,4 +1,5 @@
-﻿using JCMFitnessMobileApp.Models;
+﻿using JCMFitnessMobileApp.LocalDB;
+using JCMFitnessMobileApp.Models;
 using JCMFitnessMobileApp.Services;
 using JCMFitnessMobileApp.ViewModel;
 using MonkeyCache.FileStore;
@@ -13,7 +14,9 @@ namespace JCMFitnessMobileApp.ViewModels
 {
     public class ExerciseDetailViewModel : BaseViewModel<Exercise>
     {
+        private readonly INavService navService;
         readonly IFitnessService _fitnessService;
+        private readonly ILocalDatabase localDatabase;
         Exercise _Exer;
         
 
@@ -27,11 +30,13 @@ namespace JCMFitnessMobileApp.ViewModels
                 OnPropertyChanged();
             }
         }
-        public ExerciseDetailViewModel(INavService navService, IFitnessService fitnessService)
+        public ExerciseDetailViewModel(INavService navService, IFitnessService fitnessService, ILocalDatabase localDatabase)
     : base(navService)
         {
             Barrel.ApplicationId = "CachingDataSample";
+            this.navService = navService;
             _fitnessService = fitnessService;
+            this.localDatabase = localDatabase;
         }
 
         public override void Init(Exercise exercise)
@@ -63,10 +68,12 @@ namespace JCMFitnessMobileApp.ViewModels
                 if (current == NetworkAccess.Internet)
                 {
                     await _fitnessService.DeleteWorkoutExercise(workout.WorkoutID, Exercise.ExerciseID);
+                    await localDatabase.DeleteExercise(Exercise);
                 }
                 else
                 {
                     Exercise.IsDeleted = true;
+                    await localDatabase.UpdateExercise(Exercise);
                 }
 
                

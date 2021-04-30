@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using JCMFitnessMobileApp.LocalDB;
@@ -120,16 +121,13 @@ namespace JCMFitnessMobileApp.ViewModel
 
                     await localDatabase.AddWorkoutExercises(workoutid, workoutExercises);
 
-                   /* var LocalWorkout = await localDatabase.GetWorkoutByID(workoutid);
-                    var LocalWorkoutExer = await localDatabase.GetWorkoutExercises(workoutid);*/
-
                     return new ObservableCollection<Exercise>(newWorkouts);
                 }
                 else
                 {
                     var LocalWorkout = await localDatabase.GetWorkoutByID(workoutid);
 
-                    ObservableCollection<Exercise> newWorkouts = new ObservableCollection<Exercise>(LocalWorkout.WorkoutExercises);
+                    ObservableCollection<Exercise> newWorkouts = new ObservableCollection<Exercise>(LocalWorkout.WorkoutExercises.Where(e => e.IsDeleted != true));
                     return new ObservableCollection<Exercise>(newWorkouts);
                 }
             }
@@ -153,12 +151,16 @@ namespace JCMFitnessMobileApp.ViewModel
                 if (current == NetworkAccess.Internet)
                 {
                     await _fitnessService.DeleteUserWorkoutById(response.User.Id, Workout.WorkoutID);
+                    await localDatabase.DeleteWorkout(Workout);
                 }
                 else
                 {
                     Workout.IsDeleted = true;
+
+                    await localDatabase.UpdateWorkout(Workout);
+
                 }
-                await NavService.NavigateTo<MainViewModel>();
+                    await NavService.NavigateTo<MainViewModel>();
             }
             finally
             {

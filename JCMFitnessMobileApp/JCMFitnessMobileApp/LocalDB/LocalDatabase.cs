@@ -37,7 +37,7 @@ namespace JCMFitnessMobileApp.LocalDB
 
         public async Task<List<Workout>> GetWorkouts()
         {
-            return await Database.Table<Workout>().Where(m => m.IsDeleted != true).ToListAsync();
+            return await Database.Table<Workout>().ToListAsync();
         }
 
         public async Task<List<Workout>> GetWorkoutsWithExercises()
@@ -130,6 +130,16 @@ namespace JCMFitnessMobileApp.LocalDB
                 await Database.InsertAsync(exercise);
             }
 
+        }
+
+        public async Task UpdateExercise(Exercise localExercise)
+        {
+            await Database.UpdateAsync(localExercise);
+        }
+
+        public async Task DeleteExercise(Exercise localExercise)
+        {
+            await Database.DeleteAsync(localExercise);
         }
     }
 }

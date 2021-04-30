@@ -30,6 +30,7 @@ namespace JCMFitnessMobileApp.Services
 
             try
             {
+
                 await _fitnessService.PushSyncUser(user);
             }
             catch (Exception ex)
@@ -43,11 +44,22 @@ namespace JCMFitnessMobileApp.Services
 
             try
             {
-                if (workouts != null)
+                if (workouts != null && workouts.Count != 0)
                 {
                     await _fitnessService.PushSyncWorkout(user.Id, workouts);
-                }
 
+                    var DeletedWorkouts = workouts.FindAll(w => w.IsDeleted == true);
+                    
+                    if(DeletedWorkouts != null && DeletedWorkouts.Count != 0)
+                    {
+
+                        foreach (var w in DeletedWorkouts)
+                        {
+                            await _localDatabase.DeleteWorkout(w);
+                        }
+                    }
+                    
+                }
             }
             catch (Exception ex)
             {
@@ -62,7 +74,7 @@ namespace JCMFitnessMobileApp.Services
                 {
                     var workoutExercises = await _localDatabase.GetWorkoutExercises(v.WorkoutID);
 
-                    if(workoutExercises != null)
+                    if(workoutExercises != null && workoutExercises.Count != 0)
                     {
                         await _fitnessService.PushSyncExercises(v.WorkoutID, workoutExercises);
 
@@ -75,10 +87,6 @@ namespace JCMFitnessMobileApp.Services
                     Console.WriteLine(ex.Message);
                 }
             }
-
-         
-
-
 
         }
 
