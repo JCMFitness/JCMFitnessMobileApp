@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace JCMFitnessMobileApp.ViewModels
@@ -57,7 +58,18 @@ namespace JCMFitnessMobileApp.ViewModels
             {
                 var workout = Barrel.Current.Get<Workout>(key: "workout");
 
-                await _fitnessService.DeleteWorkoutExercise(workout.WorkoutID, Exercise.ExerciseID);
+                var current = Connectivity.NetworkAccess;
+
+                if (current == NetworkAccess.Internet)
+                {
+                    await _fitnessService.DeleteWorkoutExercise(workout.WorkoutID, Exercise.ExerciseID);
+                }
+                else
+                {
+                    Exercise.IsDeleted = true;
+                }
+
+               
 
                 NavService.RemoveLastTwoViews();
                 await NavService.NavigateTo<WorkoutDetailViewModel, Workout>(workout);

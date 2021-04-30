@@ -82,7 +82,9 @@ namespace JCMFitnessMobileApp.ViewModel
                     Name = Title,
                     Description = Description,
                     Category = Category,
-                    IsPublic = false
+                    IsPublic = false,
+                    LastUpdated = TimeZoneInfo.ConvertTimeToUtc(DateTime.Now, TimeZoneInfo.Local),
+                    IsDeleted = false
 
                 };
 

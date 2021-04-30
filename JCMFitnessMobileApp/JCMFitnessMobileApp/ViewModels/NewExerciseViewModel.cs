@@ -99,7 +99,9 @@ namespace JCMFitnessMobileApp.ViewModels
                     TimerValue = TimerValue,
                     Repititions = Repetitions,
                     Sets = Sets,
-                    IsPublic = false
+                    IsPublic = false,
+                    LastUpdated = TimeZoneInfo.ConvertTimeToUtc(DateTime.Now, TimeZoneInfo.Local),
+                    IsDeleted = false
 
                 };
 
