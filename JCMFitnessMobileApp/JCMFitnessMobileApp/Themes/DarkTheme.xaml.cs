@@ -7,16 +7,14 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace JCMFitnessMobileApp.Views
+namespace JCMFitnessMobileApp.Themes
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class SignupPage : ContentPage
+    public partial class DarkTheme : ResourceDictionary
     {
-        public SignupPage()
+        public DarkTheme()
         {
             InitializeComponent();
-            animationView.PlayAnimation();
-            NavigationPage.SetHasBackButton(this, true);
         }
     }
 }

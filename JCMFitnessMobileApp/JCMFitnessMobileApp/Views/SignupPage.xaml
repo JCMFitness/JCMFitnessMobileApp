@@ -15,7 +15,7 @@
 
 
 
-        <Grid RowDefinitions="Auto, Auto, Auto, Auto, Auto, *">
+        <Grid RowDefinitions="Auto, Auto, Auto, Auto, Auto, *" BackgroundColor="{DynamicResource PageBackgroundColor}">
 
         <forms:AnimationView x:Name="animationView"
                 ImageAssetsFolder="Assets"
@@ -61,8 +61,8 @@
                 
             
             <Button Text="Sign up"
-                   BackgroundColor="Black"
-                   TextColor="#FFF"
+                   BackgroundColor="{DynamicResource PrimaryColor}"
+                   TextColor="{DynamicResource SecondaryColor}"
                    Command="{Binding SignUpCommand}"
                    WidthRequest="150"
                    IsVisible="{Binding IsBusy, Converter={StaticResource ReverseBooleanConverter}}"

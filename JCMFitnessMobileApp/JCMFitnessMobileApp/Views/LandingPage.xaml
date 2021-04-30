@@ -5,7 +5,7 @@
              xmlns:forms="clr-namespace:Lottie.Forms;assembly=Lottie.Forms"
              NavigationPage.HasNavigationBar="False">
 
-    <Grid RowDefinitions="Auto, Auto, Auto, *">
+    <Grid RowDefinitions="Auto, Auto, Auto, *"  BackgroundColor="{DynamicResource PageBackgroundColor}">
         <forms:AnimationView x:Name="animationView"
                 ImageAssetsFolder="Assets"
                 AnimationSource="AssetOrBundle"
@@ -15,20 +15,20 @@
                 Grid.Row="3"/>
 
 
-        <Label FontSize="75" HorizontalOptions="Center" FontAttributes="Bold" TextColor="Black" HorizontalTextAlignment="Center">JCM FITNESS</Label>
+        <Label FontSize="75" HorizontalOptions="Center" FontAttributes="Bold" TextColor="{DynamicResource PrimaryTextColor}" HorizontalTextAlignment="Center">JCM FITNESS</Label>
         <Button Text="Login" 
                 Command="{Binding LoginCommand}" 
                 VerticalOptions="End" 
                 HorizontalOptions="Center" 
-                BackgroundColor="Black"
-                TextColor="White"
+                BackgroundColor="{DynamicResource PrimaryColor}"
+                TextColor="{DynamicResource SecondaryColor}"
                 Grid.Row="1"></Button>
         <Button Text="Sign up" 
                 Command="{Binding SignupCommand}" 
                 VerticalOptions="Center" 
                 HorizontalOptions="Center" 
-                BackgroundColor="Black"
-                TextColor="White"
+                BackgroundColor="{DynamicResource PrimaryColor}"
+                TextColor="{DynamicResource SecondaryColor}"
                 Grid.Row="2"></Button>
     </Grid>
 </ContentPage>

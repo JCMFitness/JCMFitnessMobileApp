@@ -13,7 +13,7 @@
     </ContentPage.ToolbarItems>
 
     <ContentPage.Content>
-        <StackLayout>
+        <StackLayout BackgroundColor="{DynamicResource PageBackgroundColor}">
             
             <StackLayout Orientation="Vertical" VerticalOptions="Center" HorizontalOptions="Center" IsVisible="{Binding IsBusy}">
                 <ActivityIndicator IsRunning="True" />
@@ -36,20 +36,20 @@
                             LineBreakMode="NoWrap"
                             Style="{DynamicResource ListItemTextStyle}"
                             FontSize="20"
-                            TextColor="Black"
+                            TextColor="{DynamicResource PrimaryTextColor}"
                             FontAttributes="Bold, Italic"/>
 
                             <Label Text="{Binding Description}"
                             LineBreakMode="NoWrap"
                             Style="{DynamicResource ListItemDetailTextStyle}"
                             FontSize="13"
-                               TextColor="Black" />
+                            TextColor="{DynamicResource PrimaryTextColor}" />
 
                             <Label Text="{Binding Category}"
                             LineBreakMode="NoWrap"
                             Style="{DynamicResource ListItemDetailTextStyle}"
                             FontSize="10"
-                               TextColor="Orange" />
+                            TextColor="{DynamicResource SecondaryTextColor}" />
 
 
                             <StackLayout.GestureRecognizers>

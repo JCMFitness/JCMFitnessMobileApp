@@ -1,22 +1,23 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="JCMFitnessMobileApp.Views.EditUser">
+             x:Class="JCMFitnessMobileApp.Views.EditUser"
+             Title="Edit User">
     <ContentPage.Content>
-        <StackLayout Spacing="20" Padding="15">
-            <Label Text="First Name:"  FontSize="Small" TextColor="Black" />
-            <Entry Text="{Binding User.FirstName}" FontSize="Medium" TextColor="Red" />
+        <StackLayout Spacing="20" Padding="15" BackgroundColor="{DynamicResource PageBackgroundColor}">
+            <Label Text="First Name:"  FontSize="Small" TextColor="{DynamicResource PrimaryTextColor}" />
+            <Entry Text="{Binding User.FirstName}" FontSize="Medium" TextColor="{DynamicResource SecondaryTextColor}" />
 
-            <Label Text="Last Name:" FontSize="Small" TextColor="Black"  />
-            <Entry Text="{Binding User.LastName}" FontSize="Medium" TextColor="Red" />
+            <Label Text="Last Name:" FontSize="Small" TextColor="{DynamicResource PrimaryTextColor}"  />
+            <Entry Text="{Binding User.LastName}" FontSize="Medium" TextColor="{DynamicResource SecondaryTextColor}" />
 
-            <Label Text="User Name:" FontSize="Small" TextColor="Black"  />
-            <Entry Text="{Binding User.UserName}" FontSize="Medium" TextColor="Red" />
+            <Label Text="User Name:" FontSize="Small" TextColor="{DynamicResource PrimaryTextColor}"  />
+            <Entry Text="{Binding User.UserName}" FontSize="Medium" TextColor="{DynamicResource SecondaryTextColor}" />
 
-            <Label Text="Email:" FontSize="Small" TextColor="Black"  />
-            <Entry Text="{Binding User.Email}" FontSize="Medium" TextColor="Red" />
+            <Label Text="Email:" FontSize="Small" TextColor="{DynamicResource PrimaryTextColor}"  />
+            <Entry Text="{Binding User.Email}" FontSize="Medium" TextColor="{DynamicResource SecondaryTextColor}" />
 
-            <Button Text="Save" Command="{Binding SaveUserCommand}" HorizontalOptions="FillAndExpand"/>
+            <Button Text="Save" Command="{Binding SaveUserCommand}" HorizontalOptions="FillAndExpand" BackgroundColor="{DynamicResource PrimaryColor}" TextColor="{DynamicResource SecondaryColor}"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

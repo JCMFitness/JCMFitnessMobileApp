@@ -3,14 +3,14 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:converters="clr-namespace:JCMFitnessMobileApp.Converters;assembly=JCMFitnessMobileApp" xmlns:forms="clr-namespace:Lottie.Forms;assembly=Lottie.Forms"
              x:Class="JCMFitnessMobileApp.Views.LoginPage"
-             NavigationPage.IconColor="White">
+             >
     <ContentPage.Resources>
         <ResourceDictionary>
             <converters:ReverseBooleanConverter x:Key="ReverseBooleanConverter" />
         </ResourceDictionary>
     </ContentPage.Resources>
 
-    <Grid RowDefinitions="Auto, Auto, Auto, Auto, Auto, Auto, *">
+    <Grid RowDefinitions="Auto, Auto, Auto, Auto, Auto, Auto, *" BackgroundColor="{DynamicResource PageBackgroundColor}">
         <forms:AnimationView x:Name="animationView"
                     ImageAssetsFolder="Assets"
                     AnimationSource="AssetOrBundle"
@@ -24,6 +24,7 @@
                     IsVisible="{Binding IsBusy, Converter={StaticResource ReverseBooleanConverter}}"/>
         
         <Entry Placeholder="Username"
+                   TextColor="{DynamicResource PrimaryTextColor}"
                    FontSize="18"
                    Text="{Binding UserName}"
                    WidthRequest="200"
@@ -34,6 +35,7 @@
                    IsVisible="{Binding IsBusy, Converter={StaticResource ReverseBooleanConverter}}"/>
 
             <Entry Placeholder="Password"
+                   TextColor="{DynamicResource PrimaryTextColor}"
                    IsPassword="True"
                    FontSize="18"
                    Text="{Binding Password}"
@@ -44,8 +46,8 @@
                    IsVisible="{Binding IsBusy, Converter={StaticResource ReverseBooleanConverter}}"/>
 
             <Button Text="Sign in"
-                    BackgroundColor="Black"
-                    TextColor="#FFF"
+                    BackgroundColor="{DynamicResource PrimaryColor}"
+                    TextColor="{DynamicResource SecondaryColor}"
                     Command="{Binding LoginCommand}"
                     IsVisible="{Binding IsBusy, Converter={StaticResource ReverseBooleanConverter}}"
                     HorizontalOptions="Center"

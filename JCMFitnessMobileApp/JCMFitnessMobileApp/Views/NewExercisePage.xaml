@@ -16,7 +16,7 @@
     </ContentPage.ToolbarItems>
 
     <ContentPage.Content>
-        <Grid RowDefinitions="Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto,*">
+        <Grid RowDefinitions="Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto,*" BackgroundColor="{DynamicResource PageBackgroundColor}">
             <forms:AnimationView x:Name="animationView"
                     ImageAssetsFolder="Assets"
                     AnimationSource="AssetOrBundle"
@@ -28,13 +28,13 @@
                     Margin="0, 15, 0, 15"
                     IsVisible="{Binding IsBusy, Converter={StaticResource ReverseBooleanConverter}}"/>
             
-            <Label Text="Name" VerticalOptions="Center" Margin="10, 0, 0, 0" Grid.Row="1" TextColor="Black" FontAttributes="Bold"/>
+            <Label Text="Name" VerticalOptions="Center" Margin="10, 0, 0, 0" Grid.Row="1" TextColor="{DynamicResource PrimaryTextColor}" FontAttributes="Bold"/>
             <Entry x:Name="Name" VerticalOptions="Center" Margin="10, 0, 25, 0" Text="{Binding Name}" IsVisible="{Binding IsBusy, Converter={StaticResource ReverseBooleanConverter}}" Grid.Row="2"/>
-            <Label Text="Timer" VerticalOptions="Center" Margin="10, 0, 0, 0" Grid.Row="3" TextColor="Black" FontAttributes="Bold"/>
+            <Label Text="Timer" VerticalOptions="Center" Margin="10, 0, 0, 0" Grid.Row="3" TextColor="{DynamicResource PrimaryTextColor}" FontAttributes="Bold"/>
             <Entry x:Name="TimerValue" VerticalOptions="Center" Margin="10, 0, 25, 0" Text="{Binding TimerValue}" IsVisible="{Binding IsBusy, Converter={StaticResource ReverseBooleanConverter}}" Grid.Row="4"/>
-            <Label Text="Repetitions" VerticalOptions="Center" Margin="10, 0, 0, 0" Grid.Row="5" TextColor="Black" FontAttributes="Bold"/>
+            <Label Text="Repetitions" VerticalOptions="Center" Margin="10, 0, 0, 0" Grid.Row="5" TextColor="{DynamicResource PrimaryTextColor}" FontAttributes="Bold"/>
             <Entry x:Name="Repetitions" VerticalOptions="Center" Margin="10, 0, 25, 0"  Text="{Binding Repetitions}" IsVisible="{Binding IsBusy, Converter={StaticResource ReverseBooleanConverter}}" Grid.Row="6"/>
-            <Label Text="Sets" Grid.Row="7" VerticalOptions="Center" Margin="10, 0, 0, 0" TextColor="Black" FontAttributes="Bold"/>
+            <Label Text="Sets" Grid.Row="7" VerticalOptions="Center" Margin="10, 0, 0, 0" TextColor="{DynamicResource PrimaryTextColor}" FontAttributes="Bold"/>
             <Entry x:Name="Sets" VerticalOptions="Center" Margin="10, 0, 25, 0"  Text="{Binding Sets}" IsVisible="{Binding IsBusy, Converter={StaticResource ReverseBooleanConverter}}" Grid.Row="8"/>
 
 

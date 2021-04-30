@@ -7,53 +7,55 @@
 
 
     <ContentPage.Content>
-        <StackLayout Spacing="20" Padding="15">
-            <Label Text="Name:"  FontSize="Small" TextColor="Black" />
-            <Label Text="{Binding Workout.Name}" FontSize="Medium" TextColor="Black" />
+        <StackLayout Spacing="20" Padding="15" BackgroundColor="{DynamicResource PageBackgroundColor}">
+            <Label Text="Name:"  FontSize="Small" TextColor="{DynamicResource PrimaryTextColor}" />
+            <Label Text="{Binding Workout.Name}" FontSize="Medium" TextColor="{DynamicResource PrimaryTextColor}" />
 
-            <Label Text="Description:" FontSize="Small" TextColor="Black"  />
-            <Label Text="{Binding Workout.Description}" FontSize="Medium" TextColor="Black" />
+            <Label Text="Description:" FontSize="Small" TextColor="{DynamicResource PrimaryTextColor}"  />
+            <Label Text="{Binding Workout.Description}" FontSize="Medium" TextColor="{DynamicResource PrimaryTextColor}" />
 
-            <Label Text="Category:" FontSize="Small" TextColor="Black"  />
-            <Label Text="{Binding Workout.Category}" FontSize="Medium" TextColor="Black" />
+            <Label Text="Category:" FontSize="Small" TextColor="{DynamicResource PrimaryTextColor}"  />
+            <Label Text="{Binding Workout.Category}" FontSize="Medium" TextColor="{DynamicResource PrimaryTextColor}" />
 
 
             <CollectionView x:Name="exercises"
             ItemsSource="{Binding WorkoutExercises}"
                             SelectionMode="Single"
                             SelectionChangedCommand="{Binding ExerciseSelectedCommand}"
-                            SelectedItem="{Binding SelectedExercise}">
-                <CollectionView.ItemTemplate>
-                    <DataTemplate>
-                        <StackLayout Padding="10">
+                            SelectedItem="{Binding SelectedExercise}"
+                            BackgroundColor="{DynamicResource PageBackgroundColor}"
+                            >
+                <CollectionView.ItemTemplate >
+                    <DataTemplate >
+                        <StackLayout Padding="10" BackgroundColor="{DynamicResource PageBackgroundColor}">
 
                             <Label Text="{Binding Name}"
                             LineBreakMode="NoWrap"
                             Style="{DynamicResource ListItemTextStyle}"
                             FontSize="20"
-                            TextColor="Black"
+                            TextColor="{DynamicResource PrimaryTextColor}"
                             FontAttributes="Bold, Italic"/>
 
                             <Label Text="{Binding TimerValue}"
                             LineBreakMode="NoWrap"
                             Style="{DynamicResource ListItemDetailTextStyle}"
                             FontSize="15"
-                               TextColor="Black" />
+                            TextColor="{DynamicResource PrimaryTextColor}" />
 
                             <Label Text="{Binding Repititions}"
                             LineBreakMode="NoWrap"
                             Style="{DynamicResource ListItemDetailTextStyle}"
                             FontSize="15"
-                               TextColor="Orange" />
+                            TextColor="{DynamicResource PrimaryTextColor}" />
 
                         </StackLayout>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
-            <StackLayout Orientation="Horizontal">
-                <Button Text="Delete" Command="{Binding DeleteCommand}" HorizontalOptions="FillAndExpand"></Button>
-                <Button Text="Edit" Command="{Binding EditCommand}" HorizontalOptions="FillAndExpand"></Button>
-                <Button Text="Add exercise" Command="{Binding AddExerciseCommand}" HorizontalOptions="FillAndExpand"></Button>
+            <StackLayout Orientation="Horizontal" BackgroundColor="{DynamicResource PageBackgroundColor}">
+                <Button Text="Delete" Command="{Binding DeleteCommand}" HorizontalOptions="FillAndExpand" BackgroundColor="{DynamicResource PrimaryColor}" TextColor="{DynamicResource SecondaryColor}"></Button>
+                <Button Text="Edit" Command="{Binding EditCommand}" HorizontalOptions="FillAndExpand" BackgroundColor="{DynamicResource PrimaryColor}" TextColor="{DynamicResource SecondaryColor}"></Button>
+                <Button Text="Add exercise" Command="{Binding AddExerciseCommand}" HorizontalOptions="FillAndExpand" BackgroundColor="{DynamicResource PrimaryColor}" TextColor="{DynamicResource SecondaryColor}"></Button>
             </StackLayout>
         </StackLayout>
 
