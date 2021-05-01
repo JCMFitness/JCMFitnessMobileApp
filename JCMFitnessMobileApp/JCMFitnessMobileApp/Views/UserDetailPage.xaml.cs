@@ -8,6 +8,7 @@ using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using JCMFitnessMobileApp.Themes;
 using JCMFitnessMobileApp.Services;
+using Xamarin.Essentials;
 
 namespace JCMFitnessMobileApp.Views
 {
@@ -18,7 +19,6 @@ namespace JCMFitnessMobileApp.Views
         {
             InitializeComponent();
             NavigationPage.SetHasBackButton(this, true);
-
         }
 
         void OnPickerSelectionChanged(object sender, EventArgs e)
@@ -41,7 +41,8 @@ namespace JCMFitnessMobileApp.Views
                         mergedDictionaries.Add(new LightTheme());
                         break;
                 }
-                statusLabel.Text = $"{theme.ToString()} theme loaded. Close this page.";
+                statusLabel.Text = $"{theme.ToString()} theme loaded.";
+                Preferences.Set("theme", theme.ToString());
             }
 
          }

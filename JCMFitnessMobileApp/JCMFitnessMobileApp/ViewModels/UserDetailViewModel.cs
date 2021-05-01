@@ -61,12 +61,13 @@ namespace JCMFitnessMobileApp.ViewModels
 
         public async void DeleteUserAsync()
         {
-
-            await _fitnessService.DeleteUser(user.Id);
-
-
-            NavService.ClearBackStack();
-            await NavService.NavigateTo<LoginViewModel>();
+            var answer = await App.Current.MainPage.DisplayAlert("Are You Sure?", "Are you sure you want to delete this account?", "No", "Yes");
+            if(answer == false)
+            {
+                await _fitnessService.DeleteUser(user.Id);
+                NavService.ClearBackStack();
+                await NavService.NavigateTo<LoginViewModel>();
+            }
 
         }
 

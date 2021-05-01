@@ -7,14 +7,7 @@
              Title="User Details">
   <ContentPage.Content>
         <Grid RowDefinitions="Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto, *" BackgroundColor="{DynamicResource PageBackgroundColor}">
-            <local:EnumPicker ios:Picker.UpdateMode="WhenFinished"
-                          EnumType="{x:Type local:Theme}"
-                          Title="Select Theme"
-                          TitleColor="{DynamicResource PrimaryTextColor}"
-                          TextColor="{DynamicResource PrimaryTextColor}"
-                          SelectedIndexChanged="OnPickerSelectionChanged" />
-            <Label x:Name="statusLabel"
-               HorizontalOptions="Center" />
+
 
             <Label Text="First Name:"  FontSize="Medium" Margin="0, 0, 0, 0" FontAttributes="Bold" TextColor="{DynamicResource PrimaryTextColor}" Grid.Row="1"/>
             <Label Text="{Binding user.FirstName}" FontSize="Medium" Margin="0, 0, 0, 0" TextColor="{DynamicResource SecondaryTextColor}" Grid.Row="2"/>
@@ -30,7 +23,15 @@
 
             <Label Text="Join Date:" FontSize="Medium" Margin="0, 15, 0, 0" FontAttributes="Bold" TextColor="{DynamicResource PrimaryTextColor}" Grid.Row="9" />
             <Label Text="{Binding user.JoinedDate}" Margin="0, 5, 0, 0" FontSize="Medium" TextColor="{DynamicResource SecondaryTextColor}" Grid.Row="10"/>
-
+            <local:EnumPicker ios:Picker.UpdateMode="WhenFinished"
+                          EnumType="{x:Type local:Theme}"
+                          Title="Select Theme"
+                          TitleColor="{DynamicResource PrimaryTextColor}"
+                          TextColor="{DynamicResource PrimaryTextColor}"
+                          SelectedIndexChanged="OnPickerSelectionChanged"
+                          />
+            <Label x:Name="statusLabel"
+               HorizontalOptions="Center" TextColor="{DynamicResource SecondaryTextColor}"/>
 
             <Button Text="Delete" Command="{Binding DeleteUserCommand}" Margin="0, 15, 120, 0" HorizontalOptions="Center" BackgroundColor="{DynamicResource PrimaryColor}" TextColor="{DynamicResource SecondaryColor}" Grid.Row="11"></Button>
             <Button Text="Edit" Command="{Binding EditUserCommand}" Margin="120, 15, 0, 0" HorizontalOptions="Center" BackgroundColor="{DynamicResource PrimaryColor}" TextColor="{DynamicResource SecondaryColor}" Grid.Row="11" ></Button>

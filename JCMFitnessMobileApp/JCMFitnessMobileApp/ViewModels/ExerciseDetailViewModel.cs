@@ -57,7 +57,7 @@ namespace JCMFitnessMobileApp.ViewModels
             IsBusy = true;
 
 
-            var answer = await App.Current.MainPage.DisplayAlert("Are You Sure?", "Are you sure you want to delete this workout?", "No", "Yes");
+            var answer = await App.Current.MainPage.DisplayAlert("Are You Sure?", "Are you sure you want to delete this exercise?", "No", "Yes");
             if (answer == false)
             {
                 try

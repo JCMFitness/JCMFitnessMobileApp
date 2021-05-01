@@ -62,7 +62,7 @@
                     IsVisible="{Binding IsBusy}"
                     />
 
-            <Label Text="Please wait! Logging in" IsVisible="{Binding IsBusy}" VerticalOptions="Center" HorizontalOptions="Center" Grid.Row="0" Margin="0, 0, 0, 25"/>
+        <Label Text="Please wait! Logging in" TextColor="{DynamicResource SecondaryTextColor}" IsVisible="{Binding IsBusy}" VerticalOptions="Center" HorizontalOptions="Center" Grid.Row="0" Margin="0, 0, 0, 25"/>
         
     </Grid>
 </ContentPage>

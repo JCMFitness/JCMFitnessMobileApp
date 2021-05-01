@@ -173,7 +173,7 @@ namespace JCMFitnessMobileApp.ViewModels
                     {
                         FailedVibration();
                         await App.Current.MainPage.DisplayAlert("Login Fail", "Please enter correct username or password", "OK");
-                        await NavService.NavigateTo<LoginViewModel>();
+                        IsBusy = false;
                     }
 
                 }
