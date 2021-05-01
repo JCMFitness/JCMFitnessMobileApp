@@ -7,15 +7,14 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace JCMFitnessMobileApp.Views
+namespace JCMFitnessMobileApp.Themes
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class LandingPage : ContentPage
+    public partial class LightTheme : ResourceDictionary
     {
-        public LandingPage()
+        public LightTheme()
         {
             InitializeComponent();
-            animationView.PlayAnimation();
         }
     }
 }

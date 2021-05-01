@@ -3,23 +3,23 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="JCMFitnessMobileApp.Views.ExerciseEditPage">
     <ContentPage.Content>
-        <StackLayout Spacing="20" Padding="15">
-                <Label Text="Name:"  FontSize="Small" TextColor="Black" />
-                <Entry Text="{Binding Exercise.Name}" FontSize="Medium" TextColor="Red" />
+        <StackLayout Spacing="20" Padding="15" BackgroundColor="{DynamicResource PageBackgroundColor}">
+                <Label Text="Name:"  FontSize="Small" TextColor="{DynamicResource PrimaryTextColor}" />
+                <Entry Text="{Binding Exercise.Name}" FontSize="Medium" TextColor="{DynamicResource SecondaryTextColor}" />
 
-                <Label Text="Time:" FontSize="Small" TextColor="Black"  />
-                <Entry Text="{Binding Exercise.TimerValue}" FontSize="Medium" TextColor="Red" />
+                <Label Text="Time:" FontSize="Small" TextColor="{DynamicResource PrimaryTextColor}"  />
+            <Entry Text="{Binding Exercise.TimerValue}" FontSize="Medium" TextColor="{DynamicResource SecondaryTextColor}" />
 
-                <Label Text="Repitions:" FontSize="Small" TextColor="Black"  />
-                <Entry Text="{Binding Exercise.Repititions }" FontSize="Medium" TextColor="Red" />
+            <Label Text="Repitions:" FontSize="Small" TextColor="{DynamicResource PrimaryTextColor}"  />
+            <Entry Text="{Binding Exercise.Repititions }" FontSize="Medium" TextColor="{DynamicResource SecondaryTextColor}" />
 
-                <Label Text="Sets:" FontSize="Small" TextColor="Black"  />
-                <Entry Text="{Binding Exercise.Sets}" FontSize="Medium" TextColor="Red" />
+            <Label Text="Sets:" FontSize="Small" TextColor="{DynamicResource PrimaryTextColor}"  />
+            <Entry Text="{Binding Exercise.Sets}" FontSize="Medium" TextColor="{DynamicResource SecondaryTextColor}" />
 
-                <Label Text="Public:" FontSize="Small" TextColor="Black"  />
-                <Entry Text="{Binding Exercise.IsPublic}" FontSize="Medium" TextColor="Red" />
+            <Label Text="Public:" FontSize="Small" TextColor="{DynamicResource PrimaryTextColor}"  />
+            <Entry Text="{Binding Exercise.IsPublic}" FontSize="Medium" TextColor="{DynamicResource SecondaryTextColor}" />
 
-            <Button Text="Save" Command="{Binding SaveExerciseCommand}" HorizontalOptions="FillAndExpand"/>
+            <Button Text="Save" Command="{Binding SaveExerciseCommand}" TextColor="{DynamicResource SecondaryColor}" BackgroundColor="{DynamicResource PageBackgroundColor}" HorizontalOptions="FillAndExpand"/>
         </StackLayout>
 
     </ContentPage.Content>

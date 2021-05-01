@@ -3,18 +3,18 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="JCMFitnessMobileApp.Views.WorkoutEditPage">
     <ContentPage.Content>
-        <StackLayout Spacing="20" Padding="15">
+        <StackLayout Spacing="20" Padding="15" BackgroundColor="{DynamicResource PageBackgroundColor}">
 
-            <Label Text="Name:"  FontSize="Small" TextColor="Black" />
-            <Entry Text="{Binding Workout.Name}" FontSize="Medium" TextColor="Red" />
-            
-            <Label Text="Description:" FontSize="Small" TextColor="Black"  />
-            <Entry Text="{Binding Workout.Description}" FontSize="Medium" TextColor="Red" />
-            
-            <Label Text="Category:" FontSize="Small" TextColor="Black"  />
-            <Entry Text="{Binding Workout.Category}" FontSize="Medium" TextColor="Red" />
+            <Label Text="Name:"  FontSize="Small" TextColor="{DynamicResource PrimaryTextColor}" />
+            <Entry Text="{Binding Workout.Name}" FontSize="Medium" TextColor="{DynamicResource SecondaryTextColor}" />
 
-            <Button Text="Save" Command="{Binding SaveWorkoutCommand}" HorizontalOptions="FillAndExpand"/>
+            <Label Text="Description:" FontSize="Small" TextColor="{DynamicResource PrimaryTextColor}"  />
+            <Entry Text="{Binding Workout.Description}" FontSize="Medium" TextColor="{DynamicResource SecondaryTextColor}" />
+
+            <Label Text="Category:" FontSize="Small" TextColor="{DynamicResource PrimaryTextColor}"  />
+            <Entry Text="{Binding Workout.Category}" FontSize="Medium" TextColor="{DynamicResource SecondaryTextColor}" />
+
+            <Button Text="Save" Command="{Binding SaveWorkoutCommand}" TextColor="{DynamicResource SecondaryColor}" BackgroundColor="{DynamicResource PrimaryColor}" HorizontalOptions="FillAndExpand"/>
         </StackLayout>
 
     </ContentPage.Content>

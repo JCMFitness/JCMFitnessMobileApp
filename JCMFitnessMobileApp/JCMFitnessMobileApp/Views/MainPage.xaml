@@ -4,17 +4,16 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     x:Class="JCMFitnessMobileApp.Views.MainPage"
     xmlns:vm="clr-namespace:JCMFitnessMobileApp.ViewModel"
-    NavigationPage.HasBackButton="False"
     Title="Workouts">
 
-    <ContentPage.ToolbarItems >
+    <ContentPage.ToolbarItems>
         <ToolbarItem Text="Signout" Command="{Binding SignoutCommand}" />
         <ToolbarItem Text="New" Command="{Binding NewCommand}" />
         <ToolbarItem Text="User Details" Command="{Binding UserDetailsCommand}" />
     </ContentPage.ToolbarItems>
 
     <ContentPage.Content>
-        <StackLayout>
+        <StackLayout BackgroundColor="{DynamicResource PageBackgroundColor}">
             
             <StackLayout Orientation="Vertical" VerticalOptions="Center" HorizontalOptions="Center" IsVisible="{Binding IsBusy}">
                 <ActivityIndicator IsRunning="True" />
@@ -37,20 +36,20 @@
                             LineBreakMode="NoWrap"
                             Style="{DynamicResource ListItemTextStyle}"
                             FontSize="20"
-                            TextColor="Blue"
+                            TextColor="{DynamicResource PrimaryTextColor}"
                             FontAttributes="Bold, Italic"/>
 
                             <Label Text="{Binding Description}"
                             LineBreakMode="NoWrap"
                             Style="{DynamicResource ListItemDetailTextStyle}"
                             FontSize="13"
-                               TextColor="Black" />
+                            TextColor="{DynamicResource PrimaryTextColor}" />
 
                             <Label Text="{Binding Category}"
                             LineBreakMode="NoWrap"
                             Style="{DynamicResource ListItemDetailTextStyle}"
                             FontSize="10"
-                               TextColor="Orange" />
+                            TextColor="{DynamicResource SecondaryTextColor}" />
 
 
                             <StackLayout.GestureRecognizers>

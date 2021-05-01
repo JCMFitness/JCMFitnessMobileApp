@@ -10,12 +10,11 @@ using Xamarin.Forms.Xaml;
 namespace JCMFitnessMobileApp.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class LandingPage : ContentPage
+    public partial class EditUser : ContentPage
     {
-        public LandingPage()
+        public EditUser()
         {
             InitializeComponent();
-            animationView.PlayAnimation();
         }
     }
 }

@@ -1,29 +1,47 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="JCMFitnessMobileApp.Views.UserDetailPage">
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:forms="clr-namespace:Lottie.Forms;assembly=Lottie.Forms"
+             x:Class="JCMFitnessMobileApp.Views.UserDetailPage"
+             xmlns:local="clr-namespace:JCMFitnessMobileApp"
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+             Title="User Details">
   <ContentPage.Content>
-        <StackLayout Spacing="20" Padding="15">
-            <Label Text="First Name:"  FontSize="Medium" FontAttributes="Bold" TextColor="Black" />
-            <Label Text="{Binding user.FirstName}" FontSize="Medium" TextColor="Black" />
+        <Grid RowDefinitions="Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto, *" BackgroundColor="{DynamicResource PageBackgroundColor}">
+            <local:EnumPicker ios:Picker.UpdateMode="WhenFinished"
+                          EnumType="{x:Type local:Theme}"
+                          Title="Select Theme"
+                          TitleColor="{DynamicResource PrimaryTextColor}"
+                          TextColor="{DynamicResource PrimaryTextColor}"
+                          SelectedIndexChanged="OnPickerSelectionChanged" />
+            <Label x:Name="statusLabel"
+               HorizontalOptions="Center" />
 
-            <Label Text="Last Name:" FontSize="Medium" FontAttributes="Bold" TextColor="Black"  />
-            <Label Text="{Binding user.LastName}" FontSize="Medium" TextColor="Black" />
+            <Label Text="First Name:"  FontSize="Medium" Margin="0, 0, 0, 0" FontAttributes="Bold" TextColor="{DynamicResource PrimaryTextColor}" Grid.Row="1"/>
+            <Label Text="{Binding user.FirstName}" FontSize="Medium" Margin="0, 0, 0, 0" TextColor="{DynamicResource SecondaryTextColor}" Grid.Row="2"/>
+
+            <Label Text="Last Name:" FontSize="Medium" Margin="0, 15, 0, 0" FontAttributes="Bold" TextColor="{DynamicResource PrimaryTextColor}" Grid.Row="3" />
+            <Label Text="{Binding user.LastName}" FontSize="Medium" Margin="0, 0, 0, 0" TextColor="{DynamicResource SecondaryTextColor}" Grid.Row="4"/>
+
+            <Label Text="User Name:" FontSize="Medium" Margin="0, 15, 0, 0" FontAttributes="Bold" TextColor="{DynamicResource PrimaryTextColor}" Grid.Row="5"/>
+            <Label Text="{Binding user.UserName}" FontSize="Medium" Margin="0, 0, 0, 0" TextColor="{DynamicResource SecondaryTextColor}" Grid.Row="6"/>
+
+            <Label Text="Email:" FontSize="Medium" Margin="0, 15, 0, 0" FontAttributes="Bold" TextColor="{DynamicResource PrimaryTextColor}" Grid.Row="7" />
+            <Label Text="{Binding user.Email}" FontSize="Medium" Margin="0, 0, 0, 0" TextColor="{DynamicResource SecondaryTextColor}" Grid.Row="8"/>
+
+            <Label Text="Join Date:" FontSize="Medium" Margin="0, 15, 0, 0" FontAttributes="Bold" TextColor="{DynamicResource PrimaryTextColor}" Grid.Row="9" />
+            <Label Text="{Binding user.JoinedDate}" Margin="0, 5, 0, 0" FontSize="Medium" TextColor="{DynamicResource SecondaryTextColor}" Grid.Row="10"/>
 
 
-            <Label Text="User Name:" FontSize="Medium" FontAttributes="Bold" TextColor="Black"  />
-            <Label Text="{Binding user.UserName}" FontSize="Medium" TextColor="Black" />
+            <Button Text="Delete" Command="{Binding DeleteUserCommand}" Margin="0, 15, 120, 0" HorizontalOptions="Center" BackgroundColor="{DynamicResource PrimaryColor}" TextColor="{DynamicResource SecondaryColor}" Grid.Row="11"></Button>
+            <Button Text="Edit" Command="{Binding EditUserCommand}" Margin="120, 15, 0, 0" HorizontalOptions="Center" BackgroundColor="{DynamicResource PrimaryColor}" TextColor="{DynamicResource SecondaryColor}" Grid.Row="11" ></Button>
 
-            <Label Text="Email:" FontSize="Medium" FontAttributes="Bold" TextColor="Black"  />
-            <Label Text="{Binding user.Email}" FontSize="Medium" TextColor="Black" />
-
-            <Label Text="Join Date:" FontSize="Medium" FontAttributes="Bold" TextColor="Black"  />
-            <Label Text="{Binding user.JoinedDate}" FontSize="Medium" TextColor="Black" />
-
-            <StackLayout Orientation="Horizontal">
-                <Button Text="Delete" Command="{Binding DeleteUserCommand}" HorizontalOptions="FillAndExpand"></Button>
-                <Button Text="Edit" Command="{Binding EditUserCommand}" HorizontalOptions="FillAndExpand"></Button>
-            </StackLayout>
-        </StackLayout>
+            <forms:AnimationView x:Name="animationView"
+                ImageAssetsFolder="Assets"
+                AnimationSource="AssetOrBundle"
+                Animation="profile.json"
+                RepeatMode="Restart"
+                RepeatCount="0"
+                Grid.Row="12"/>
+        </Grid>
     </ContentPage.Content>
 </ContentPage>
