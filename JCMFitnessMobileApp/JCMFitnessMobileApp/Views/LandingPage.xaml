@@ -30,5 +30,13 @@
                 BackgroundColor="{DynamicResource PrimaryColor}"
                 TextColor="{DynamicResource SecondaryColor}"
                 Grid.Row="2"></Button>
+
+        <Button Text="Google"
+                Command="{Binding GoogleCommand}" 
+                VerticalOptions="Center" 
+                HorizontalOptions="Center" 
+                BackgroundColor="#d34836" 
+                TextColor="White"
+                Grid.Row="3"/>
     </Grid>
 </ContentPage>

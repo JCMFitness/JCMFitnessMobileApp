@@ -69,19 +69,19 @@ namespace JCMFitnessMobileApp.ViewModels
                 {
                     var workout = Barrel.Current.Get<Workout>(key: "workout");
 
-                var current = Connectivity.NetworkAccess;
+                    var current = Connectivity.NetworkAccess;
 
-                if (current == NetworkAccess.Internet)
-                {
-                    await _fitnessService.DeleteWorkoutExercise(workout.WorkoutID, Exercise.ExerciseID);
-                    await localDatabase.DeleteExercise(Exercise);
-                }
-                else
-                {
-                    Exercise.IsDeleted = true;
-                    Exercise.LastUpdated = TimeZoneInfo.ConvertTimeToUtc(DateTime.Now, TimeZoneInfo.Local);
-                    await localDatabase.UpdateExercise(Exercise);
-                }
+                    if (current == NetworkAccess.Internet)
+                    {
+                        await _fitnessService.DeleteWorkoutExercise(workout.WorkoutID, Exercise.ExerciseID);
+                        await localDatabase.DeleteExercise(Exercise);
+                    }
+                    else
+                    {
+                        Exercise.IsDeleted = true;
+                        Exercise.LastUpdated = TimeZoneInfo.ConvertTimeToUtc(DateTime.Now, TimeZoneInfo.Local);
+                        await localDatabase.UpdateExercise(Exercise);
+                    }
 
                
 
@@ -96,6 +96,7 @@ namespace JCMFitnessMobileApp.ViewModels
                 {
                     IsBusy = false;
                 }
+
             }
             else
             {

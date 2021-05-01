@@ -158,22 +158,35 @@ namespace JCMFitnessMobileApp.ViewModel
 
             try
             {
-                var current = Connectivity.NetworkAccess;
-
-                if (current == NetworkAccess.Internet)
+                var answer = await App.Current.MainPage.DisplayAlert("Are You Sure?", "Are you sure you want to delete this workout?", "No", "Yes");
+                if (answer == false)
                 {
-                    await _fitnessService.DeleteUserWorkoutById(response.User.Id, Workout.WorkoutID);
-                    await localDatabase.DeleteWorkout(Workout);
+
+                    var current = Connectivity.NetworkAccess;
+
+                    if (current == NetworkAccess.Internet)
+                    {
+                        await _fitnessService.DeleteUserWorkoutById(response.User.Id, Workout.WorkoutID);
+                        await localDatabase.DeleteWorkout(Workout);
+                    }
+                    else
+                    {
+                        Workout.IsDeleted = true;
+                        Workout.LastUpdated = TimeZoneInfo.ConvertTimeToUtc(DateTime.Now, TimeZoneInfo.Local);
+
+                        await localDatabase.UpdateWorkout(Workout);
+
+                    }
+                    
+                    Vibration.Vibrate(50);
+                    await NavService.NavigateTo<MainViewModel>();
                 }
                 else
                 {
-                    Workout.IsDeleted = true;
-                    Workout.LastUpdated = TimeZoneInfo.ConvertTimeToUtc(DateTime.Now, TimeZoneInfo.Local);
-
-                    await localDatabase.UpdateWorkout(Workout);
-
+                    FailedVibration();
+                    return;
                 }
-                    await NavService.NavigateTo<MainViewModel>();
+
             }
             finally
             {
