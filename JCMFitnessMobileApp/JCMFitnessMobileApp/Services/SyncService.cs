@@ -26,111 +26,209 @@ namespace JCMFitnessMobileApp.Services
 
         public async Task PushSync()
         {
-            var user = Barrel.Current.Get<LoginResponse>(key: "user").User;
 
-            try
+            var LastSyncTime = Barrel.Current.Get<DateTime>(key: "sync");
+
+            if (LastSyncTime != null)
             {
+                var user = Barrel.Current.Get<LoginResponse>(key: "user").User;
 
-                await _fitnessService.PushSyncUser(user);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
-
-
-
-            var workouts = await _localDatabase.GetWorkouts();
-
-            try
-            {
-                if (workouts != null && workouts.Count != 0)
-                {
-                    await _fitnessService.PushSyncWorkout(user.Id, workouts);
-
-                    var DeletedWorkouts = workouts.FindAll(w => w.IsDeleted == true);
-                    
-                    if(DeletedWorkouts != null && DeletedWorkouts.Count != 0)
-                    {
-
-                        foreach (var w in DeletedWorkouts)
-                        {
-                            await _localDatabase.DeleteWorkout(w);
-                        }
-                    }
-                    
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
-
-           
-
-            foreach (var v in workouts)
-            {
                 try
                 {
-                    var workoutExercises = await _localDatabase.GetWorkoutExercises(v.WorkoutID);
-
-                    if(workoutExercises != null && workoutExercises.Count != 0)
+                    if(user.LastUpdated > LastSyncTime)
                     {
-                        await _fitnessService.PushSyncExercises(v.WorkoutID, workoutExercises);
-
-                        var DeletedExercises = workoutExercises.FindAll(w => w.IsDeleted == true);
-
-                        if (DeletedExercises != null && DeletedExercises.Count != 0)
-                        {
-
-                            foreach (var e in DeletedExercises)
-                            {
-                                await _localDatabase.DeleteExercise(e);
-                            }
-                        }
-
+                        await _fitnessService.PushSyncUser(user);
                     }
-                   
-                    
                 }
                 catch (Exception ex)
                 {
                     Console.WriteLine(ex.Message);
                 }
+
+
+
+                var workouts = await _localDatabase.GetWorkouts();
+
+                try
+                {
+                    if (workouts != null && workouts.Count != 0)
+                    {
+                        var ModifiedWorkouts = workouts.Where(m => m.LastUpdated > LastSyncTime).ToList();
+
+                        await _fitnessService.PushSyncWorkout(user.Id, ModifiedWorkouts);
+
+                        var DeletedWorkouts = ModifiedWorkouts.FindAll(w => w.IsDeleted == true);
+
+                        if (DeletedWorkouts != null && DeletedWorkouts.Count != 0)
+                        {
+
+                            foreach (var w in DeletedWorkouts)
+                            {
+                                await _localDatabase.DeleteWorkout(w);
+                            }
+                        }
+
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
+
+
+
+                foreach (var v in workouts)
+                {
+                    try
+                    {
+                        var workoutExercises = await _localDatabase.GetWorkoutExercises(v.WorkoutID);
+
+                        if (workoutExercises != null && workoutExercises.Count != 0)
+                        {
+                            var ModifiedExercises = workoutExercises.Where(m => m.LastUpdated > LastSyncTime).ToList();
+
+                            await _fitnessService.PushSyncExercises(v.WorkoutID, ModifiedExercises);
+
+                            var DeletedExercises = ModifiedExercises.FindAll(w => w.IsDeleted == true);
+
+                            if (DeletedExercises != null && DeletedExercises.Count != 0)
+                            {
+
+                                foreach (var e in DeletedExercises)
+                                {
+                                    await _localDatabase.DeleteExercise(e);
+                                }
+                            }
+
+                        }
+
+
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine(ex.Message);
+                    }
+                }
+
             }
 
         }
 
         public async Task PullSync()
         {
-            var LocalUser = Barrel.Current.Get<LoginResponse>(key: "user").User;
-            var ApiUser = new User();
 
-            try
+            var LastSyncTime = Barrel.Current.Get<DateTime>(key: "sync");
+
+            if (LastSyncTime != null)
             {
-                ApiUser = await _fitnessService.GetUserById(LocalUser.Id);
+
+                var LocalUser = Barrel.Current.Get<LoginResponse>(key: "user").User;
+                var ApiUser = new User();
+
+                try
+                {
+                    ApiUser = await _fitnessService.GetUserById(LocalUser.Id);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
+
+
+                if (ApiUser.LastUpdated > LocalUser.LastUpdated)
+                {
+                    var loginResponse = Barrel.Current.Get<LoginResponse>(key: "user");
+                    loginResponse.User = ApiUser;
+
+                    Barrel.Current.Add(key: "user", data: loginResponse, expireIn: TimeSpan.FromHours(1));
+                }
+
+
+
+                List<Workout> ApiWorkouts = new List<Workout>();
+               
+
+
+                try
+                {
+                    ApiWorkouts = await _fitnessService.GetUserWorkouts(LocalUser.Id);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
+
+
+                foreach (var w in ApiWorkouts)
+                {
+                    var localWorkout = await _localDatabase.GetWorkoutByID(w.WorkoutID);
+
+                    if(localWorkout == null)
+                    {
+                        await _localDatabase.AddWorkout(w);
+                    }
+                    else if (w.LastUpdated > localWorkout.LastUpdated)
+                    {
+                        w.WorkoutExercises = localWorkout.WorkoutExercises;
+
+                        await _localDatabase.UpdateWorkout(w);
+                    }
+                }
+
+
+                //List<Exercise> ApiExercises = new List<Exercise>();
+
+                foreach(var w in ApiWorkouts)
+                {
+                    var apiExercises = await _fitnessService.GetWorkoutExercises(w.WorkoutID);
+
+                    //var localExercises = await _localDatabase.GetWorkoutExercises(w.WorkoutID);
+
+                    foreach(var e in apiExercises)
+                    {
+                        if(_localDatabase.ExerciseExists(e.ExerciseID) == null)
+                        {
+                            await _fitnessService.AddWorkoutExercise(w.WorkoutID, e);
+                        }
+                        else
+                        {
+                            var localExercise = await _localDatabase.ExerciseExists(e.ExerciseID);
+
+                            if(e.LastUpdated > localExercise.LastUpdated)
+                            {
+                                e.Workout = localExercise.Workout;
+                                e.WorkoutID = localExercise.WorkoutID;
+
+                                await _localDatabase.UpdateExercise(e);
+                            }
+                        }
+                    }
+
+                   
+                }
+
+
+                Barrel.Current.Add(key: "sync", data: TimeZoneInfo.ConvertTimeToUtc(DateTime.Now, TimeZoneInfo.Local), expireIn: TimeSpan.FromMinutes(5));
             }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
 
-            if (ApiUser.LastUpdated > LocalUser.LastUpdated)
-            {
-                var loginResponse = Barrel.Current.Get<LoginResponse>(key: "user");
-                loginResponse.User = ApiUser;
-
-                Barrel.Current.Add(key: "user", data: loginResponse, expireIn: TimeSpan.FromMinutes(10));
-            }
+        }
 
 
 
+       public async Task PopulateLocalDBInitial()
+       {
             List<Workout> ApiWorkouts = new List<Workout>();
 
+            var LocalUser = Barrel.Current.Get<LoginResponse>(key: "user").User;
 
             try
             {
                 ApiWorkouts = await _fitnessService.GetUserWorkouts(LocalUser.Id);
+
+                foreach(var w in ApiWorkouts)
+                {
+                    await _localDatabase.AddWorkout(w);
+                }
             }
             catch (Exception ex)
             {
@@ -138,34 +236,26 @@ namespace JCMFitnessMobileApp.Services
             }
 
 
+
+
+            //List<Exercise> ApiExercises = new List<Exercise>();
+
             foreach (var w in ApiWorkouts)
             {
-                var localWorkout = await _localDatabase.GetWorkoutByID(w.WorkoutID);
+                var apiExercises = await _fitnessService.GetWorkoutExercises(w.WorkoutID);
 
+                //var localExercises = await _localDatabase.GetWorkoutExercises(w.WorkoutID);
 
-                if (w.LastUpdated > localWorkout.LastUpdated)
+                foreach (var e in apiExercises)
                 {
-
+                  
+                   await _fitnessService.AddWorkoutExercise(w.WorkoutID, e);
+                    
+                   
                 }
+
             }
-
-
-
-
-
         }
-        /*
-
-                    // Pull sync is just getting all records that have changed since that date.
-                    foreach (var row in _fitnessService.PullSync(_lastSync))
-                        if (!_rows.Any(x => x.Id == row.Id)) // Does not exist, hence insert 
-                            InsertRow(new ClientTableSchema(row));
-                        else if (row.Deleted.HasValue)
-                            DeleteRow(row.Id);
-                        else
-                            UpdateRow(new ClientTableSchema(row));
-
-                    _lastSync = DateTimeOffset.Now;*/
 
 
     }

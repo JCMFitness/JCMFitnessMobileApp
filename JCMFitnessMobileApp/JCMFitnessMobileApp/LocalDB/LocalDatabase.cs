@@ -56,11 +56,16 @@ namespace JCMFitnessMobileApp.LocalDB
 
         }
 
-     
+        public async Task<Workout> WorkoutExists(string workoutID)
+        {
+            var w = await Database.FindAsync<Workout>(m => m.WorkoutID == workoutID);
+
+            return w;
+        }
 
         public async Task CreateWorkout(Workout localWorkout)
         {
-            var w = await Database.FindAsync<Workout>(m => m.WorkoutID == localWorkout.WorkoutID);
+            var w = await WorkoutExists(localWorkout.WorkoutID);
 
             if (w == null)
             {
@@ -140,6 +145,22 @@ namespace JCMFitnessMobileApp.LocalDB
         public async Task DeleteExercise(Exercise localExercise)
         {
             await Database.DeleteAsync(localExercise);
+        }
+
+        public async Task<Exercise> ExerciseExists(string exerciseID)
+        {
+            var w = await Database.FindAsync<Exercise>(m => m.ExerciseID == exerciseID);
+
+            return w;
+        }
+
+
+
+
+        public async Task ClearDatabase()
+        {
+            await Database.DeleteAllAsync<Workout>();
+            await Database.DeleteAllAsync<Exercise>();
         }
     }
 }

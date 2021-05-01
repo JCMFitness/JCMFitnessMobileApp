@@ -73,6 +73,7 @@ namespace JCMFitnessMobileApp.ViewModels
                 else
                 {
                     Exercise.IsDeleted = true;
+                    Exercise.LastUpdated = TimeZoneInfo.ConvertTimeToUtc(DateTime.Now, TimeZoneInfo.Local);
                     await localDatabase.UpdateExercise(Exercise);
                 }
 

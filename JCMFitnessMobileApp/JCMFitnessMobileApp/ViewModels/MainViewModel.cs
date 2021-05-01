@@ -106,6 +106,8 @@ namespace JCMFitnessMobileApp.ViewModel
         {
             var response = Barrel.Current.Get<LoginResponse>(key: "user");
 
+            Barrel.Current.Add(key: "sync", data: TimeZoneInfo.ConvertTimeToUtc(DateTime.Now, TimeZoneInfo.Local), expireIn: TimeSpan.FromMinutes(5));
+
             User = response.User;
 
 
@@ -166,6 +168,8 @@ namespace JCMFitnessMobileApp.ViewModel
         public async Task SignoutAsync()
         {
             Barrel.Current.EmptyAll();
+
+            await _localDatabase.ClearDatabase();
             
             await NavService.NavigateTo<LandingViewModel>();
 

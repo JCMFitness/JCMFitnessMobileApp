@@ -6,5 +6,6 @@ namespace JCMFitnessMobileApp.Services
     {
         Task PullSync();
         Task PushSync();
+        Task PopulateLocalDBInitial();
     }
 }

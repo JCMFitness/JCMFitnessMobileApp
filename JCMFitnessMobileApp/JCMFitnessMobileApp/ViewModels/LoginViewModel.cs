@@ -15,9 +15,10 @@ namespace JCMFitnessMobileApp.ViewModels
 {
     public class LoginViewModel : BaseViewModel<User>
     {
+        private readonly INavService navService;
         private IFitnessService _fitnessService;
         private ILocalDatabase _localDatabase;
-
+        private readonly ISyncService syncService;
         public User _user;
         public User User
         {
@@ -34,12 +35,13 @@ namespace JCMFitnessMobileApp.ViewModels
         public DelegateCommand ValidatePwdCommand { get; private set; }
 
 
-        public LoginViewModel(INavService navService, IFitnessService fitService, ILocalDatabase localDatabase)
+        public LoginViewModel(INavService navService, IFitnessService fitService, ILocalDatabase localDatabase, ISyncService syncService)
             : base(navService)
         {
+            this.navService = navService;
             _fitnessService = fitService;
             _localDatabase = localDatabase;
-
+            this.syncService = syncService;
             Barrel.ApplicationId = "CachingDataSample";
 
             
@@ -169,6 +171,8 @@ namespace JCMFitnessMobileApp.ViewModels
 
 
                         Barrel.Current.Add(key: "user", data: loginResponse, expireIn: TimeSpan.FromDays(1));
+
+                        await syncService.PopulateLocalDBInitial();
 
                         await NavService.NavigateTo<MainViewModel>();
                     }
