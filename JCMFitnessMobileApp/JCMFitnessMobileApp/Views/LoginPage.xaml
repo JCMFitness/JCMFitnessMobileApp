@@ -11,19 +11,11 @@
     </ContentPage.Resources>
 
     <Grid RowDefinitions="Auto, Auto, Auto, Auto, Auto, Auto, *" BackgroundColor="{DynamicResource PageBackgroundColor}">
-        <forms:AnimationView x:Name="animationView"
-                    ImageAssetsFolder="Assets"
-                    AnimationSource="AssetOrBundle"
-                    Animation="armflex.json"
-                    RepeatMode="Infinite"
-                    RepeatCount="1"
-                    HorizontalOptions="Center"
-                    Grid.Row="0"
-                    Margin="0, 25, 0, -25"
-                    Grid.Column="0"
-                    IsVisible="{Binding IsBusy, Converter={StaticResource ReverseBooleanConverter}}"/>
+   
         
-        <Entry Placeholder="Username"
+        <Entry   
+                   Placeholder="Username"
+                   PlaceholderColor="{DynamicResource SecondaryColor}"
                    TextColor="{DynamicResource SecondaryColor}"
                    BackgroundColor="{DynamicResource PrimaryColor}"
                    FontSize="18"
@@ -35,7 +27,9 @@
                    Margin="0, 50, 0, 0"
                    IsVisible="{Binding IsBusy, Converter={StaticResource ReverseBooleanConverter}}"/>
 
-            <Entry Placeholder="Password"
+            <Entry 
+                   Placeholder="Password"
+                   PlaceholderColor="{DynamicResource SecondaryColor}"
                    TextColor="{DynamicResource SecondaryColor}"
                    BackgroundColor="{DynamicResource PrimaryColor}"
                    IsPassword="True"
@@ -55,9 +49,20 @@
                     HorizontalOptions="Center"
                     Grid.Row="3"
                     Margin="0, 25, 0, 0"/>
-        
-        <ActivityIndicator IsRunning="True" VerticalOptions="Start" HorizontalOptions="Center" IsVisible="{Binding IsBusy}"/>
-            <Label Text="Please wait! Logging in" IsVisible="{Binding IsBusy}" VerticalOptions="Center" HorizontalOptions="Center"/>
+
+        <forms:AnimationView x:Name="animationView"
+                    ImageAssetsFolder="Assets"
+                    AnimationSource="AssetOrBundle"
+                    Animation="armflex.json"
+                    RepeatMode="Infinite"
+                    RepeatCount="1"
+                    HorizontalOptions="Center"
+                    Grid.Row="0"
+                    Margin="0, 200, 0, 0"
+                    IsVisible="{Binding IsBusy}"
+                    />
+
+            <Label Text="Please wait! Logging in" IsVisible="{Binding IsBusy}" VerticalOptions="Center" HorizontalOptions="Center" Grid.Row="0" Margin="0, 0, 0, 25"/>
         
     </Grid>
 </ContentPage>

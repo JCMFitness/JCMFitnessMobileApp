@@ -1,12 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="JCMFitnessMobileApp.Views.ExerciseDetailPage">
+             x:Class="JCMFitnessMobileApp.Views.ExerciseDetailPage"
+             Title="{Binding Exercise.Name}">
     <ContentPage.Content>
         <StackLayout BackgroundColor="{DynamicResource PageBackgroundColor}">
             <StackLayout Spacing="20" Padding="15">
-            <Label Text="Name:"  FontSize="Small" TextColor="{DynamicResource PrimaryTextColor}" />
-                <Label Text="{Binding Exercise.Name}" FontSize="Medium" TextColor="{DynamicResource SecondaryTextColor}" />
 
                 <Label Text="Time:" FontSize="Small" TextColor="{DynamicResource PrimaryTextColor}"  />
                 <Label Text="{Binding Exercise.TimerValue}" FontSize="Medium" TextColor="{DynamicResource SecondaryTextColor}" />
@@ -16,11 +15,7 @@
 
                 <Label Text="Sets:" FontSize="Small" TextColor="{DynamicResource PrimaryTextColor}"  />
                 <Label Text="{Binding Exercise.Sets}" FontSize="Medium" TextColor="{DynamicResource SecondaryTextColor}" />
-
-                <Label Text="Public:" FontSize="Small" TextColor="{DynamicResource PrimaryTextColor}"  />
-                <Label Text="{Binding Exercise.IsPublic}" FontSize="Medium" TextColor="{DynamicResource SecondaryTextColor}" />
-
-        </StackLayout>
+            </StackLayout>
         <StackLayout Orientation="Horizontal">
                 <Button Text="Delete" Command="{Binding DeleteExerciseCommand}" HorizontalOptions="FillAndExpand" TextColor="{DynamicResource SecondaryColor}" BackgroundColor="{DynamicResource PrimaryColor}"></Button>
                 <Button Text="Edit" Command="{Binding EditCommand}" HorizontalOptions="FillAndExpand" TextColor="{DynamicResource SecondaryColor}" BackgroundColor="{DynamicResource PrimaryColor}"></Button>

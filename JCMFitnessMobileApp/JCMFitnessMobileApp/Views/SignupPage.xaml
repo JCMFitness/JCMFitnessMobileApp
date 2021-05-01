@@ -17,15 +17,7 @@
 
         <Grid RowDefinitions="Auto, Auto, Auto, Auto, Auto, *" BackgroundColor="{DynamicResource PageBackgroundColor}">
 
-        <forms:AnimationView x:Name="animationView"
-                ImageAssetsFolder="Assets"
-                AnimationSource="AssetOrBundle"
-                Animation="runnershoe.json"
-                RepeatMode="Infinite"
-                RepeatCount="1"
-                Grid.Row="0"
-                Margin="0, -100, 0,  -200"
-                />
+
 
 
             <Entry Placeholder="Username"
@@ -34,7 +26,7 @@
                    WidthRequest="200"
                    VerticalOptions="Center"
                    IsVisible="{Binding IsBusy, Converter={StaticResource ReverseBooleanConverter}}"
-                   Grid.Row="1"
+                   Grid.Row="0"
                    Margin="0, 25, 0, 0"
                    HorizontalOptions="Center"/>
 
@@ -45,7 +37,7 @@
                    WidthRequest="200"
                    VerticalOptions="Center"
                    IsVisible="{Binding IsBusy, Converter={StaticResource ReverseBooleanConverter}}"
-                   Grid.Row="2"
+                   Grid.Row="1"
                    HorizontalOptions="Center"/>
 
                  
@@ -56,7 +48,7 @@
                    WidthRequest="200"
                    VerticalOptions="Center"
                    IsVisible="{Binding IsBusy, Converter={StaticResource ReverseBooleanConverter}}"
-                   Grid.Row="3"
+                   Grid.Row="2"
                    HorizontalOptions="Center"/>
                 
             
@@ -66,14 +58,25 @@
                    Command="{Binding SignUpCommand}"
                    WidthRequest="150"
                    IsVisible="{Binding IsBusy, Converter={StaticResource ReverseBooleanConverter}}"
-                   Grid.Row="4"
+                   Grid.Row="3"
                    HorizontalOptions="Center"
-                   Margin="0, 25, 0 , 0"/>
-                
+                   Margin="0, 25, 0 , 150"/>
+        
+            <forms:AnimationView x:Name="animationView"
+                ImageAssetsFolder="Assets"
+                AnimationSource="AssetOrBundle"
+                Animation="runnershoe.json"
+                RepeatMode="Infinite"
+                RepeatCount="1"
+                Grid.Row="4"
+                Margin="0, -100, 0,  -200"
+                IsVisible="{Binding IsBusy, Converter={StaticResource ReverseBooleanConverter}}"
+                />
 
-                <StackLayout Orientation="Vertical" VerticalOptions="Center" HorizontalOptions="Center" IsVisible="{Binding IsBusy}">
+
+        <StackLayout Orientation="Vertical" VerticalOptions="Center" HorizontalOptions="Center" IsVisible="{Binding IsBusy}">
                     <ActivityIndicator IsRunning="True" />
-                    <Label Text="Please wait! Logging in" />
+                    <Label Text="Please wait, redirecting to login page..." />
                 </StackLayout>
 
 

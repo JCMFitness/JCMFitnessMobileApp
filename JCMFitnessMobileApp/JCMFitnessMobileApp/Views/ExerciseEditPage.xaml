@@ -1,7 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="JCMFitnessMobileApp.Views.ExerciseEditPage">
+             x:Class="JCMFitnessMobileApp.Views.ExerciseEditPage"
+             Title="Edit Exercise">
     <ContentPage.Content>
         <StackLayout Spacing="20" Padding="15" BackgroundColor="{DynamicResource PageBackgroundColor}">
                 <Label Text="Name:"  FontSize="Small" TextColor="{DynamicResource PrimaryTextColor}" />
@@ -16,10 +17,10 @@
             <Label Text="Sets:" FontSize="Small" TextColor="{DynamicResource PrimaryTextColor}"  />
             <Entry Text="{Binding Exercise.Sets}" FontSize="Medium" TextColor="{DynamicResource SecondaryTextColor}" />
 
-            <Label Text="Public:" FontSize="Small" TextColor="{DynamicResource PrimaryTextColor}"  />
+            <Label Text="Make This Public:" FontSize="Small" TextColor="{DynamicResource PrimaryTextColor}"  />
             <Entry Text="{Binding Exercise.IsPublic}" FontSize="Medium" TextColor="{DynamicResource SecondaryTextColor}" />
 
-            <Button Text="Save" Command="{Binding SaveExerciseCommand}" TextColor="{DynamicResource SecondaryColor}" BackgroundColor="{DynamicResource PageBackgroundColor}" HorizontalOptions="FillAndExpand"/>
+            <Button Text="Save" Command="{Binding SaveExerciseCommand}" TextColor="{DynamicResource SecondaryColor}" BackgroundColor="{DynamicResource PrimaryColor}" HorizontalOptions="FillAndExpand"/>
         </StackLayout>
 
     </ContentPage.Content>

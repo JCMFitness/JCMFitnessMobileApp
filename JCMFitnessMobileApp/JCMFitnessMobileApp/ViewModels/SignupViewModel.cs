@@ -91,7 +91,7 @@ namespace JCMFitnessMobileApp.ViewModels
                 catch
                 {
                     await App.Current.MainPage.DisplayAlert("Sign up Fail", "Please enter valid username or password", "OK");
-                    await NavService.NavigateTo<SignupViewModel>();
+                    IsBusy = false;
                 }
 
                 IsBusy = false;

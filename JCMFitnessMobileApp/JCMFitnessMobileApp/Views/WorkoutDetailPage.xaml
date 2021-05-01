@@ -2,15 +2,13 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     x:Class="JCMFitnessMobileApp.Views.WorkoutDetailPage"
-             Title="Workout Details">
+             Title="{Binding Workout.Name}">
 
 
 
     <ContentPage.Content>
         <StackLayout Spacing="20" Padding="15" BackgroundColor="{DynamicResource PageBackgroundColor}">
-            <Label Text="Name:"  FontSize="Small" TextColor="{DynamicResource PrimaryTextColor}" />
-            <Label Text="{Binding Workout.Name}" FontSize="Medium" TextColor="{DynamicResource PrimaryTextColor}" />
-
+            
             <Label Text="Description:" FontSize="Small" TextColor="{DynamicResource PrimaryTextColor}"  />
             <Label Text="{Binding Workout.Description}" FontSize="Medium" TextColor="{DynamicResource PrimaryTextColor}" />
 

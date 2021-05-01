@@ -11,13 +11,14 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Essentials;
 using System.Timers;
+using System.Threading;
 
 namespace JCMFitnessMobileApp.ViewModels
 {
     public class LoginViewModel : BaseViewModel<User>
     {
         private IFitnessService _fitnessService;
-        private static Timer timer;
+        private static System.Timers.Timer timer;
         private static int timerCounter;
 
         public User _user;
@@ -165,6 +166,7 @@ namespace JCMFitnessMobileApp.ViewModels
                         var loginResponse = await _fitnessService.LoginUser(userLogin);
                         Barrel.Current.Add(key: "user", data: loginResponse, expireIn: TimeSpan.FromMinutes(1));
                         Vibration.Vibrate(50);
+                        await Task.Run(() => Thread.Sleep(2500));
                         await NavService.NavigateTo<MainViewModel>();
                     }
                     catch
@@ -192,7 +194,7 @@ namespace JCMFitnessMobileApp.ViewModels
         void FailedVibration()
         {
             timerCounter = 0;
-            timer = new Timer(500);
+            timer = new System.Timers.Timer(500);
             timer.Elapsed += OnTimedEvent;
             timer.Enabled = true;    
         }
