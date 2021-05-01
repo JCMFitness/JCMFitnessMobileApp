@@ -16,7 +16,7 @@ using Xamarin.Forms;
 
 namespace JCMFitnessMobileApp.ViewModels
 {
-    public class LandingViewModel:BaseViewModel
+    public class LandingViewModel : BaseViewModel
     {
         
 
@@ -33,6 +33,10 @@ namespace JCMFitnessMobileApp.ViewModels
             Barrel.ApplicationId = "CachingDataSample";
         }
 
+        public override void Init()
+        {
+            NavService.ClearBackStack();
+        }
 
         public Command LoginCommand =>
           new Command(async () =>

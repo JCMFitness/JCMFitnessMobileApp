@@ -19,8 +19,8 @@ namespace JCMFitnessMobileApp.Services
 
         //User endpoints
 
-        [Put("/api/user?id={userid}")]
-        public Task EditUserAsync(string userid);
+        [Put("/api/user")]
+        public Task EditUserAsync([Body] User user);
 
         [Delete("/api/user?userid={id}")]
         public Task DeleteUserAsync(string id);

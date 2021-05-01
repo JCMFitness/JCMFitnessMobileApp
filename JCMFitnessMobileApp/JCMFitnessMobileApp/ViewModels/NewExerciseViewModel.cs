@@ -5,6 +5,7 @@ using JCMFitnessMobileApp.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using Xamarin.Essentials;
 using Xamarin.Forms;
@@ -92,6 +93,7 @@ namespace JCMFitnessMobileApp.ViewModels
             IsBusy = true;
             try
             {
+                await Task.Run(() => Thread.Sleep(5000));
                 var newExercise = new Exercise
                 {
                     ExerciseID = Guid.NewGuid().ToString(),
@@ -120,6 +122,7 @@ namespace JCMFitnessMobileApp.ViewModels
                 //NavService.RemoveLastView();
                 NavService.RemoveLastTwoViews();
                 //NavService.ClearBackStack();
+                
                 await NavService.NavigateTo<WorkoutDetailViewModel, Workout>(_workout);
             }
             finally

@@ -217,6 +217,18 @@ namespace JCMFitnessMobileApp.Services
         }
 
 
+        public async Task EditUser(User user)
+        {
+            try
+            {
+                await fitApi.EditUserAsync(user);
+            }
+            catch (Exception ex)
+            { 
+                System.Diagnostics.Debug.WriteLine(ex.Message);
+                throw;
+            }
+        }
     }
 
 }

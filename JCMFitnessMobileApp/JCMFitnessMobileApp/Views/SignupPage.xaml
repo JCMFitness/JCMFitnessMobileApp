@@ -1,8 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:converters="clr-namespace:JCMFitnessMobileApp.Converters;assembly=JCMFitnessMobileApp"
-             x:Class="JCMFitnessMobileApp.Views.SignupPage">
+             xmlns:converters="clr-namespace:JCMFitnessMobileApp.Converters;assembly=JCMFitnessMobileApp" xmlns:forms="clr-namespace:Lottie.Forms;assembly=Lottie.Forms"
+             x:Class="JCMFitnessMobileApp.Views.SignupPage"
+             >
  
         
         <ContentPage.Resources>
@@ -14,55 +15,93 @@
 
 
 
-        <ContentPage.Content>
-            <StackLayout  HorizontalOptions="Center"
-                 VerticalOptions="Center" IsVisible="{Binding IsBusy, Converter={StaticResource ReverseBooleanConverter}}">
+        <Grid RowDefinitions="Auto, Auto, Auto, Auto, Auto, Auto,Auto, *" BackgroundColor="{DynamicResource PageBackgroundColor}">
 
-                <StackLayout Orientation="Horizontal">
-                  
-                    <Entry Placeholder="Username"
+        <Entry Placeholder="First Name"
+                   FontSize="18"
+                   Text="{Binding FirstName}"
+                   PlaceholderColor="{DynamicResource  SecondaryTextColor}"
+                   WidthRequest="200"
+                   VerticalOptions="Center"
+                   IsVisible="{Binding IsBusy, Converter={StaticResource ReverseBooleanConverter}}"
+                   Grid.Row="0"
+       
+                   HorizontalOptions="Center"/>
+       
+            <Entry Placeholder="Last Name"
+                   PlaceholderColor="{DynamicResource  SecondaryTextColor}"
+                   FontSize="18"
+                   Text="{Binding LastName}"
+                   WidthRequest="200"
+                   VerticalOptions="Center"
+                   IsVisible="{Binding IsBusy, Converter={StaticResource ReverseBooleanConverter}}"
+                   Grid.Row="1"
+         
+                   HorizontalOptions="Center"/>
+
+
+        <Entry Placeholder="Username"
+               PlaceholderColor="{DynamicResource  SecondaryTextColor}"
                    FontSize="18"
                    Text="{Binding Username}"
                    WidthRequest="200"
-                   VerticalOptions="Center"/>
-                </StackLayout>
-                
-                
-                <StackLayout Orientation="Horizontal">
-                  
-                    <Entry Placeholder="Email"
-                       FontSize="18"
-                       Text="{Binding Email}"
-                       WidthRequest="200"
-                       VerticalOptions="Center"/>
-                </StackLayout>
-                
-                
-                <StackLayout Orientation="Horizontal">
+                   VerticalOptions="Center"
+                   IsVisible="{Binding IsBusy, Converter={StaticResource ReverseBooleanConverter}}"
+                   Grid.Row="2"
+                   HorizontalOptions="Center"/>
+
+
+            <Entry Placeholder="Email"
+                   PlaceholderColor="{DynamicResource  SecondaryTextColor}"
+                   FontSize="18"
+                   Text="{Binding Email}"
+                   WidthRequest="200"
+                   VerticalOptions="Center"
+                   IsVisible="{Binding IsBusy, Converter={StaticResource ReverseBooleanConverter}}"
+                   Grid.Row="3"
+                   HorizontalOptions="Center"/>
+
                  
-                    <Entry Placeholder="Password"
+            <Entry Placeholder="Password"
+                   PlaceholderColor="{DynamicResource  SecondaryTextColor}"
                    IsPassword="True"
                    FontSize="18"
                    Text="{Binding Password}"
                    WidthRequest="200"
-                   VerticalOptions="Center"/>
-                </StackLayout>
+                   VerticalOptions="Center"
+                   IsVisible="{Binding IsBusy, Converter={StaticResource ReverseBooleanConverter}}"
+                   Grid.Row="4"
+                   HorizontalOptions="Center"/>
+                
+            
+            <Button Text="Sign up"
+                   BackgroundColor="{DynamicResource PrimaryColor}"
+                   TextColor="{DynamicResource SecondaryTextColor}"
+                   Command="{Binding SignUpCommand}"
+                   WidthRequest="150"
+                   IsVisible="{Binding IsBusy, Converter={StaticResource ReverseBooleanConverter}}"
+                   Grid.Row="5"
+                   HorizontalOptions="Center"
+                   Margin="0, 25, 0 , 150"/>
+        
+            <forms:AnimationView x:Name="animationView"
+                ImageAssetsFolder="Assets"
+                AnimationSource="AssetOrBundle"
+                Animation="runnershoe.json"
+                RepeatMode="Infinite"
+                RepeatCount="1"
+                Grid.Row="6"
+                Margin="0, -150, 0,  -200"
+                IsVisible="{Binding IsBusy, Converter={StaticResource ReverseBooleanConverter}}"
+                />
 
-                <StackLayout HorizontalOptions="Center"
-                     Margin="0,10">
-                    <Button Text="Sign up"
-                    BackgroundColor="#09C"
-                    TextColor="#FFF"
-                    Command="{Binding SignUpCommand}"
-                    WidthRequest="150"/>
-                </StackLayout>
 
-                <StackLayout Orientation="Vertical" VerticalOptions="Center" HorizontalOptions="Center" IsVisible="{Binding IsBusy}">
+        <StackLayout Orientation="Vertical" VerticalOptions="Center" HorizontalOptions="Center" IsVisible="{Binding IsBusy}">
                     <ActivityIndicator IsRunning="True" />
-                    <Label Text="Please wait! Logging in" />
+            <Label Text="Please wait, redirecting to login page..." TextColor="{DynamicResource SecondaryTextColor}"  />
                 </StackLayout>
 
 
-            </StackLayout>
-        </ContentPage.Content>
+           
+        </Grid>
 </ContentPage>

@@ -57,6 +57,32 @@ namespace JCMFitnessMobileApp.ViewModels
             }
         }
 
+        string _firstname;
+        public string FirstName
+        {
+            get => _firstname;
+            set
+            {
+                _firstname = value;
+                OnPropertyChanged();
+            }
+        }
+
+
+        string _lastname;
+        public string LastName
+        {
+            get => _lastname;
+            set
+            {
+                _lastname = value;
+                OnPropertyChanged();
+            }
+        }
+
+
+
+
 
 
         Command _SignUpCommand;
@@ -78,8 +104,9 @@ namespace JCMFitnessMobileApp.ViewModels
                 {
                     UserName = Username,
                     Email = Email,
-                    Password = Password
-
+                    Password = Password,
+                    FirstName = FirstName,
+                    LastName = LastName
                 };
 
 
@@ -91,7 +118,7 @@ namespace JCMFitnessMobileApp.ViewModels
                 catch
                 {
                     await App.Current.MainPage.DisplayAlert("Sign up Fail", "Please enter valid username or password", "OK");
-                    await NavService.NavigateTo<SignupViewModel>();
+                    IsBusy = false;
                 }
 
                 IsBusy = false;

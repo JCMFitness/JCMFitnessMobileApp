@@ -5,7 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using Akavache;
 using JCMFitnessMobileApp.Models;
+using JCMFitnessMobileApp.Themes;
 using JCMFitnessMobileApp.ViewModel;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -26,7 +28,8 @@ namespace JCMFitnessMobileApp.Views
         public MainPage()
         {
             InitializeComponent();
-            //MainPage.HasBackButton(this, false);
+            ReconcileTheme();
+            NavigationPage.SetHasBackButton(this, false);
         }
 
         void New_Clicked(object sender, EventArgs e)
@@ -45,6 +48,34 @@ namespace JCMFitnessMobileApp.Views
             trips.SelectedItem = null;
         }
 
-       
+        private void ReconcileTheme()
+        {
+            if (Preferences.ContainsKey("theme"))
+            {
+                var theme = Preferences.Get("theme", "");
+                if (theme != null)
+                {
+                    ICollection<ResourceDictionary> mergedDictionaries = Application.Current.Resources.MergedDictionaries;
+                    mergedDictionaries.Clear();
+                    if (theme == "Dark")
+                    {
+
+                        mergedDictionaries.Add(new DarkTheme());
+
+                    }
+                    else
+                    {
+                        mergedDictionaries.Add(new LightTheme());
+                    }
+                }
+            }
+            else
+            {
+
+            }
+
+        }
+
+
     }
 }

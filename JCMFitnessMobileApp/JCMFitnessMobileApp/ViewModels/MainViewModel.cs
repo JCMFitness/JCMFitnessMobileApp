@@ -71,8 +71,8 @@ namespace JCMFitnessMobileApp.ViewModel
 
 
       
-        public Command RefreshCommand => new Command(async () => 
-                await LoadEntriesAsync());
+        public Command RefreshCommand => new Command(() => 
+                LoadEntriesAsync());
 
         public Command SignoutCommand => new Command(async () =>
                 await SignoutAsync());
@@ -99,9 +99,21 @@ namespace JCMFitnessMobileApp.ViewModel
             }
         }
 
-        public async Task LoadEntriesAsync()
+        public async void LoadEntriesAsync()
         {
             var response = Barrel.Current.Get<LoginResponse>(key: "user");
+            if(response.User == null)
+            {
+                try
+                {
+                   User = response.User;
+                }
+                catch (Exception ex)
+                {
+
+                    IsRefreshing = false;
+                    await NavService.NavigateTo<LandingViewModel>();
+                }
 
             Barrel.Current.Add(key: "sync", data: TimeZoneInfo.ConvertTimeToUtc(DateTime.Now, TimeZoneInfo.Local), expireIn: TimeSpan.FromMinutes(5));
 
@@ -123,6 +135,9 @@ namespace JCMFitnessMobileApp.ViewModel
                 IsRefreshing = false;
                 return;
             }
+
+
+
               
             IsBusy = true;
 
@@ -172,6 +187,7 @@ namespace JCMFitnessMobileApp.ViewModel
             await _localDatabase.ClearDatabase();
             
             await NavService.NavigateTo<LandingViewModel>();
+            
 
         }
 

@@ -10,6 +10,9 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Xamarin.Forms;
+using Xamarin.Essentials;
+using System.Timers;
+using System.Threading;
 
 namespace JCMFitnessMobileApp.ViewModels
 {
@@ -19,6 +22,9 @@ namespace JCMFitnessMobileApp.ViewModels
         private IFitnessService _fitnessService;
         private ILocalDatabase _localDatabase;
         private readonly ISyncService syncService;
+        private static System.Timers.Timer timer;
+        private static int timerCounter;
+
         public User _user;
         public User User
         {
@@ -43,9 +49,6 @@ namespace JCMFitnessMobileApp.ViewModels
             _localDatabase = localDatabase;
             this.syncService = syncService;
             Barrel.ApplicationId = "CachingDataSample";
-
-            
-
             SignInCommand = new DelegateCommand(SignIp, CanExecuteSignIn);
             ValidateLoginCommand = new DelegateCommand(ValidateLogin, () => UserName != null);
             ValidatePwdCommand = new DelegateCommand(ValidatePwd, () => UserName != null);
@@ -131,10 +134,10 @@ namespace JCMFitnessMobileApp.ViewModels
             }
         }
 
-        public override void Init()
+        /*public override void Init()
         {
             NavService.ClearBackStack();
-        }
+        }*/
 
 
 
@@ -168,25 +171,23 @@ namespace JCMFitnessMobileApp.ViewModels
                     try
                     {
                         var loginResponse = await _fitnessService.LoginUser(userLogin);
-
-
-                        Barrel.Current.Add(key: "user", data: loginResponse, expireIn: TimeSpan.FromDays(1));
-
-                        //await syncService.PopulateLocalDBInitial();
-
+                        Barrel.Current.Add(key: "user", data: loginResponse, expireIn: TimeSpan.FromMinutes(1));
+                        Vibration.Vibrate(50);
+                        await Task.Run(() => Thread.Sleep(2500));
                         await NavService.NavigateTo<MainViewModel>();
                     }
                     catch
                     {
+                        FailedVibration();
                         await App.Current.MainPage.DisplayAlert("Login Fail", "Please enter correct username or password", "OK");
-                        await NavService.NavigateTo<LoginViewModel>();
+                        IsBusy = false;
                     }
 
                 }
 
                
 
-                NavService.RemoveLastView();
+               //NavService.RemoveLastView();
             }
             catch 
             {
@@ -195,6 +196,27 @@ namespace JCMFitnessMobileApp.ViewModels
 
  
             //await NavService.NavigateTo<MainViewModel, User>(user);
+        }
+
+        void FailedVibration()
+        {
+            timerCounter = 0;
+            timer = new System.Timers.Timer(500);
+            timer.Elapsed += OnTimedEvent;
+            timer.Enabled = true;    
+        }
+        private static void OnTimedEvent(Object source, ElapsedEventArgs e)
+        {
+            if (timerCounter == 2)
+            {
+                timer.Stop();
+            }
+            else
+            {
+                Vibration.Vibrate(50);
+            }
+            timerCounter++;
+            
         }
     }
 }

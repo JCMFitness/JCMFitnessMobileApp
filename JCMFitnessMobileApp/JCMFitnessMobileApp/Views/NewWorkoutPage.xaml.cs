@@ -34,7 +34,7 @@ namespace JCMFitnessMobileApp.Views
                 switch (e.PropertyName)
                 {
                     case nameof(ViewModel.Title):
-                        title.LabelColor = propHasErrors
+                        title.TextColor = propHasErrors
                             ? Color.Red : Color.Black;
                         break;
                     default:

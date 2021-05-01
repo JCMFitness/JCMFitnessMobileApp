@@ -1,8 +1,9 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:converters="clr-namespace:JCMFitnessMobileApp.Converters;assembly=JCMFitnessMobileApp"
-             x:Class="JCMFitnessMobileApp.Views.NewExercisePage">
+             xmlns:converters="clr-namespace:JCMFitnessMobileApp.Converters;assembly=JCMFitnessMobileApp" xmlns:forms="clr-namespace:Lottie.Forms;assembly=Lottie.Forms"
+             x:Class="JCMFitnessMobileApp.Views.NewExercisePage"
+             Title="Create a New Exercise">
 
     <ContentPage.Resources>
         <ResourceDictionary>
@@ -15,21 +16,31 @@
     </ContentPage.ToolbarItems>
 
     <ContentPage.Content>
-        <Grid>
-            <TableView Intent="Form" IsVisible="{Binding IsBusy, Converter={StaticResource ReverseBooleanConverter}}">
-                <TableView.Root>
-                    <TableSection>
-                        <EntryCell x:Name="Name" Label="Name" Text="{Binding Name}" />
-                        <EntryCell x:Name="TimerValue" Label="TimerValue" Text="{Binding TimerValue}" />
-                        <EntryCell Label="Repetitions" Text="{Binding Repetitions}" />
-                        <EntryCell Label="Sets" Text="{Binding Sets}" />
-                    </TableSection>
-                </TableView.Root>
-            </TableView>
+        <Grid RowDefinitions="Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto,*" BackgroundColor="{DynamicResource PageBackgroundColor}">
+            <forms:AnimationView x:Name="animationView"
+                    ImageAssetsFolder="Assets"
+                    AnimationSource="AssetOrBundle"
+                    Animation="exercisingman.json"
+                    RepeatMode="Infinite"
+                    RepeatCount="1"
+                    HorizontalOptions="Center"
+                    Grid.Row="8"
+                    Margin="0, -50, 0, -200"
+                    IsVisible="{Binding IsBusy}"/>
 
-            <StackLayout Orientation="Vertical" VerticalOptions="Center" HorizontalOptions="Center" IsVisible="{Binding IsBusy}">
-                <ActivityIndicator IsRunning="True" />
-                <Label Text="Please wait! Saving new entry..." />
+            <Label Text="Name" VerticalOptions="Center" Margin="10, 0, 0, 0" Grid.Row="0" TextColor="{DynamicResource PrimaryTextColor}" FontAttributes="Bold" IsVisible="{Binding IsBusy, Converter={StaticResource ReverseBooleanConverter}}"/>
+            <Entry x:Name="Name" VerticalOptions="Center" Margin="10, 0, 25, 0" Text="{Binding Name}" TextColor="{DynamicResource SecondaryColor}" IsVisible="{Binding IsBusy, Converter={StaticResource ReverseBooleanConverter}}" Grid.Row="1"/>
+            <Label Text="Timer" VerticalOptions="Center" Margin="10, 0, 0, 0" Grid.Row="2" TextColor="{DynamicResource PrimaryTextColor}" FontAttributes="Bold" IsVisible="{Binding IsBusy, Converter={StaticResource ReverseBooleanConverter}}"/>
+            <Entry x:Name="TimerValue" VerticalOptions="Center" Margin="10, 0, 25, 0" Text="{Binding TimerValue}" TextColor="{DynamicResource SecondaryColor}" IsVisible="{Binding IsBusy, Converter={StaticResource ReverseBooleanConverter}}" Grid.Row="3"/>
+            <Label Text="Repetitions" VerticalOptions="Center" Margin="10, 0, 0, 0" Grid.Row="4" TextColor="{DynamicResource PrimaryTextColor}" FontAttributes="Bold" IsVisible="{Binding IsBusy, Converter={StaticResource ReverseBooleanConverter}}"/>
+            <Entry x:Name="Repetitions" VerticalOptions="Center" Margin="10, 0, 25, 0"  Text="{Binding Repetitions}" TextColor="{DynamicResource SecondaryColor}" IsVisible="{Binding IsBusy, Converter={StaticResource ReverseBooleanConverter}}" Grid.Row="5"/>
+            <Label Text="Sets" Grid.Row="6" VerticalOptions="Center" Margin="10, 0, 0, 0" TextColor="{DynamicResource PrimaryTextColor}" FontAttributes="Bold" IsVisible="{Binding IsBusy, Converter={StaticResource ReverseBooleanConverter}}"/>
+            <Entry x:Name="Sets" VerticalOptions="Center" Margin="10, 0, 25, 0"  Text="{Binding Sets}" TextColor="{DynamicResource SecondaryColor}" IsVisible="{Binding IsBusy, Converter={StaticResource ReverseBooleanConverter}}" Grid.Row="7"/>
+
+
+
+            <StackLayout Orientation="Vertical" VerticalOptions="Center" HorizontalOptions="Center" IsVisible="{Binding IsBusy}" Grid.Row="8">
+                <Label Text="Please wait! Saving new exercise..." TextColor="{DynamicResource SecondaryTextColor}"  Margin="0, 0, 0, 25"/>
             </StackLayout>
         </Grid>
     </ContentPage.Content>

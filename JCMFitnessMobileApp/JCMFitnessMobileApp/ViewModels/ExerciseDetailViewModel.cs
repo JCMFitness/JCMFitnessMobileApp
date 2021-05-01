@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using System.Timers;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 
@@ -18,7 +19,8 @@ namespace JCMFitnessMobileApp.ViewModels
         readonly IFitnessService _fitnessService;
         private readonly ILocalDatabase localDatabase;
         Exercise _Exer;
-        
+        private static Timer timer;
+        private static int timerCounter;
 
         public Exercise Exercise
         {
@@ -58,10 +60,14 @@ namespace JCMFitnessMobileApp.ViewModels
             if (IsBusy)
                 return;
             IsBusy = true;
-            
-            try
+
+
+            var answer = await App.Current.MainPage.DisplayAlert("Are You Sure?", "Are you sure you want to delete this exercise?", "No", "Yes");
+            if (answer == false)
             {
-                var workout = Barrel.Current.Get<Workout>(key: "workout");
+                try
+                {
+                    var workout = Barrel.Current.Get<Workout>(key: "workout");
 
                 var current = Connectivity.NetworkAccess;
 
@@ -79,14 +85,45 @@ namespace JCMFitnessMobileApp.ViewModels
 
                
 
-                NavService.RemoveLastTwoViews();
-                await NavService.NavigateTo<WorkoutDetailViewModel, Workout>(workout);
+                    NavService.RemoveLastTwoViews();
+                    await NavService.NavigateTo<WorkoutDetailViewModel, Workout>(workout);
+                }
+                catch 
+                {
+                    FailedVibration();
+                }
+                finally
+                {
+                    IsBusy = false;
+                }
             }
-            finally
+            else
             {
-                IsBusy = false;
+                FailedVibration();
+                return;
             }
+
            
+        }
+        void FailedVibration()
+        {
+            timerCounter = 0;
+            timer = new Timer(500);
+            timer.Elapsed += OnTimedEvent;
+            timer.Enabled = true;
+        }
+        private static void OnTimedEvent(Object source, ElapsedEventArgs e)
+        {
+            if (timerCounter == 2)
+            {
+                timer.Stop();
+            }
+            else
+            {
+                Vibration.Vibrate(50);
+            }
+            timerCounter++;
+
         }
     }
 }

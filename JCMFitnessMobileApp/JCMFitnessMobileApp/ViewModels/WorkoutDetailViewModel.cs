@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Timers;
 using JCMFitnessMobileApp.LocalDB;
 using JCMFitnessMobileApp.Models;
 using JCMFitnessMobileApp.Services;
@@ -20,6 +21,9 @@ namespace JCMFitnessMobileApp.ViewModel
         Exercise _exercise;
         private readonly INavService navService;
         readonly IFitnessService _fitnessService;
+        private static Timer timer;
+        private static int timerCounter;
+
         private readonly ILocalDatabase localDatabase;
         ObservableCollection<Exercise> _workoutExercises;
 
@@ -150,6 +154,8 @@ namespace JCMFitnessMobileApp.ViewModel
                 return;
             IsBusy = true;
             var response = Barrel.Current.Get<LoginResponse>(key: "user");
+
+
             try
             {
                 var current = Connectivity.NetworkAccess;
@@ -173,6 +179,26 @@ namespace JCMFitnessMobileApp.ViewModel
             {
                 IsBusy = false;
             }
+
+        }
+        void FailedVibration()
+        {
+            timerCounter = 0;
+            timer = new Timer(500);
+            timer.Elapsed += OnTimedEvent;
+            timer.Enabled = true;
+        }
+        private static void OnTimedEvent(Object source, ElapsedEventArgs e)
+        {
+            if (timerCounter == 2)
+            {
+                timer.Stop();
+            }
+            else
+            {
+                Vibration.Vibrate(50);
+            }
+            timerCounter++;
 
         }
 

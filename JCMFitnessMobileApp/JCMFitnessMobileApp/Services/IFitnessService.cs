@@ -33,5 +33,8 @@ namespace JCMFitnessMobileApp.Services
         public Task PushSyncExercises(string id, List<Exercise> exercises);
         public Task PushSyncUser(User user);
 
+
+        Task EditUser(User user);
+       
     }
 }

@@ -3,7 +3,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:converters="clr-namespace:JCMFitnessMobileApp.Converters;assembly=JCMFitnessMobileApp"
     x:Class="JCMFitnessMobileApp.Views.NewWorkoutPage"
-    Title="New Entry">
+    Title="Create a New Workout">
 
     <ContentPage.Resources>
         <ResourceDictionary>
@@ -16,22 +16,23 @@
     </ContentPage.ToolbarItems>
 
     <ContentPage.Content>
-        <Grid>
-            <TableView Intent="Form" IsVisible="{Binding IsBusy, Converter={StaticResource ReverseBooleanConverter}}">
-                <TableView.Root>
-                    <TableSection>
-                       
-                        <EntryCell x:Name="title" Label="Name" Text="{Binding Title}" />
-                        <EntryCell Label="Description" Text="{Binding Description}" />
-                        <EntryCell Label="Category" Text="{Binding Category}" />
+        <Grid RowDefinitions="Auto, Auto, Auto, Auto, Auto, Auto, *" BackgroundColor="{DynamicResource PageBackgroundColor}">
+           
+                        <Label Text="Name" VerticalOptions="Center" Margin="10, 0, 0, 0" Grid.Row="0" TextColor="{DynamicResource PrimaryTextColor}" FontAttributes="Bold" IsVisible="{Binding IsBusy, Converter={StaticResource ReverseBooleanConverter}}"/>
+                        <Entry x:Name="title" VerticalOptions="Center" Margin="10, 0, 25, 0" Text="{Binding Title}" TextColor="{DynamicResource SecondaryColor}" IsVisible="{Binding IsBusy, Converter={StaticResource ReverseBooleanConverter}}" Grid.Row="1"/>
+                        <Label Text="Description" VerticalOptions="Center" Margin="10, 0, 0, 0" Grid.Row="2" TextColor="{DynamicResource PrimaryTextColor}" FontAttributes="Bold" IsVisible="{Binding IsBusy, Converter={StaticResource ReverseBooleanConverter}}"/>
+                        <Entry x:Name="description" VerticalOptions="Center" Margin="10, 0, 25, 0" Text="{Binding Description}" TextColor="{DynamicResource SecondaryColor}" IsVisible="{Binding IsBusy, Converter={StaticResource ReverseBooleanConverter}}" Grid.Row="3"/>
+                        <Label Text="Category" VerticalOptions="Center" Margin="10, 0, 0, 0" Grid.Row="4" TextColor="{DynamicResource PrimaryTextColor}" FontAttributes="Bold" IsVisible="{Binding IsBusy, Converter={StaticResource ReverseBooleanConverter}}"/>
+                        <Entry x:Name="category" VerticalOptions="Center" Margin="10, 0, 25, 0"  Text="{Binding Category}" TextColor="{DynamicResource SecondaryColor}" IsVisible="{Binding IsBusy, Converter={StaticResource ReverseBooleanConverter}}" Grid.Row="5"/>
+
+
+
+    
                         
-                    </TableSection>
-                </TableView.Root>
-            </TableView>
 
             <StackLayout Orientation="Vertical" VerticalOptions="Center" HorizontalOptions="Center" IsVisible="{Binding IsBusy}">
                 <ActivityIndicator IsRunning="True" />
-                <Label Text="Please wait! Saving new entry..." />
+                <Label Text="Please wait! Saving new workout..." TextColor="{DynamicResource SecondaryTextColor}"  />
             </StackLayout>
         </Grid>
     </ContentPage.Content>

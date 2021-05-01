@@ -11,6 +11,7 @@ using JCMFitnessMobileApp.ViewModel;
 using JCMFitnessMobileApp.ViewModels;
 using MonkeyCache.FileStore;
 using JCMFitnessMobileApp.Models;
+using Plugin.FirebasePushNotification;
 
 namespace JCMFitnessMobileApp
 {
@@ -22,8 +23,8 @@ namespace JCMFitnessMobileApp
         public App(params INinjectModule[] platformModules)
         {
             InitializeComponent();
+            
             Barrel.ApplicationId = "CachingDataSample";
-
             // Register core services
             Kernel = new StandardKernel(
                 new CoreModule(),
@@ -33,8 +34,10 @@ namespace JCMFitnessMobileApp
 
             // Setup data service authentication delegates
             var dataService = Kernel.Get<IFitnessService>();
-           
+          
             SetMainPage();
+
+         
         }
 
 
@@ -44,7 +47,7 @@ namespace JCMFitnessMobileApp
         {
 
             bool IsSignedIn = Barrel.Current.Exists("user");
-
+            var navService = Kernel.Get<INavService>() as XamarinFormsNavService;
             var mainPage = IsSignedIn
              ? new NavigationPage(new MainPage())
              {
@@ -55,13 +58,12 @@ namespace JCMFitnessMobileApp
                  BindingContext = Kernel.Get<LandingViewModel>()
              };
 
-
             /*var mainPage = new NavigationPage(new LandingPage())
             {
                 BindingContext = Kernel.Get<LandingViewModel>()
             };*/
 
-            var navService = Kernel.Get<INavService>() as XamarinFormsNavService;
+
             navService.XamarinFormsNav = mainPage.Navigation;
             MainPage = mainPage;
         }
@@ -75,6 +77,7 @@ namespace JCMFitnessMobileApp
 
         protected override void OnStart()
         {
+           
         }
 
         protected override void OnSleep()

@@ -1,51 +1,68 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:converters="clr-namespace:JCMFitnessMobileApp.Converters;assembly=JCMFitnessMobileApp"
-             x:Class="JCMFitnessMobileApp.Views.LoginPage">
-
-
+             xmlns:converters="clr-namespace:JCMFitnessMobileApp.Converters;assembly=JCMFitnessMobileApp" xmlns:forms="clr-namespace:Lottie.Forms;assembly=Lottie.Forms"
+             x:Class="JCMFitnessMobileApp.Views.LoginPage"
+             >
     <ContentPage.Resources>
         <ResourceDictionary>
             <converters:ReverseBooleanConverter x:Key="ReverseBooleanConverter" />
         </ResourceDictionary>
     </ContentPage.Resources>
 
-    <ContentPage.Content>
-        <StackLayout HorizontalOptions="Center"
-                 VerticalOptions="Center">
-            <StackLayout Orientation="Horizontal" IsVisible="{Binding IsBusy, Converter={StaticResource ReverseBooleanConverter}}">
-         
-            <Entry Placeholder="Username"
+    <Grid RowDefinitions="Auto, Auto, Auto, Auto, Auto, Auto, *" BackgroundColor="{DynamicResource PageBackgroundColor}">
+   
+        
+        <Entry   
+                   Placeholder="Username"
+                   PlaceholderColor="{DynamicResource SecondaryColor}"
+                   TextColor="{DynamicResource SecondaryColor}"
+                   BackgroundColor="{DynamicResource PrimaryColor}"
                    FontSize="18"
                    Text="{Binding UserName}"
                    WidthRequest="200"
-                   VerticalOptions="Center"/>
-        </StackLayout>
-            <StackLayout Orientation="Horizontal" IsVisible="{Binding IsBusy, Converter={StaticResource ReverseBooleanConverter}}">
-          
-            <Entry Placeholder="Password"
+                   VerticalOptions="Center"
+                   HorizontalOptions="Center"
+                   Grid.Row="1"
+                   Margin="0, 50, 0, 0"
+                   IsVisible="{Binding IsBusy, Converter={StaticResource ReverseBooleanConverter}}"/>
+
+            <Entry 
+                   Placeholder="Password"
+                   PlaceholderColor="{DynamicResource SecondaryColor}"
+                   TextColor="{DynamicResource SecondaryColor}"
+                   BackgroundColor="{DynamicResource PrimaryColor}"
                    IsPassword="True"
                    FontSize="18"
                    Text="{Binding Password}"
                    WidthRequest="200"
-                   VerticalOptions="Center"/>
-        </StackLayout>
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center"
+                   Grid.Row="2"
+                   IsVisible="{Binding IsBusy, Converter={StaticResource ReverseBooleanConverter}}"/>
 
-        <StackLayout HorizontalOptions="Center"
-                     Margin="0,10">
             <Button Text="Sign in"
-                    BackgroundColor="#09C"
-                    TextColor="#FFF"
+                    BackgroundColor="{DynamicResource PrimaryColor}"
+                    TextColor="{DynamicResource SecondaryColor}"
                     Command="{Binding LoginCommand}"
-                    WidthRequest="150"
-                    IsVisible="{Binding IsBusy, Converter={StaticResource ReverseBooleanConverter}}"/>
-        </StackLayout>
+                    IsVisible="{Binding IsBusy, Converter={StaticResource ReverseBooleanConverter}}"
+                    HorizontalOptions="Center"
+                    Grid.Row="3"
+                    Margin="0, 25, 0, 0"/>
 
-        <StackLayout Orientation="Vertical" VerticalOptions="Center" HorizontalOptions="Center" IsVisible="{Binding IsBusy}">
-            <ActivityIndicator IsRunning="True" />
-                <Label Text="Please wait! Logging in" IsVisible="{Binding IsBusy}"/>
-        </StackLayout>
-        </StackLayout>
-    </ContentPage.Content>
+        <forms:AnimationView x:Name="animationView"
+                    ImageAssetsFolder="Assets"
+                    AnimationSource="AssetOrBundle"
+                    Animation="armflex.json"
+                    RepeatMode="Infinite"
+                    RepeatCount="1"
+                    HorizontalOptions="Center"
+                    Grid.Row="0"
+                    Margin="0, 200, 0, 0"
+                    IsVisible="{Binding IsBusy}"
+                    />
+
+        <Label Text="Please wait! Logging in" TextColor="{DynamicResource SecondaryTextColor}" IsVisible="{Binding IsBusy}" VerticalOptions="Center" HorizontalOptions="Center" Grid.Row="0" Margin="0, 0, 0, 25"/>
+        
+    </Grid>
 </ContentPage>

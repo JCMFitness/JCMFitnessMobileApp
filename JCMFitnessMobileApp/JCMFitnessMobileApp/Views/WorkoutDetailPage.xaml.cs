@@ -25,6 +25,7 @@ namespace JCMFitnessMobileApp.Views
         public WorkoutDetailPage()
         {
             InitializeComponent();
+            NavigationPage.SetHasBackButton(this, true);
         }
 
         protected override void OnAppearing()
