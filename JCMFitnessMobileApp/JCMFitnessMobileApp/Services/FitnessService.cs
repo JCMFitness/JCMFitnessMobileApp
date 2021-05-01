@@ -88,30 +88,7 @@ namespace JCMFitnessMobileApp.Services
         {
             try
             {
-                List<Workout> workouts = new List<Workout>();
-
-                var userWorkouts = await fitApi.GetUserWorkoutsAsync(id);
-
-                foreach(var w in userWorkouts)
-                {
-                    var LocalWorkout = new Workout
-                    {
-                        WorkoutID = w.WorkoutID,
-                        Name = w.Name,
-                        Description = w.Description,
-                        Category = w.Category,
-                        IsPublic = w.IsPublic,
-                        LastUpdated = TimeZoneInfo.ConvertTimeToUtc(DateTime.Now, TimeZoneInfo.Local),
-                        IsDeleted = w.IsDeleted,
-                        WorkoutExercises = null
-
-                    };
-
-                    workouts.Add(LocalWorkout);
-                }
-
-                return workouts;
-
+               return await fitApi.GetUserWorkoutsAsync(id);
             }
             catch(Exception ex)
             {

@@ -172,7 +172,7 @@ namespace JCMFitnessMobileApp.ViewModels
 
                         Barrel.Current.Add(key: "user", data: loginResponse, expireIn: TimeSpan.FromDays(1));
 
-                        await syncService.PopulateLocalDBInitial();
+                        //await syncService.PopulateLocalDBInitial();
 
                         await NavService.NavigateTo<MainViewModel>();
                     }

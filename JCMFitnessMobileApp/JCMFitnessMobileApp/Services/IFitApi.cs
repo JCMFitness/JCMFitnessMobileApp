@@ -55,7 +55,7 @@ namespace JCMFitnessMobileApp.Services
 
         //UserWorkout
         [Get("/api/userworkouts?userid={userid}")]
-        public Task<List<ApiWorkout>> GetUserWorkoutsAsync(string userid);
+        public Task<List<Workout>> GetUserWorkoutsAsync(string userid);
 
         [Post("/api/userworkouts?userid={id}")]
         public Task AddNewUserWorkoutAsync(string id, [Body] Workout workout);

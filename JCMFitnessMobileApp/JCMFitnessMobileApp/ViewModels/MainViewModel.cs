@@ -89,16 +89,13 @@ namespace JCMFitnessMobileApp.ViewModel
             Barrel.ApplicationId = "CachingDataSample";
             Task.Run(async () => await LoadEntriesAsync());
         }
-        /*  public override void Init()
-          {
-              LoadEntriesAsync();
-          }*/
+    
 
-        public void RefreshWorkoutsOnAppearing()
+        public async void RefreshWorkoutsOnAppearing()
         {
             if (_userWorkouts != null)
             {
-                LoadEntriesAsync();
+                await LoadEntriesAsync();
             }
         }
 
@@ -135,6 +132,9 @@ namespace JCMFitnessMobileApp.ViewModel
 
                 if (current == NetworkAccess.Internet)
                 {
+
+                    
+                    await SyncService.PullSync();
 
                     await SyncService.PushSync();
 

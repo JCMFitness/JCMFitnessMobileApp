@@ -18,8 +18,7 @@ namespace JCMFitnessMobileApp.ViewModels
 {
     public class LandingViewModel:BaseViewModel
     {
-        //const string authenticationUrl = "https://192.168.0.6:38604/mobileauth/";
-        //const string authenticationUrl = "https://xamarin-essentials-auth-sample.azurewebsites.net/mobileauth/";
+        
 
         const string authenticationUrl = "https://jcmfitness1.azurewebsites.net/api/authentication/";
         //const string authenticationUrl = "https://googleauth2.azurewebsites.net/mobileauth/";
@@ -30,9 +29,7 @@ namespace JCMFitnessMobileApp.ViewModels
         public LandingViewModel(INavService navService)
         : base(navService)
         {
-            MicrosoftCommand = new Command(async () => await OnAuthenticate("Microsoft"));
             GoogleCommand = new Command(async () => await OnAuthenticate("Google"));
-            FacebookCommand = new Command(async () => await OnAuthenticate("Facebook"));
             Barrel.ApplicationId = "CachingDataSample";
         }
 
@@ -46,11 +43,11 @@ namespace JCMFitnessMobileApp.ViewModels
             await NavService.NavigateTo<SignupViewModel>());
 
 
-        public ICommand MicrosoftCommand { get; }
+        
 
         public ICommand GoogleCommand { get; }
 
-        public ICommand FacebookCommand { get; }
+        
 
 
         string accessToken = string.Empty;
