@@ -33,9 +33,13 @@ namespace JCMFitnessMobileApp.Views
                     as List<string>)?.Any() == true;
                 switch (e.PropertyName)
                 {
-                    case nameof(ViewModel.Title):
-                        title.TextColor = propHasErrors
-                            ? Color.Red : Color.Black;
+                    case nameof(ViewModel.Name):
+                        if(propHasErrors)
+                        {
+                            name.TextColor = Color.Red;
+
+
+                        }
                         break;
                     default:
                         break;

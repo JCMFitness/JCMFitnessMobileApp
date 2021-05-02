@@ -15,12 +15,13 @@
 
 
 
-        <Grid RowDefinitions="Auto, Auto, Auto, Auto, Auto, Auto,Auto, *" BackgroundColor="{DynamicResource PageBackgroundColor}">
+        <Grid RowDefinitions="Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto,*" BackgroundColor="{DynamicResource PageBackgroundColor}">
 
         <Entry Placeholder="First Name"
                    FontSize="18"
                    Text="{Binding FirstName}"
                    PlaceholderColor="{DynamicResource  SecondaryTextColor}"
+                   TextColor="{DynamicResource  SecondaryTextColor}"
                    WidthRequest="200"
                    VerticalOptions="Center"
                    IsVisible="{Binding IsBusy, Converter={StaticResource ReverseBooleanConverter}}"
@@ -32,11 +33,11 @@
                    PlaceholderColor="{DynamicResource  SecondaryTextColor}"
                    FontSize="18"
                    Text="{Binding LastName}"
+                   TextColor="{DynamicResource  SecondaryTextColor}"
                    WidthRequest="200"
                    VerticalOptions="Center"
                    IsVisible="{Binding IsBusy, Converter={StaticResource ReverseBooleanConverter}}"
                    Grid.Row="1"
-         
                    HorizontalOptions="Center"/>
 
 
@@ -44,6 +45,7 @@
                PlaceholderColor="{DynamicResource  SecondaryTextColor}"
                    FontSize="18"
                    Text="{Binding Username}"
+                   TextColor="{DynamicResource  SecondaryTextColor}"
                    WidthRequest="200"
                    VerticalOptions="Center"
                    IsVisible="{Binding IsBusy, Converter={StaticResource ReverseBooleanConverter}}"
@@ -55,6 +57,7 @@
                    PlaceholderColor="{DynamicResource  SecondaryTextColor}"
                    FontSize="18"
                    Text="{Binding Email}"
+                   TextColor="{DynamicResource  SecondaryTextColor}"
                    WidthRequest="200"
                    VerticalOptions="Center"
                    IsVisible="{Binding IsBusy, Converter={StaticResource ReverseBooleanConverter}}"
@@ -67,30 +70,41 @@
                    IsPassword="True"
                    FontSize="18"
                    Text="{Binding Password}"
+                   TextColor="{DynamicResource  SecondaryTextColor}"
                    WidthRequest="200"
                    VerticalOptions="Center"
                    IsVisible="{Binding IsBusy, Converter={StaticResource ReverseBooleanConverter}}"
                    Grid.Row="4"
                    HorizontalOptions="Center"/>
-                
-            
-            <Button Text="Sign up"
+        
+            <Label Text="Password must contain a symbol, capital letter and a number"
+                   FontSize="12"
+                   TextColor="{DynamicResource SecondaryColor}"
+                   VerticalOptions="Center"
+                   WidthRequest="200"
+                   IsVisible="{Binding IsBusy, Converter={StaticResource ReverseBooleanConverter}}"
+                   Grid.Row="5"
+                   HorizontalOptions="Center"/>
+
+        <Button Text="Sign up"
                    BackgroundColor="{DynamicResource PrimaryColor}"
-                   TextColor="{DynamicResource SecondaryTextColor}"
+                   TextColor="{DynamicResource SecondaryColor}"
                    Command="{Binding SignUpCommand}"
                    WidthRequest="150"
                    IsVisible="{Binding IsBusy, Converter={StaticResource ReverseBooleanConverter}}"
-                   Grid.Row="5"
+                   Grid.Row="6"
                    HorizontalOptions="Center"
                    Margin="0, 25, 0 , 150"/>
-        
-            <forms:AnimationView x:Name="animationView"
+
+ 
+
+        <forms:AnimationView x:Name="animationView"
                 ImageAssetsFolder="Assets"
                 AnimationSource="AssetOrBundle"
                 Animation="runnershoe.json"
                 RepeatMode="Infinite"
                 RepeatCount="1"
-                Grid.Row="6"
+                Grid.Row="7"
                 Margin="0, -150, 0,  -200"
                 IsVisible="{Binding IsBusy, Converter={StaticResource ReverseBooleanConverter}}"
                 />

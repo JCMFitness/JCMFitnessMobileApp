@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:converters="clr-namespace:JCMFitnessMobileApp.Converters;assembly=JCMFitnessMobileApp"
+    xmlns:converters="clr-namespace:JCMFitnessMobileApp.Converters;assembly=JCMFitnessMobileApp" xmlns:forms="clr-namespace:Lottie.Forms;assembly=Lottie.Forms"
     x:Class="JCMFitnessMobileApp.Views.NewWorkoutPage"
     Title="Create a New Workout">
 
@@ -16,22 +16,30 @@
     </ContentPage.ToolbarItems>
 
     <ContentPage.Content>
-        <Grid RowDefinitions="Auto, Auto, Auto, Auto, Auto, Auto, *" BackgroundColor="{DynamicResource PageBackgroundColor}">
+        <Grid RowDefinitions="Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto, *" BackgroundColor="{DynamicResource PageBackgroundColor}">
            
                         <Label Text="Name" VerticalOptions="Center" Margin="10, 0, 0, 0" Grid.Row="0" TextColor="{DynamicResource PrimaryTextColor}" FontAttributes="Bold" IsVisible="{Binding IsBusy, Converter={StaticResource ReverseBooleanConverter}}"/>
-                        <Entry x:Name="title" VerticalOptions="Center" Margin="10, 0, 25, 0" Text="{Binding Title}" TextColor="{DynamicResource SecondaryColor}" IsVisible="{Binding IsBusy, Converter={StaticResource ReverseBooleanConverter}}" Grid.Row="1"/>
+                        <Entry x:Name="name" VerticalOptions="Center" Margin="10, 0, 25, 0" Text="{Binding Name}" TextColor="{DynamicResource SecondaryTextColor}" IsVisible="{Binding IsBusy, Converter={StaticResource ReverseBooleanConverter}}" Grid.Row="1"/>
                         <Label Text="Description" VerticalOptions="Center" Margin="10, 0, 0, 0" Grid.Row="2" TextColor="{DynamicResource PrimaryTextColor}" FontAttributes="Bold" IsVisible="{Binding IsBusy, Converter={StaticResource ReverseBooleanConverter}}"/>
-                        <Entry x:Name="description" VerticalOptions="Center" Margin="10, 0, 25, 0" Text="{Binding Description}" TextColor="{DynamicResource SecondaryColor}" IsVisible="{Binding IsBusy, Converter={StaticResource ReverseBooleanConverter}}" Grid.Row="3"/>
+                        <Entry x:Name="description" VerticalOptions="Center" Margin="10, 0, 25, 0" Text="{Binding Description}" TextColor="{DynamicResource SecondaryTextColor}" IsVisible="{Binding IsBusy, Converter={StaticResource ReverseBooleanConverter}}" Grid.Row="3"/>
                         <Label Text="Category" VerticalOptions="Center" Margin="10, 0, 0, 0" Grid.Row="4" TextColor="{DynamicResource PrimaryTextColor}" FontAttributes="Bold" IsVisible="{Binding IsBusy, Converter={StaticResource ReverseBooleanConverter}}"/>
-                        <Entry x:Name="category" VerticalOptions="Center" Margin="10, 0, 25, 0"  Text="{Binding Category}" TextColor="{DynamicResource SecondaryColor}" IsVisible="{Binding IsBusy, Converter={StaticResource ReverseBooleanConverter}}" Grid.Row="5"/>
+                        <Entry x:Name="category" VerticalOptions="Center" Margin="10, 0, 25, 0"  Text="{Binding Category}" TextColor="{DynamicResource SecondaryTextColor}" IsVisible="{Binding IsBusy, Converter={StaticResource ReverseBooleanConverter}}" Grid.Row="5"/>
+
+            <forms:AnimationView x:Name="animationView"
+                    ImageAssetsFolder="Assets"
+                    AnimationSource="AssetOrBundle"
+                    Animation="exercisingman.json"
+                    RepeatMode="Infinite"
+                    RepeatCount="1"
+                    HorizontalOptions="Center"
+                    Grid.Row="7"
+                    Margin="0, -50, 0, -200"
+                    IsVisible="{Binding IsBusy}"/>
 
 
 
-    
-                        
 
             <StackLayout Orientation="Vertical" VerticalOptions="Center" HorizontalOptions="Center" IsVisible="{Binding IsBusy}">
-                <ActivityIndicator IsRunning="True" />
                 <Label Text="Please wait! Saving new workout..." TextColor="{DynamicResource SecondaryTextColor}"  />
             </StackLayout>
         </Grid>

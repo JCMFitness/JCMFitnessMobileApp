@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using JCMFitnessMobileApp.LocalDB;
 using JCMFitnessMobileApp.Models;
@@ -27,14 +28,14 @@ namespace JCMFitnessMobileApp.ViewModel
 
 
 
-        string _title;
-        public string Title
+        string _name;
+        public string Name
         {
-            get => _title;
+            get => _name;
             set
             {
-                _title = value;
-                Validate(() => !string.IsNullOrWhiteSpace(_title), "Title must be provided.");
+                _name = value;
+                Validate(() => !string.IsNullOrWhiteSpace(_name), "Title must be provided.");
                 OnPropertyChanged();
                 SaveCommand.ChangeCanExecute();
             }
@@ -79,7 +80,7 @@ namespace JCMFitnessMobileApp.ViewModel
                 var newWorkout = new Workout
                 {
                     WorkoutID = Guid.NewGuid().ToString(),
-                    Name = Title,
+                    Name = Name,
                     Description = Description,
                     Category = Category,
                     IsPublic = false,
@@ -94,10 +95,12 @@ namespace JCMFitnessMobileApp.ViewModel
 
                 if (current == NetworkAccess.Internet)
                 {
+                    await Task.Run(() => Thread.Sleep(5000));
                     await _fitnessService.AddNewUserWorkout(response.User.Id, newWorkout);
                 }
                 else
                 {
+                    await Task.Run(() => Thread.Sleep(5000));
                     await _localDatabase.AddWorkout(newWorkout);
                 }
 
@@ -110,7 +113,7 @@ namespace JCMFitnessMobileApp.ViewModel
             }
 
         }
-        bool CanSave() => !string.IsNullOrWhiteSpace(Title) && !HasErrors;
+        bool CanSave() => !string.IsNullOrWhiteSpace(Name) && !HasErrors;
 
 
 

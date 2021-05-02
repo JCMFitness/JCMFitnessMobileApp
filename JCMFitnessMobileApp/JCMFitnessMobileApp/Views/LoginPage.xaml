@@ -10,7 +10,7 @@
         </ResourceDictionary>
     </ContentPage.Resources>
 
-    <Grid RowDefinitions="Auto, Auto, Auto, Auto, Auto, Auto, *" BackgroundColor="{DynamicResource PageBackgroundColor}">
+    <Grid RowDefinitions="Auto, Auto, Auto, Auto, Auto, *" BackgroundColor="{DynamicResource PageBackgroundColor}">
    
         
         <Entry   
@@ -61,7 +61,15 @@
                     Margin="0, 200, 0, 0"
                     IsVisible="{Binding IsBusy}"
                     />
-
+        <Button Text="Google"
+                Command="{Binding GoogleCommand}" 
+                VerticalOptions="Center" 
+                HorizontalOptions="Center" 
+                BackgroundColor="#d34836" 
+                TextColor="White"
+                Grid.Row="4"
+                IsVisible="{Binding IsBusy, Converter={StaticResource ReverseBooleanConverter}}" />
+        
         <Label Text="Please wait! Logging in" TextColor="{DynamicResource SecondaryTextColor}" IsVisible="{Binding IsBusy}" VerticalOptions="Center" HorizontalOptions="Center" Grid.Row="0" Margin="0, 0, 0, 25"/>
         
     </Grid>

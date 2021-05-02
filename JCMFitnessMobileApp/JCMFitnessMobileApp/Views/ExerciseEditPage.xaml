@@ -17,8 +17,8 @@
             <Label Text="Sets:" FontSize="Small" TextColor="{DynamicResource PrimaryTextColor}"  />
             <Entry Text="{Binding Exercise.Sets}" FontSize="Medium" TextColor="{DynamicResource SecondaryTextColor}" />
 
-            <Label Text="Make This Public:" FontSize="Small" TextColor="{DynamicResource PrimaryTextColor}"  />
-            <Entry Text="{Binding Exercise.IsPublic}" FontSize="Medium" TextColor="{DynamicResource SecondaryTextColor}" />
+            <!--<Label Text="Make This Public:" FontSize="Small" TextColor="{DynamicResource PrimaryTextColor}"  />
+            <Entry Text="{Binding Exercise.IsPublic}" FontSize="Medium" TextColor="{DynamicResource SecondaryTextColor}" />-->
 
             <Button Text="Save" Command="{Binding SaveExerciseCommand}" TextColor="{DynamicResource SecondaryColor}" BackgroundColor="{DynamicResource PrimaryColor}" HorizontalOptions="FillAndExpand"/>
         </StackLayout>
