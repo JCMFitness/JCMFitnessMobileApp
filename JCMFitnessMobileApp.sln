@@ -7,7 +7,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JCMFitnessMobileApp.Android
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JCMFitnessMobileApp.iOS", "JCMFitnessMobileApp\JCMFitnessMobileApp.iOS\JCMFitnessMobileApp.iOS.csproj", "{ADA2EBBB-3661-4C29-B530-77E94A414531}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JCMFitnessMobileApp", "JCMFitnessMobileApp\JCMFitnessMobileApp\JCMFitnessMobileApp.csproj", "{E8A4BB12-91A6-4493-88C5-A83040FD224F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JCMFitnessMobileApp", "JCMFitnessMobileApp\JCMFitnessMobileApp\JCMFitnessMobileApp.csproj", "{E8A4BB12-91A6-4493-88C5-A83040FD224F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FitnessAppTests", "FitnessAppTests\FitnessAppTests.csproj", "{95265FF1-078C-49AC-9696-AE256B53BEE4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -73,6 +75,18 @@ Global
 		{E8A4BB12-91A6-4493-88C5-A83040FD224F}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
 		{E8A4BB12-91A6-4493-88C5-A83040FD224F}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
 		{E8A4BB12-91A6-4493-88C5-A83040FD224F}.Release|iPhoneSimulator.Deploy.0 = Release|Any CPU
+		{95265FF1-078C-49AC-9696-AE256B53BEE4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{95265FF1-078C-49AC-9696-AE256B53BEE4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{95265FF1-078C-49AC-9696-AE256B53BEE4}.Debug|iPhone.ActiveCfg = Debug|Any CPU
+		{95265FF1-078C-49AC-9696-AE256B53BEE4}.Debug|iPhone.Build.0 = Debug|Any CPU
+		{95265FF1-078C-49AC-9696-AE256B53BEE4}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{95265FF1-078C-49AC-9696-AE256B53BEE4}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{95265FF1-078C-49AC-9696-AE256B53BEE4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{95265FF1-078C-49AC-9696-AE256B53BEE4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{95265FF1-078C-49AC-9696-AE256B53BEE4}.Release|iPhone.ActiveCfg = Release|Any CPU
+		{95265FF1-078C-49AC-9696-AE256B53BEE4}.Release|iPhone.Build.0 = Release|Any CPU
+		{95265FF1-078C-49AC-9696-AE256B53BEE4}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{95265FF1-078C-49AC-9696-AE256B53BEE4}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -79,7 +79,7 @@
         
             <Label Text="Password must contain a symbol, capital letter and a number"
                    FontSize="12"
-                   TextColor="{DynamicResource SecondaryColor}"
+                   TextColor="{DynamicResource SecondaryTextColor}"
                    VerticalOptions="Center"
                    WidthRequest="200"
                    IsVisible="{Binding IsBusy, Converter={StaticResource ReverseBooleanConverter}}"

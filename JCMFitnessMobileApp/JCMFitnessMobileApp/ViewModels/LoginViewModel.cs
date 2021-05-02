@@ -182,8 +182,9 @@ namespace JCMFitnessMobileApp.ViewModels
                         await Task.Run(() => Thread.Sleep(2500));
                         await NavService.NavigateTo<MainViewModel>();
                     }
-                    catch
+                    catch(Exception ex)
                     {
+                        Console.WriteLine(ex.Message);
                         FailedVibration();
                         await App.Current.MainPage.DisplayAlert("Login Fail", "Please enter correct username or password", "OK");
                         IsBusy = false;
@@ -193,7 +194,7 @@ namespace JCMFitnessMobileApp.ViewModels
 
                
 
-               //NavService.RemoveLastView();
+               NavService.RemoveLastTwoViews();
             }
             catch 
             {

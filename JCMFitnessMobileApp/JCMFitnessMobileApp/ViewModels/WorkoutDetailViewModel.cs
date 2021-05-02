@@ -114,7 +114,7 @@ namespace JCMFitnessMobileApp.ViewModel
 
       
 
-        async Task<ObservableCollection<Exercise>> LoadExercises(string workoutid)
+        public async Task<ObservableCollection<Exercise>> LoadExercises(string workoutid)
         {
 
             try
