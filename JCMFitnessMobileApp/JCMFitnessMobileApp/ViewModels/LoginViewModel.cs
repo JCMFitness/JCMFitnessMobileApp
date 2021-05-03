@@ -194,7 +194,7 @@ namespace JCMFitnessMobileApp.ViewModels
 
                
 
-               NavService.RemoveLastTwoViews();
+               //NavService.RemoveLastTwoViews();
             }
             catch 
             {
